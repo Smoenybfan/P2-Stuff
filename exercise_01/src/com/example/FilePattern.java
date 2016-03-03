@@ -30,24 +30,24 @@ public class FilePattern implements FileFilter {
 		this.pattern=pattern;
 	}
 
-	public boolean accept(File pathname1) {
-		String pathname=pathname1.getPath();
-		int patterncounter = 0;
-		int i=0;
-		while((pathname.charAt(i)==pattern.charAt(patterncounter) || pattern.charAt(patterncounter)=='?')&&i<pathname.length()-1&&patterncounter<pattern.length()-1){
+	public boolean accept(File pathname) {
+		int patterncounter = 0, i = 0;
+		while((pathname.getPath().charAt(i)== pattern.charAt(patterncounter)
+				|| pattern.charAt(patterncounter)=='?') && i<pathname.length()-1 && patterncounter<pattern.length()-1){
 			i++;
 			patterncounter++;
 		}
 		while(pattern.charAt(patterncounter)=='*'){
-			while(pattern.charAt(patterncounter+1)!=pathname.charAt(i)){
+			while(pattern.charAt(patterncounter+1)!=pathname.getPath().charAt(i)){
 				i++;
 			}
 			patterncounter++;
 		}
 
-		if(i==pathname.length()-1 || patterncounter==pattern.length()-1){
+		if(i == pathname.length()-1 || patterncounter==pattern.length()-1){
 			return true;
 		}
+		//return false;
 
 		throw new Error();
 
