@@ -13,7 +13,7 @@ import java.io.FileFilter;
  * <tt>cat??.jpg</tt> matches all images that start
  * with <i>cat</i> and got two more characters. 
  * 
- * @author You!
+ * @author David Bösiger
  *
  */
 public class FilePattern implements FileFilter {
@@ -34,7 +34,7 @@ public class FilePattern implements FileFilter {
 
 		int counter = 0;
 
-		for(int i = 0; i < pathname.getPath().length(); i++) {
+		for (int i = 0; i < pathname.getPath().length(); i++) {
 			if (counter > pattern.length() - 1) {
 				return false;
 			}
@@ -49,10 +49,10 @@ public class FilePattern implements FileFilter {
 					}
 					//in text
 					if (pattern.charAt(counter + 1) == pathname.getPath().charAt(i)) {
-						if((new FilePattern(pattern.substring(counter + 1)).accept
-									(new File(pathname.getPath().substring(i))))){
+						if ((new FilePattern(pattern.substring(counter + 1)).accept
+								(new File(pathname.getPath().substring(i))))) {
 							return true;
-						}else counter += 2;
+						} else counter += 2;
 					}
 				}
 				//case ?
@@ -69,33 +69,11 @@ public class FilePattern implements FileFilter {
 		}
 
 		//if * is last char and filename is longer
-		if(counter == pattern.length() - 1){
-			if(pattern.charAt(counter) == '*'){
+		if (counter == pattern.length() - 1) {
+			if (pattern.charAt(counter) == '*') {
 				return true;
 			}
 		}
 		return counter > pattern.length() - 1;
-
-
-		/* Simons Programm:
-		while((pathname.getPath().charAt(i)== pattern.charAt(patterncounter)
-				|| pattern.charAt(patterncounter)=='?') && i<pathname.length()-1 && patterncounter<pattern.length()-1){
-			i++;
-			patterncounter++;
-		}
-		while(pattern.charAt(patterncounter)=='*'){
-			while(pattern.charAt(patterncounter+1)!=pathname.getPath().charAt(i)){
-				i++;
-			}
-			patterncounter++;
-		}
-
-		if(i == pathname.length()-1 || patterncounter==pattern.length()-1){
-			return true;
-		}
-
-		throw new Error();*/
-
 	}
-    
 }
