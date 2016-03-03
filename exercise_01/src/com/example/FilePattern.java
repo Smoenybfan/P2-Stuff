@@ -43,13 +43,16 @@ public class FilePattern implements FileFilter {
 			if (pathname.getPath().charAt(i) != pattern.charAt(counter)) {
 				//case *
 				if (pattern.charAt(counter) == '*') {
-					// at the end
+					//at the end
 					if (counter + 1 >= pattern.length()) {
 						return true;
 					}
 					//in text
 					if (pattern.charAt(counter + 1) == pathname.getPath().charAt(i)) {
-						counter += 2;
+						if((new FilePattern(pattern.substring(counter + 1)).accept
+									(new File(pathname.getPath().substring(i))))){
+							return true;
+						}else counter += 2;
 					}
 				}
 				//case ?
@@ -64,6 +67,8 @@ public class FilePattern implements FileFilter {
 				} else return false;
 			} else counter++;
 		}
+
+		//if * is last char and filename is longer
 		if(counter == pattern.length() - 1){
 			if(pattern.charAt(counter) == '*'){
 				return true;

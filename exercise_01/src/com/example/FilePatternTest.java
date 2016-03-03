@@ -182,4 +182,9 @@ public class FilePatternTest {
         assertFalse(newFileFilter("f?.txt").accept(new File(".txt")));
     }
 
+    //new Test cases
+    @Test public void fnamefnamefnameDotTxtdMatchStarDotTxT(){
+        assertTrue(newFileFilter("fname*.txt").accept(new File("fnamefnamefname.txt")));
+    }
+
 }
