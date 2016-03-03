@@ -25,13 +25,32 @@ public class FilePattern implements FileFilter {
 	 * @param pattern the pattern used to filter file names.
 	 * @see FilePattern
 	 */
+	String pattern;
 	public FilePattern(String pattern) {
-		// TODO add your solution here
+		this.pattern=pattern;
 	}
 
-	public boolean accept(File pathname) {
-		// TODO add your solution here
+	public boolean accept(File pathname1) {
+		String pathname=pathname1.getPath();
+		int patterncounter = 0;
+		int i=0;
+		while((pathname.charAt(i)==pattern.charAt(patterncounter) || pattern.charAt(patterncounter)=='?')&&i<pathname.length()-1&&patterncounter<pattern.length()-1){
+			i++;
+			patterncounter++;
+		}
+		while(pattern.charAt(patterncounter)=='*'){
+			while(pattern.charAt(patterncounter+1)!=pathname.charAt(i)){
+				i++;
+			}
+			patterncounter++;
+		}
+
+		if(i==pathname.length()-1 || patterncounter==pattern.length()-1){
+			return true;
+		}
+
 		throw new Error();
+
 	}
     
 }
