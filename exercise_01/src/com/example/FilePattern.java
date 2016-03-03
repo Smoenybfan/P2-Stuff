@@ -34,13 +34,13 @@ public class FilePattern implements FileFilter {
 
 		int counter = 0;
 
-		for (int i = 0; i < pathname.getPath().length(); i++) {
+		for (int i = 0; i < pathname.toString().length(); i++) {
 			if (counter > pattern.length() - 1) {
 				return false;
 			}
 
 			//If char not match
-			if (pathname.getPath().charAt(i) != pattern.charAt(counter)) {
+			if (pathname.toString().charAt(i) != pattern.charAt(counter)) {
 				//case *
 				if (pattern.charAt(counter) == '*') {
 					//at the end
@@ -48,9 +48,9 @@ public class FilePattern implements FileFilter {
 						return true;
 					}
 					//in text
-					if (pattern.charAt(counter + 1) == pathname.getPath().charAt(i)) {
+					if (pattern.charAt(counter + 1) == pathname.toString().charAt(i)) {
 						if ((new FilePattern(pattern.substring(counter + 1)).accept
-								(new File(pathname.getPath().substring(i))))) {
+								(new File(pathname.toString().substring(i))))) {
 							return true;
 						} else counter += 2;
 					}
@@ -59,7 +59,7 @@ public class FilePattern implements FileFilter {
 				else if (pattern.charAt(counter) == '?') {
 					//if its the las char
 					if (counter == pattern.length() - 1) {
-						if (i < pathname.getPath().length() - 1) {
+						if (i < pathname.toString().length() - 1) {
 							return false;
 						}
 					}
