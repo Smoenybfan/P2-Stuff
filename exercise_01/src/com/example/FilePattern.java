@@ -31,7 +31,48 @@ public class FilePattern implements FileFilter {
 	}
 
 	public boolean accept(File pathname) {
-		int patterncounter = 0, i = 0;
+
+		int counter = 0;
+
+		for(int i = 0; i < pathname.getPath().length(); i++) {
+			if (counter > pattern.length() - 1) {
+				return false;
+			}
+
+			//If char not match
+			if (pathname.getPath().charAt(i) != pattern.charAt(counter)) {
+				//case *
+				if (pattern.charAt(counter) == '*') {
+					// at the end
+					if (counter + 1 >= pattern.length()) {
+						return true;
+					}
+					//in text
+					if (pattern.charAt(counter + 1) == pathname.getPath().charAt(i)) {
+						counter += 2;
+					}
+				}
+				//case ?
+				else if (pattern.charAt(counter) == '?') {
+					//if its the las char
+					if (counter == pattern.length() - 1) {
+						if (i < pathname.getPath().length() - 1) {
+							return false;
+						}
+					}
+					counter++;
+				} else return false;
+			} else counter++;
+		}
+		if(counter == pattern.length() - 1){
+			if(pattern.charAt(counter) == '*'){
+				return true;
+			}
+		}
+		return counter > pattern.length() - 1;
+
+
+		/* Simons Programm:
 		while((pathname.getPath().charAt(i)== pattern.charAt(patterncounter)
 				|| pattern.charAt(patterncounter)=='?') && i<pathname.length()-1 && patterncounter<pattern.length()-1){
 			i++;
@@ -47,9 +88,8 @@ public class FilePattern implements FileFilter {
 		if(i == pathname.length()-1 || patterncounter==pattern.length()-1){
 			return true;
 		}
-		//return false;
 
-		throw new Error();
+		throw new Error();*/
 
 	}
     
