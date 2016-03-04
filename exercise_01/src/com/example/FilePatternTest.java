@@ -187,4 +187,8 @@ public class FilePatternTest {
         assertTrue(newFileFilter("fname*.txt").accept(new File("fnamefnamefname.txt")));
     }
 
+    @Test public void bliblublaShouldMatchbliStarbla(){
+        assertTrue(newFileFilter("bli*bla").accept(new File("bliblubla")));
+    }
+
 }

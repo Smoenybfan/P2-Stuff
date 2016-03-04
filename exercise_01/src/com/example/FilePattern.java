@@ -52,7 +52,7 @@ public class FilePattern implements FileFilter {
 						if ((new FilePattern(pattern.substring(counter + 1)).accept
 								(new File(pathname.toString().substring(i))))) {
 							return true;
-						} else counter += 2;
+						}
 					}
 				}
 				//case ?
