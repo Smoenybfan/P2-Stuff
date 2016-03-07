@@ -1,0 +1,13 @@
+            01      02      03      04      05      06      07      08      09      10      11      admitted
+
+Group 03    ok      
+
+ wow:       especially rad solution.
+  ok:       accepted.
+ nef:       revision required by next week.
+fail:       failed assignment. 
+  --:       nothing was submitted.
+date:      deadline extended until this date.
+
+
+

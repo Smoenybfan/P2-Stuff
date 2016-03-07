@@ -3,11 +3,12 @@
 *.war
 *.ear
 
-# eclipse and setting files
+# eclipse and setting files/ IDEA setting files
 */bin
 *.launch
 .settings/
 .metadata
+*.iml
 
 /**/RemoteSystemsTempFiles
 
