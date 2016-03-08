@@ -7,19 +7,24 @@ public class SwapSquare extends Square {
 	}
 
 	protected ISquare destination(){
-		return game.getSquare(game.currentPlayer().position()); //currentPlayer() is acutally the next player
+		return game.getSquare(game.currentPlayer().position()); //this is actually the next Player
 	}
 
 	@Override
 	public ISquare landHereOrGoHome(){
-		if(!this.isOccupied()){
-			ISquare destination = destination();
-			destination.leave(game.currentPlayer());
-			this.enter(game.currentPlayer());
-			return destination;
-		}
-		else{
-			return game.firstSquare();
-		}
+		ISquare destination = this.destination();
+		game.currentPlayer().swap(this);
+		return destination;
 	}
+
+	@Override
+	public String toString() {
+		return "[" + this.squareLabel() + this.player() + "]";
+	}
+
+	@Override
+	protected String squareLabel() {
+		return super.squareLabel() + " (Swap)";
+	}
+
 }

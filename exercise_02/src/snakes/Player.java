@@ -33,6 +33,12 @@ public class Player {
 		square.enter(this);
 	}
 
+	public void swap(ISquare destination){
+		square.leave(this);
+		square = destination;
+		square.enter(this);
+	}
+
 	public String toString() {
 		return name;
 	}

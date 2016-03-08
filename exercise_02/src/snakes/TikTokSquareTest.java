@@ -52,8 +52,10 @@ public class TikTokSquareTest {
 
 	@Given("moveJackOnToTikTokSquare")
 	public Game moveJillOnToTikTokSquare(Game game) {
-		// TODO: let Jill move on to square 4 (the TikTok square we created in "newGame")
-		//       and make sure she lands on the correct destination.
+		game.movePlayer(3);
+		assertEquals(5, jack.position());
+		assertEquals(6, jill.position());
+		assertTrue("The game should not be over when Jill moves to TikTokSquare", game.notOver());
 		return game;
 	}
 
