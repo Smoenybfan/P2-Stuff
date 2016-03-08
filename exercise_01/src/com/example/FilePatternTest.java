@@ -190,5 +190,24 @@ public class FilePatternTest {
     @Test public void bliblublaShouldMatchbliStarbla(){
         assertTrue(newFileFilter("bli*bla").accept(new File("bliblubla")));
     }
+    
+    /*
+     * Additional tests
+     */
 
+    @Test public void doubleAnananas() {
+        assertTrue(newFileFilter("*nas*anas").accept(new File("ananasananas")));
+    }
+    
+    @Test public void fStarDotStarShouldMatchFnameDotTxt() {
+        assertTrue(newFileFilter("*.*").accept(new File("fname.txt")));
+    }
+    
+    @Test public void fStarStarShouldMatchEmptyString() {
+        assertTrue(newFileFilter("**").accept(new File("")));
+    }
+    
+    @Test public void fStarMarkShouldMatchX() {
+        assertTrue(newFileFilter("*?").accept(new File("x")));
+    }
 }
