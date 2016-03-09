@@ -13,7 +13,7 @@ public class SwapSquare extends Square {
 	@Override
 	public ISquare landHereOrGoHome(){
 		ISquare destination = this.destination();
-		game.currentPlayer().swap(this);
+		game.currentPlayer().jumpTo(this);
 		return destination;
 	}
 

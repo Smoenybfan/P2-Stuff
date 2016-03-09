@@ -29,7 +29,22 @@ public class Game {
 	}
 
 	public static void main(String args[]) {
-		(new SimpleGameTest()).newGame().play(new Die());
+		//Add players
+		Player jack = new Player("Jack");
+		Player jill = new Player("Jill");
+		Player roby = new Player("Roby");
+		Player[] players ={jack,jill,roby};
+		//Add Game
+		Game game = new Game(15, players);
+		//Add special Squares
+		game.setSquareToWormholeEntrance(3);
+		game.setSquareToWormholeExit(12);
+		game.setSquareToLadder(5,7);
+		game.setSquareToSnake(9,-2);
+		game.setSquareToTikTok(4,13,2);
+		game.setSquareToSwap(10);
+		//Start game
+		game.play(new Die());
 	}
 
 	public void play(Die die) {
@@ -96,7 +111,7 @@ public class Game {
 	}
 
 	private void addSquares(int size) {
-		squares = new ArrayList<ISquare>();
+		squares = new ArrayList<>();
 		for(int i=0; i<size; i++) {
 			Square square = new Square(this, i+1);
 			squares.add(square);
@@ -106,7 +121,7 @@ public class Game {
 	}
 
 	private void addPlayers(Player[] initPlayers) {
-		players = new LinkedList<Player>();
+		players = new LinkedList<>();
 		for (Player player : initPlayers) {
 			player.joinGame(this);
 			players.add(player);
@@ -124,6 +139,22 @@ public class Game {
 
 	public void setSquareToSnake(int position, int transport) {
 		this.setSquare(position, new Snake(transport, this, position));
+	}
+
+	public void setSquareToTikTok(int position, int destinationA, int destinationB){
+		this.setSquare(position,new TikTokSquare(this, position, destinationA, destinationB));
+	}
+
+	public void setSquareToSwap(int position){
+		this.setSquare(position, new SwapSquare(this, position));
+	}
+
+	public void setSquareToWormholeEntrance(int position){
+		this.setSquare(position, new WormholeEntrance(this, position));
+	}
+
+	public void setSquareToWormholeExit(int position){
+		this.setSquare(position, new WormholeExit(this, position));
 	}
 
 	public ISquare findSquare(int position, int moves) {

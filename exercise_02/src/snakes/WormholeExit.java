@@ -1,18 +1,29 @@
 package snakes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WormholeExit extends Square {
 
-	private static ArrayList<WormholeExit> Exits;
+	public static List<WormholeExit> exits = new ArrayList<>();
 
 	public WormholeExit(Game game, int position) {
 		super(game, position);
-		Exits.add(this);
+		exits.add(this);
 	}
 
-	public static ArrayList getExits(){
-		return Exits;
+	@Override
+	public String toString() {
+		return "[" + this.squareLabel() + this.player() + "]";
+	}
+
+	@Override
+	protected String squareLabel() {
+		return super.squareLabel() + " (WEx)";
+	}
+
+	public static List<WormholeExit> getExits(){
+		return exits;
 	}
 
 }

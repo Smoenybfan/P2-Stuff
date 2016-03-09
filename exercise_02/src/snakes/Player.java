@@ -33,7 +33,7 @@ public class Player {
 		square.enter(this);
 	}
 
-	public void swap(ISquare destination){
+	public void jumpTo(ISquare destination){
 		square.leave(this);
 		square = destination;
 		square.enter(this);

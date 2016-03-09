@@ -1,18 +1,18 @@
 package snakes;
 
 import ch.unibe.jexample.Given;
-import ch.unibe.jexample.JExample;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+    import ch.unibe.jexample.JExample;
+    import org.junit.Test;
+    import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+    import static org.junit.Assert.assertEquals;
+    import static org.junit.Assert.assertTrue;
 
-@RunWith(JExample.class)
-public class SwapSquareTest {
-    private Player jack;
-    private Player jill;
-    private Player roby;
+    @RunWith(JExample.class)
+    public class SwapSquareTest {
+        private Player jack;
+        private Player jill;
+        private Player roby;
 
     @Test
     public Game newGame() {
@@ -22,7 +22,7 @@ public class SwapSquareTest {
         Player[] args = { jack, jill, roby};
         Game game = new Game(12, args);
 
-        game.setSquare(4, new SwapSquare(game,4));
+        game.setSquareToSwap(4);
 
         assertTrue(game.notOver());
         assertTrue(game.firstSquare().isOccupied());

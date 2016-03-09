@@ -10,19 +10,22 @@ public class WormholeEntrance extends Square {
 	}
 
 	public ISquare destination(){
-		ArrayList<WormholeExit> Exits = WormholeExit.getExits();
-		return Exits.get(randomInt(Exits.size()));
-
+		return WormholeExit.getExits().get(randomInt(WormholeExit.getExits().size()));
 	}
 
 	@Override
 	public ISquare landHereOrGoHome(){
-		if(!this.isOccupied()){
-			return destination();
-		}
-		else{
-			return game.firstSquare();
-		}
+		return destination();
+	}
+
+	@Override
+	public String toString() {
+		return "[" + this.squareLabel() + this.player() + "]";
+	}
+
+	@Override
+	protected String squareLabel() {
+		return super.squareLabel() + " (WEn)";
 	}
 
 	private int randomInt(int range){  //returns a random int between 0 and range
