@@ -1,5 +1,13 @@
 package snakes;
 
+/**
+ * If a Player enters this <code>Square</code>, he swaps
+ * place with the player whos next
+ *
+ * @author David Bösiger
+ * @author Simon Kafader
+ * @see ISquare
+ */
 public class SwapSquare extends Square {
 
 	public SwapSquare(Game game, int position) {
@@ -7,7 +15,7 @@ public class SwapSquare extends Square {
 	}
 
 	protected ISquare destination(){
-		return game.getSquare(game.currentPlayer().position()); //this is actually the next Player
+		return game.getSquare(game.currentPlayer().position());
 	}
 
 	@Override
@@ -26,5 +34,4 @@ public class SwapSquare extends Square {
 	protected String squareLabel() {
 		return super.squareLabel() + " (Swap)";
 	}
-
 }

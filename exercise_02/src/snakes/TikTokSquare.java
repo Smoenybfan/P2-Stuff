@@ -1,5 +1,16 @@
 package snakes;
 
+/**
+ * If a Player entes this Square it sends him
+ * to one of the two destinations.
+ * The destination iterates, so one Player is sent to the first
+ * destination and the second to the second. The third to the first
+ * and so on.
+ *
+ * @author David Bösiger
+ * @author Simon Kafader
+ * @see ISquare
+ */
 public class TikTokSquare extends Square {
 
 	private int[] destination = new int[2];
