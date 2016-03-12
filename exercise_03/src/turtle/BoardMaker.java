@@ -1,8 +1,12 @@
 package turtle;
 
+import javax.swing.text.html.parser.Parser;
+
 public class BoardMaker {
 	private boolean[][] board;
 	private final static int SIZE = 100;
+	private int xPosition;
+	private int yPosition;
 
 	/**
 	 * Parse the given turtle program and evaluate it. Render the trail as
@@ -37,16 +41,29 @@ public class BoardMaker {
 		}
 		*/
 
+		CommandParser parser = new CommandParser(turtleProgram);
+		try {
+			parser.parse();
+		}
+
+		catch (Exception err){
+
+		}
+
 		// TODO: remove this and return a board instead
-		throw new UnsupportedOperationException();
+		return board;
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * Create a new board and return it.
+	 * Create a new board and return it. Sets the turtle in the center
 	 * @return board, must be of size SIZExSIZE.
 	 */
 	public boolean[][] initialBoard() {
 		// TODO: remove this and return a board instead
-		throw new UnsupportedOperationException();
+		board= new boolean[SIZE][SIZE];
+		xPosition = SIZE/2;
+		yPosition = SIZE/2;
+		return board;
 	}
 }
