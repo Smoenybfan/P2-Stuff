@@ -49,7 +49,7 @@ public class TikTokSquare extends Square {
 	protected ISquare destination(){
 		return game.getSquare(nextDestination());
 	}
-
+	
 	private int nextDestination(){
 		int cache = destination[0];
 		destination[0] = destination[1];
