@@ -42,19 +42,15 @@ public class BoardMaker {
 		}
 		*/
 
-		CommandParser parser = new CommandParser(turtleProgram, xPosition, yPosition, board);
+		CommandParser parser = new CommandParser(turtleProgram, xPosition, yPosition, SIZE);
 		try {
-			commands= parser.parse();
+			commands = parser.parse();
 			return move();
 		}
-
-		catch (Exception err){
-			throw new ParserException();
+		catch(Exception e){
+			//e.printStackTrace();
+			return board;
 		}
-
-		// TODO: remove this and return a board instead
-
-		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -63,10 +59,10 @@ public class BoardMaker {
 	 */
 	public boolean[][] initialBoard() {
 		// TODO: remove this and return a board instead
-		board= new boolean[SIZE][SIZE];
+		board = new boolean[SIZE][SIZE];
 		xPosition = SIZE/2;
 		yPosition = SIZE/2;
-		board[xPosition][yPosition]=true;
+		board[xPosition][yPosition] = true;
 		return board;
 	}
 
@@ -84,7 +80,6 @@ public class BoardMaker {
 			case "jump":    moveJump();
 				break;
 		}
-
 		return board;
 	}
 
@@ -93,10 +88,10 @@ public class BoardMaker {
 	 */
 	private void moveUp() {
 		assert commands.length == 2;
-		for (int i = yPosition; i < Integer.parseInt( commands[1]); i++) {
-			board[xPosition][i] = true;
+		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+			board[xPosition][yPosition - i] = true;
 		}
-		yPosition+=Integer.parseInt( commands[1]);
+		yPosition -= Integer.parseInt(commands[1]);
 	}
 
 	/**
@@ -104,10 +99,10 @@ public class BoardMaker {
 	 */
 	private void moveRight() {
 		assert  commands.length == 2;
-		for (int i = 1; i <= Integer.parseInt( commands[1]); i++) {
-			board[xPosition+i][yPosition] = true;
+		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+			board[xPosition + i][yPosition] = true;
 		}
-		xPosition+=Integer.parseInt( commands[1]);
+		xPosition += Integer.parseInt(commands[1]);
 	}
 
 	/**
@@ -116,10 +111,10 @@ public class BoardMaker {
 
 	private void moveDown() {
 		assert  commands.length == 2;
-		for (int i = xPosition; i < Integer.parseInt( commands[1]); i--) {
-			board[i][yPosition] = true;
+		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+			board[xPosition][yPosition + i] = true;
 		}
-		yPosition-=Integer.parseInt( commands[1]);
+		yPosition += Integer.parseInt(commands[1]);
 	}
 
 	/**
@@ -128,8 +123,8 @@ public class BoardMaker {
 
 	private void moveLeft() {
 		assert  commands.length == 2;
-		for (int i = xPosition; i < Integer.parseInt( commands[1]); i--) {
-			board[i][yPosition] = true;
+		for (int i = 1; i <= Integer.parseInt( commands[1]); i++) {
+			board[xPosition - i][yPosition] = true;
 		}
 		xPosition -= Integer.parseInt( commands[1]);
 	}
@@ -139,7 +134,7 @@ public class BoardMaker {
 	 */
 
 	private void moveJump(){
-		assert  commands.length==3;
+		assert  commands.length == 3;
 		board[Integer.parseInt( commands[1])][Integer.parseInt( commands[2])]=true;
 		xPosition=Integer.parseInt( commands[1]);
 		yPosition=Integer.parseInt( commands[2]);
