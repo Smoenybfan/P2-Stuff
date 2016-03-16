@@ -3,12 +3,15 @@ package turtle;
 import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 
+/**
+ * Creates a Board according to a given turtle program
+ */
+
 public class BoardMaker {
 	private boolean[][] board;
 	private final static int SIZE = 100;
-	private int xPosition;
-	private int yPosition;
-	private ArrayList<String[]> commands;
+	private int xPosition = 1;
+	private int yPosition = 1;
 
 	/**
 	 * Parse the given turtle program and evaluate it. Render the trail as
@@ -17,37 +20,17 @@ public class BoardMaker {
 	 *
 	 * @param turtleProgram input program according to specification. may also contain invalid text!
 	 * @return SIZExSIZE boolean board, where true values denote "red trail".
+	 * @see CommandParser
 	 */
 	public boolean[][] makeBoardFrom(String turtleProgram) throws ParserException {
 
-		// TODO: Read text below!
-		// You should handle parsing of the program in a different class.
-		// That class should create and store individual programs, which
-		// can then be executed.
-		//
-		// An example of how this method could be implemented follows.
-		// Please note that this is not real Java code; you will have
-		// to come up with your own classes and structures!
-		/*
-		// You can create a new board each time makeBoardFrom is called.
-		boolean[][] board = new boolean[SIZE][SIZE];
-
-		// Create a parser that accepts a program and creates individual
-		// programs.
-		CommandParser parser = new CommandParser();
-		parser.parse(turtleProgram);
-
-		// Iterate over the parsed commands and keep track of the turtle.
-		for each parsed command {
-			execute the command on the board and update the state of the turtle
-		}
-		*/
 		this.board = initialBoard();
 		CommandParser parser = new CommandParser(SIZE);
-		commands = parser.parse(turtleProgram);
+		ArrayList<String[]> commands = parser.parse(turtleProgram);
 		for(String[] command : commands){
 			move(command);
 		}
+		assert invariant();
 		return board;
 	}
 
@@ -56,15 +39,22 @@ public class BoardMaker {
 	 * @return board, must be of size SIZExSIZE.
 	 */
 	public boolean[][] initialBoard() {
+		assert invariant();
 		board = new boolean[SIZE][SIZE];
 		xPosition = SIZE/2;
 		yPosition = SIZE/2;
 		board[xPosition][yPosition] = true;
+		assert invariant();
 		return board;
 	}
 
-	public void move(String[] command){
-
+	/**
+	 * Executes the given command
+	 * asserts if the <code>command</code> is correct (has the correct length)
+	 *
+	 * @param command the executed command
+     */
+	private void move(String[] command){
 		switch (command[0]){
 			case "right":	assert command.length == 2;
 				moveRight(Integer.parseInt(command[1]));
@@ -85,7 +75,8 @@ public class BoardMaker {
 	}
 
 	/**
-	 * Helper Method that marks the way of the turtle and moves it up
+	 * Executes the up command
+	 * asserts if the destination is on the board
 	 */
 	private void moveUp(int n) {
 		assert yPosition - n > 0;
@@ -96,7 +87,8 @@ public class BoardMaker {
 	}
 
 	/**
-	 * Helper method that marks the way of the turtle and moves it right
+	 * Executes the right command
+	 * asserts if the destination is on the board
 	 */
 	private void moveRight(int n) {
 		assert xPosition + n < SIZE;
@@ -107,9 +99,9 @@ public class BoardMaker {
 	}
 
 	/**
-	 * Helper method that marks the way of the turtle and moves it down
+	 * Executes the down command
+	 * asserts if the destination is on the board
 	 */
-
 	private void moveDown(int n) {
 		assert  yPosition + n < SIZE;
 		for (int i = 1; i <= n ; i++) {
@@ -119,9 +111,9 @@ public class BoardMaker {
 	}
 
 	/**
-	 * Helper method that marks the way of the turtle and moves it left
+	 * Executes the left command
+	 * asserts if the destination is on the board
 	 */
-
 	private void moveLeft(int n) {
 		assert  xPosition - n > 0;
 		for (int i = 1; i <= n ; i++) {
@@ -131,9 +123,9 @@ public class BoardMaker {
 	}
 
 	/**
-	 * Helper method that jumps the turtle and marks the new position.
+	 * Executes the jump command
+	 * asserts if the destination is on the board
 	 */
-
 	private void moveJump(int x, int y){
 		assert  x > 0 && x < SIZE && y > 0 && y < SIZE;
 		board[x][y]=true;
@@ -141,6 +133,9 @@ public class BoardMaker {
 		yPosition = y;
 	}
 
+	/**
+	 * @return if the position of the turtle is valid
+     */
 	private boolean invariant(){
 		return xPosition > 0 && xPosition < SIZE && yPosition > 0 && yPosition < SIZE;
 	}

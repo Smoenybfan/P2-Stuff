@@ -3,10 +3,17 @@ package turtle;
 import java.util.ArrayList;
 
 /**
- * This class checks if the entered command is valid.
- * If the command is valid, it returns it to the BoardMaker.
- * Otherwise it throws an Exception that will be caught by the BoardMaker Class.
- * Created by Simon on 12.03.2016.
+ * Checks if an entered Program is valid.
+ * If the command is valid, it returns the formatted Program.
+ *
+ * In the array command will the splited commands be stored
+ * The array <code>step</code> is used to store the arguments of a command
+ * <code>x</code> and <code>y</code> are used to hold track of the turtle e.g. if the turtle would leaves the board
+ * The Integer <code>SIZE</code> is the Size of the Board an is used for the same matter
+ *
+ * The Program is formatted to fit the Execution in the Class <code>BoardMaker</code>
+ *
+ * @see BoardMaker
  */
 public class CommandParser {
 
@@ -24,16 +31,17 @@ public class CommandParser {
 
     /**
      * @return formatted Program as ArrayList
+     * @throws ParserException
      */
     public ArrayList<String[]> parse(String turtleProgram) throws ParserException {
-        ArrayList<String[]> parsedProgram = new ArrayList<>();
+        ArrayList<String[]> Program = new ArrayList<>();
         command = turtleProgram.split("\\r?\\n");
         for(String command : this.command){
             step = command.split("\\s");
             parseCommand();
-            parsedProgram.add(step);
+            Program.add(step);
         }
-        return parsedProgram;
+        return Program;
     }
 
     private void parseCommand() throws ParserException{
@@ -51,6 +59,7 @@ public class CommandParser {
                 default:   throw new ParserException();
         }
     }
+
 
     private void parseRight() throws ParserException{
         if(step.length < 2) throw new ParserException();
