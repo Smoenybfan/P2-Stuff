@@ -1,5 +1,7 @@
 package turtle;
 
+import java.util.ArrayList;
+
 /**
  * This class checks if the entered command is valid.
  * If the command is valid, it returns it to the BoardMaker.
@@ -9,65 +11,82 @@ package turtle;
 public class CommandParser {
 
     private String[] command;
+    private String[] step;
     private int x,y;
-    private int SIZE;
+    private final int SIZE;
 
-    public CommandParser(String command,int x, int y, int SIZE) {
-        this.command = command.split("\\s+");
+    public CommandParser(int SIZE) {
+        assert SIZE > 0;
+        this.SIZE = SIZE;
+        x = SIZE/2;
+        y = SIZE/2;
+    }
+
+    /**
+     * @return formatted Program as ArrayList
+     */
+    public ArrayList<String[]> parse(String turtleProgram) throws ParserException {
+        ArrayList<String[]> parsedProgram = new ArrayList<>();
+        command = turtleProgram.split("\\r?\\n");
+        for(String command : this.command){
+            step = command.split("\\s");
+            parseCommand();
+            parsedProgram.add(step);
+        }
+        return parsedProgram;
+    }
+
+    private void parseCommand() throws ParserException{
+        switch(step[0]){
+            case "right":  parseRight();
+                break;
+            case "left" :  parseLeft();
+                break;
+            case "up":     parseUp();
+                break;
+            case "down":   parseDown();
+                break;
+            case "jump":   parseJump();
+                break;
+                default:   throw new ParserException();
+        }
+    }
+
+    private void parseRight() throws ParserException{
+        if(step.length < 2) throw new ParserException();
+        int n = Integer.parseInt(step[1]);
+        if(!(n > 0 && x + n < SIZE)) throw new ParserException();
+        x += n;
+    }
+
+    private void parseLeft() throws ParserException{
+        if(step.length < 2) throw new ParserException();
+        int n = Integer.parseInt(step[1]);
+        if(!(n > 0 && x - n > 0)) throw new ParserException();
+        x -= n;
+    }
+
+    private void parseUp() throws ParserException{
+        if(step.length < 2) throw new ParserException();
+        int n = Integer.parseInt(step[1]);
+        if(!(n > 0 && y - n > 0)) throw new ParserException();
+        y -=n;
+    }
+
+    private void parseDown() throws ParserException{
+        if(step.length < 2) throw new ParserException();
+        int n = Integer.parseInt(step[1]);
+        if(!(n > 0 && y + n < SIZE)) throw new ParserException();
+        y += n;
+    }
+
+    private void parseJump() throws ParserException{
+        if(step.length < 3) throw new ParserException();
+        int x = Integer.parseInt(step[1]);
+        int y = Integer.parseInt(step[2]);
+        if(!(0 < x && x < SIZE && 0 < y && y < SIZE)) throw new ParserException();
         this.x = x;
         this.y = y;
-        this.SIZE = SIZE;
-        assert invariant();
-    }
-
-    /**
-     * @return the board with the correct move
-     */
-    public String[] parse() throws ParserException {
-        assert invariant();
-        if(parseCommand()){
-            return command;
-        }
-        throw new ParserException();
-    }
-
-    /**
-     * @return true if there is a command
-     */
-    private boolean invariant() {
-        return (command.length > 0);
-    }
-
-    private boolean parseCommand(){
-        switch(command[0]){
-            case "right": return parseRight();
-            case "left" : return parseLeft();
-            case "up": return parseUp();
-            case "down": return parseDown();
-            case "jump": return parseJump();
-            default: return false;
-        }
-    }
-
-    private boolean parseRight() {
-        return command.length == 2 && (Integer.parseInt(command[1]) >= 0 && x + Integer.parseInt(command[1]) <= SIZE);
-    }
-
-    private boolean parseLeft() {
-        return command.length == 2 && (Integer.parseInt(command[1]) >= 0 && x - Integer.parseInt(command[1]) >= 0);
-    }
-
-    private boolean parseUp() {
-        return command.length == 2 && (Integer.parseInt(command[1]) >= 0 && y - Integer.parseInt(command[1]) >= 0);
-    }
-
-    private boolean parseDown() {
-        return command.length == 2 && (Integer.parseInt(command[1]) >= 0 && y + Integer.parseInt(command[1]) <= SIZE);
-    }
-
-    private boolean parseJump() {
-        return command.length == 3 && (0 <= Integer.parseInt(command[1]) && Integer.parseInt(command[1]) <= SIZE
-                        && 0 <= Integer.parseInt(command[2]) && Integer.parseInt(command[2]) <= SIZE);
     }
 
 

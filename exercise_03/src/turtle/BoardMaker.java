@@ -1,13 +1,14 @@
 package turtle;
 
 import javax.swing.text.html.parser.Parser;
+import java.util.ArrayList;
 
 public class BoardMaker {
 	private boolean[][] board;
 	private final static int SIZE = 100;
 	private int xPosition;
 	private int yPosition;
-	private String[] commands;
+	private ArrayList<String[]> commands;
 
 	/**
 	 * Parse the given turtle program and evaluate it. Render the trail as
@@ -41,16 +42,13 @@ public class BoardMaker {
 			execute the command on the board and update the state of the turtle
 		}
 		*/
-
-		CommandParser parser = new CommandParser(turtleProgram, xPosition, yPosition, SIZE);
-		try {
-			commands = parser.parse();
-			return move();
+		this.board = initialBoard();
+		CommandParser parser = new CommandParser(SIZE);
+		commands = parser.parse(turtleProgram);
+		for(String[] command : commands){
+			move(command);
 		}
-		catch(Exception e){
-			//e.printStackTrace();
-			return board;
-		}
+		return board;
 	}
 
 	/**
@@ -58,7 +56,6 @@ public class BoardMaker {
 	 * @return board, must be of size SIZExSIZE.
 	 */
 	public boolean[][] initialBoard() {
-		// TODO: remove this and return a board instead
 		board = new boolean[SIZE][SIZE];
 		xPosition = SIZE/2;
 		yPosition = SIZE/2;
@@ -66,77 +63,85 @@ public class BoardMaker {
 		return board;
 	}
 
-	public boolean[][] move(){
+	public void move(String[] command){
 
-		switch (commands[0]){
-			case "right":   moveRight();
+		switch (command[0]){
+			case "right":	assert command.length == 2;
+				moveRight(Integer.parseInt(command[1]));
 				break;
-			case "left":    moveLeft();
+			case "left":    assert command.length == 2;
+				moveLeft(Integer.parseInt(command[1]));
 				break;
-			case "down":    moveDown();
+			case "down":    assert command.length == 2;
+				moveDown(Integer.parseInt(command[1]));
 				break;
-			case "up":      moveUp();
+			case "up":      assert command.length == 2;
+				moveUp(Integer.parseInt(command[1]));
 				break;
-			case "jump":    moveJump();
+			case "jump":    assert command.length == 3;
+				moveJump(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
 				break;
 		}
-		return board;
 	}
 
 	/**
 	 * Helper Method that marks the way of the turtle and moves it up
 	 */
-	private void moveUp() {
-		assert commands.length == 2;
-		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+	private void moveUp(int n) {
+		assert yPosition - n > 0;
+		for (int i = 1; i <= n; i++) {
 			board[xPosition][yPosition - i] = true;
 		}
-		yPosition -= Integer.parseInt(commands[1]);
+		yPosition -= n;
 	}
 
 	/**
 	 * Helper method that marks the way of the turtle and moves it right
 	 */
-	private void moveRight() {
-		assert  commands.length == 2;
-		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+	private void moveRight(int n) {
+		assert xPosition + n < SIZE;
+		for (int i = 1; i <= n; i++) {
 			board[xPosition + i][yPosition] = true;
 		}
-		xPosition += Integer.parseInt(commands[1]);
+		xPosition += n;
 	}
 
 	/**
 	 * Helper method that marks the way of the turtle and moves it down
 	 */
 
-	private void moveDown() {
-		assert  commands.length == 2;
-		for (int i = 1; i <= Integer.parseInt(commands[1]); i++) {
+	private void moveDown(int n) {
+		assert  yPosition + n < SIZE;
+		for (int i = 1; i <= n ; i++) {
 			board[xPosition][yPosition + i] = true;
 		}
-		yPosition += Integer.parseInt(commands[1]);
+		yPosition += n;
 	}
 
 	/**
 	 * Helper method that marks the way of the turtle and moves it left
 	 */
 
-	private void moveLeft() {
-		assert  commands.length == 2;
-		for (int i = 1; i <= Integer.parseInt( commands[1]); i++) {
+	private void moveLeft(int n) {
+		assert  xPosition - n > 0;
+		for (int i = 1; i <= n ; i++) {
 			board[xPosition - i][yPosition] = true;
 		}
-		xPosition -= Integer.parseInt( commands[1]);
+		xPosition -= n;
 	}
 
 	/**
 	 * Helper method that jumps the turtle and marks the new position.
 	 */
 
-	private void moveJump(){
-		assert  commands.length == 3;
-		board[Integer.parseInt( commands[1])][Integer.parseInt( commands[2])]=true;
-		xPosition=Integer.parseInt( commands[1]);
-		yPosition=Integer.parseInt( commands[2]);
+	private void moveJump(int x, int y){
+		assert  x > 0 && x < SIZE && y > 0 && y < SIZE;
+		board[x][y]=true;
+		xPosition = x;
+		yPosition = y;
+	}
+
+	private boolean invariant(){
+		return xPosition > 0 && xPosition < SIZE && yPosition > 0 && yPosition < SIZE;
 	}
 }
