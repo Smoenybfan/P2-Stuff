@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * Creates a Board according to a given turtle program
+ *
+ * The invariant checks if the <code>xPosition</code> and the <code>yPosition</code> are valid
  */
 
 public class BoardMaker {
@@ -50,11 +52,14 @@ public class BoardMaker {
 
 	/**
 	 * Executes the given command
-	 * asserts if the <code>command</code> is correct (has the correct length)
+	 * asserts if the first argument of the <code>command</code>
+	 * asserts if the <code>command</code> has the correct length
 	 *
 	 * @param command the executed command
      */
 	private void move(String[] command){
+		assert command[0] == "right" || command[0] =="left" || command[0] == "down" || command[0] == "up"
+									|| command[0] == "jump";
 		switch (command[0]){
 			case "right":	assert command.length == 2;
 				moveRight(Integer.parseInt(command[1]));
