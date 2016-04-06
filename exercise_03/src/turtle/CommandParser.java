@@ -5,34 +5,32 @@ import java.util.ArrayList;
 /**
  * Parses a turtle Program
  *
- * Invalid commands will be ignored
+ * Commands must be in the correct semantics, else they will be ignored or in
+ * case a number couldn't be parsed an Exception is thrown
+ * (e.g. right 5right) thwors an Exception
  *
- * @throws ParserException if the fist or the second argument from a command couldn't be parsed
+ * @throws ParserException if a number e.g. command argument couldn't be parsed
  */
 public class CommandParser {
 
     private String[] command;
     private String[] step;
-    private int x,y;
+    ArrayList<Command> Program = new ArrayList<>();
     private final int SIZE;
 
     public CommandParser(int SIZE) {
-        assert SIZE > 0;
         this.SIZE = SIZE;
-        x = SIZE/2;
-        y = SIZE/2;
     }
 
     /**
-     * @return formatted Program as ArrayList
-     * @throws ParserException if there is no valid command
+     * @return an ArrayList with the parsed Commands ready to execute
+     * @throws ParserException if an argument couldn't be parsed
      */
-    public ArrayList<String[]> parse(String turtleProgram) throws ParserException {
+    public ArrayList<Command> parse(String turtleProgram) throws ParserException {
         try{
-            ArrayList<String[]> Program = new ArrayList<>();
             command = turtleProgram.split("\\r?\\n");
             for(String command : this.command){step = command.split("\\s");
-                if(parseCommand()){Program.add(step);}
+                parseCommand();
             }
             return Program;}
         catch(Exception e){
@@ -40,56 +38,69 @@ public class CommandParser {
         }
     }
 
-    private boolean parseCommand() throws Exception{
+    /**
+     * Parses the command
+     */
+    private void parseCommand() throws Exception{
         switch(step[0]){
-            case "right":  return parseRight();
-            case "left" :  return parseLeft();
-            case "up":     return parseUp();
-            case "down":   return parseDown();
-            case "jump":   return parseJump();
-                default:   return false;
+            case "right":   parseRight(); break;
+            case "left" :   parseLeft(); break;
+            case "up":      parseUp(); break;
+            case "down":    parseDown(); break;
+            case "jump":    parseJump(); break;
+                default:
         }
     }
 
-    private boolean parseRight() throws Exception{
-        if(step.length < 2) return false;
+    /**
+     * Parses the command "right" and adds it to the Program
+     */
+    private void parseRight() throws Exception{
+        if(step.length < 2) return;
         int n = Integer.parseInt(step[1]);
-        if(!(n > 0 && x + n < SIZE)) return false;
-        x += n;
-        return true;
+        CommandRight command = new CommandRight(n);
+        Program.add(command);
     }
 
-    private boolean parseLeft()throws Exception{
-        if(step.length < 2) return false;
+    /**
+     * Parses the command "left" and adds it to the Program
+     */
+    private void parseLeft()throws Exception{
+        if(step.length < 2) return;
         int n = Integer.parseInt(step[1]);
-        if(!(n > 0 && x - n > 0)) return false;
-        x -= n;
-        return true;
+        CommandLeft command = new CommandLeft(n);
+        Program.add(command);
     }
 
-    private boolean parseUp()throws Exception{
-        if(step.length < 2) return false;
+    /**
+     * Parses the command "up" and adds it to the Program
+     */
+    private void parseUp()throws Exception{
+        if(step.length < 2) return;
         int n = Integer.parseInt(step[1]);
-        if(!(n > 0 && y - n > 0)) return false;
-        y -=n;
-        return true;
+        CommandUp command = new CommandUp(n);
+        Program.add(command);
     }
 
-    private boolean parseDown()throws Exception{
-        if(step.length < 2) return false;
+    /**
+     * Parses the command "down" and adds it to the Program
+     */
+    private void parseDown()throws Exception{
+        if(step.length < 2) return;
         int n = Integer.parseInt(step[1]);
-        if(!(n > 0 && y + n < SIZE)) return false;
-        y += n;
-        return true;
+        CommandDown command = new CommandDown(n);
+        Program.add(command);
     }
 
-    private boolean parseJump()throws Exception{
-        if(step.length < 3) return false;
+    /**
+     * Parses the command "jump" and adds it to the Program
+     */
+    private void parseJump()throws Exception{
+        if(step.length < 3) return;
         int x = Integer.parseInt(step[1]);
         int y = Integer.parseInt(step[2]);
-        if(!(0 < x && x < SIZE && 0 < y && y < SIZE)) return false;
-        this.x = x;
-        this.y = y;
-        return true;
+        if(!(0 < x && x < SIZE && 0 < y && y < SIZE)) return;
+        CommandJump command = new CommandJump(x,y);
+        Program.add(command);
     }
 }
