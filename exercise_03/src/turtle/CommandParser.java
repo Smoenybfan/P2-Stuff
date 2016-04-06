@@ -7,14 +7,15 @@ import java.util.ArrayList;
  *
  * Commands must be in the correct semantics, else they will be ignored or in
  * case a number couldn't be parsed an Exception is thrown
- * (e.g. right 5right) thwors an Exception
+ * (e.g. right 5right) throws an Exception
  *
- * @throws ParserException if a number e.g. command argument couldn't be parsed
+ * There is no invariant
+ *
+ * @throws ParserException if command argument as number (not the command itself but the number/numbers after) couldn't be parsed
  */
 public class CommandParser {
 
-    private String[] command;
-    private String[] step;
+    private String[] commands;
     ArrayList<Command> Program = new ArrayList<>();
     private final int SIZE;
 
@@ -28,10 +29,8 @@ public class CommandParser {
      */
     public ArrayList<Command> parse(String turtleProgram) throws ParserException {
         try{
-            command = turtleProgram.split("\\r?\\n");
-            for(String command : this.command){step = command.split("\\s");
-                parseCommand();
-            }
+            commands = turtleProgram.split("\\r?\\n");
+            for(String command : this.commands){parseCommand(command.split("\\s"));}
             return Program;}
         catch(Exception e){
             throw new ParserException();
@@ -40,67 +39,73 @@ public class CommandParser {
 
     /**
      * Parses the command
+     * @throws ParserException if an argument couldn't be parsed
      */
-    private void parseCommand() throws Exception{
-        switch(step[0]){
-            case "right":   parseRight(); break;
-            case "left" :   parseLeft(); break;
-            case "up":      parseUp(); break;
-            case "down":    parseDown(); break;
-            case "jump":    parseJump(); break;
+    private void parseCommand(String[] command) throws Exception{
+        switch(command[0]){
+            case "right":   parseRight(command); break;
+            case "left" :   parseLeft(command); break;
+            case "up":      parseUp(command); break;
+            case "down":    parseDown(command); break;
+            case "jump":    parseJump(command); break;
                 default:
         }
     }
 
     /**
      * Parses the command "right" and adds it to the Program
+     * @throws ParserException if steps couldn't be parsed
      */
-    private void parseRight() throws Exception{
-        if(step.length < 2) return;
-        int n = Integer.parseInt(step[1]);
-        CommandRight command = new CommandRight(n);
-        Program.add(command);
+    private void parseRight(String[] command) throws Exception{
+        if(command.length != 2) return;
+        int steps = Integer.parseInt(command[1]);
+        CommandRight commandRight = new CommandRight(steps);
+        Program.add(commandRight);
     }
 
     /**
      * Parses the command "left" and adds it to the Program
+     * @throws ParserException if steps couldn't be parsed
      */
-    private void parseLeft()throws Exception{
-        if(step.length < 2) return;
-        int n = Integer.parseInt(step[1]);
-        CommandLeft command = new CommandLeft(n);
-        Program.add(command);
+    private void parseLeft(String[] command)throws Exception{
+        if(command.length != 2) return;
+        int steps = Integer.parseInt(command[1]);
+        CommandLeft commandLeft = new CommandLeft(steps);
+        Program.add(commandLeft);
     }
 
     /**
      * Parses the command "up" and adds it to the Program
+     * @throws ParserException if steps couldn't be parsed
      */
-    private void parseUp()throws Exception{
-        if(step.length < 2) return;
-        int n = Integer.parseInt(step[1]);
-        CommandUp command = new CommandUp(n);
-        Program.add(command);
+    private void parseUp(String[] command)throws Exception{
+        if(command.length != 2) return;
+        int steps = Integer.parseInt(command[1]);
+        CommandUp commandUp = new CommandUp(steps);
+        Program.add(commandUp);
     }
 
     /**
      * Parses the command "down" and adds it to the Program
+     * @throws ParserException if steps couldn't be parsed
      */
-    private void parseDown()throws Exception{
-        if(step.length < 2) return;
-        int n = Integer.parseInt(step[1]);
-        CommandDown command = new CommandDown(n);
-        Program.add(command);
+    private void parseDown(String[] command)throws Exception{
+        if(command.length != 2) return;
+        int steps = Integer.parseInt(command[1]);
+        CommandDown commandDown = new CommandDown(steps);
+        Program.add(commandDown);
     }
 
     /**
      * Parses the command "jump" and adds it to the Program
+     * @throws ParserException if x or y couldn't be parsed
      */
-    private void parseJump()throws Exception{
-        if(step.length < 3) return;
-        int x = Integer.parseInt(step[1]);
-        int y = Integer.parseInt(step[2]);
+    private void parseJump(String[] command)throws Exception{
+        if(command.length != 3) return;
+        int x = Integer.parseInt(command[1]);
+        int y = Integer.parseInt(command[2]);
         if(!(0 < x && x < SIZE && 0 < y && y < SIZE)) return;
-        CommandJump command = new CommandJump(x,y);
-        Program.add(command);
+        CommandJump commandJump = new CommandJump(x,y);
+        Program.add(commandJump);
     }
 }

@@ -2,9 +2,10 @@ package turtle;
 
 /**
  * Moves a turtle around on a board
+ * The board must be of size SIZExSIZE
  *
+ * the invariant checks if the turtle is still on the board
  */
-
 public class Turtle {
     private int x,y;
     private boolean[][] board;
@@ -16,13 +17,19 @@ public class Turtle {
         assert invariant();
     }
 
-
+    /**
+     * Moves the turtle according to the command
+     * @param command holds the execution
+     */
     public void move(Command command){
         assert invariant();
         command.execute(this);
         assert invariant();
     }
 
+    /**
+     * @return is the turtle still on the board
+     */
     private boolean invariant(){return x > 0 && x < board.length && y > 0 && y < board.length;}
 
     public int getX(){

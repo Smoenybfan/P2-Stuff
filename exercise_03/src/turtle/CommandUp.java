@@ -5,17 +5,20 @@ package turtle;
  *
  * In case the turtle leaves the board he returns on the other side
  *
- * invariant isn't needed, because steps isn't modified
+ * invariant isn't needed, because steps is final
  */
-
 public class CommandUp implements Command {
 
-    private int steps;
+    private final int steps;
 
     public CommandUp(int steps){
         this.steps = steps;
     }
 
+    /**
+     * Executes the "up" command
+     * @param turtle the Turtle which is moved by the execution of the Program
+     */
     public void execute(Turtle turtle){
         int x = turtle.getX();
         int y = turtle.getY();
