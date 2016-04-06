@@ -3,19 +3,11 @@ package turtle;
 import java.util.ArrayList;
 
 /**
- * Checks if an entered Program is valid.
- * If minimum one command is valid, it returns the formatted Program.
+ * Parses a turtle Program
  *
  * Invalid commands will be ignored
  *
- * In the array <code>command</code> will the splitted commands be stored
- * The array <code>step</code> is used to store the arguments of a command
- * <code>x</code> and <code>y</code> are used to hold track of the turtle e.g. if the turtle would leaves the board
- * The Integer <code>SIZE</code> is the Size of the Board an is used for the same matter
- *
- * The Program is formatted to fit the Execution in the Class <code>BoardMaker</code>
- *
- * @see BoardMaker
+ * @throws ParserException if the fist or the second argument from a command couldn't be parsed
  */
 public class CommandParser {
 
@@ -36,21 +28,19 @@ public class CommandParser {
      * @throws ParserException if there is no valid command
      */
     public ArrayList<String[]> parse(String turtleProgram) throws ParserException {
-        ArrayList<String[]> Program = new ArrayList<>();
-        command = turtleProgram.split("\\r?\\n");
-        for(String command : this.command){
-            step = command.split("\\s");
-            if(parseCommand()){
-                Program.add(step);
+        try{
+            ArrayList<String[]> Program = new ArrayList<>();
+            command = turtleProgram.split("\\r?\\n");
+            for(String command : this.command){step = command.split("\\s");
+                if(parseCommand()){Program.add(step);}
             }
-        }
-        if(Program.size() == 0){
+            return Program;}
+        catch(Exception e){
             throw new ParserException();
         }
-        return Program;
     }
 
-    private boolean parseCommand(){
+    private boolean parseCommand() throws Exception{
         switch(step[0]){
             case "right":  return parseRight();
             case "left" :  return parseLeft();
@@ -61,8 +51,7 @@ public class CommandParser {
         }
     }
 
-
-    private boolean parseRight(){
+    private boolean parseRight() throws Exception{
         if(step.length < 2) return false;
         int n = Integer.parseInt(step[1]);
         if(!(n > 0 && x + n < SIZE)) return false;
@@ -70,7 +59,7 @@ public class CommandParser {
         return true;
     }
 
-    private boolean parseLeft(){
+    private boolean parseLeft()throws Exception{
         if(step.length < 2) return false;
         int n = Integer.parseInt(step[1]);
         if(!(n > 0 && x - n > 0)) return false;
@@ -78,7 +67,7 @@ public class CommandParser {
         return true;
     }
 
-    private boolean parseUp(){
+    private boolean parseUp()throws Exception{
         if(step.length < 2) return false;
         int n = Integer.parseInt(step[1]);
         if(!(n > 0 && y - n > 0)) return false;
@@ -86,7 +75,7 @@ public class CommandParser {
         return true;
     }
 
-    private boolean parseDown(){
+    private boolean parseDown()throws Exception{
         if(step.length < 2) return false;
         int n = Integer.parseInt(step[1]);
         if(!(n > 0 && y + n < SIZE)) return false;
@@ -94,7 +83,7 @@ public class CommandParser {
         return true;
     }
 
-    private boolean parseJump(){
+    private boolean parseJump()throws Exception{
         if(step.length < 3) return false;
         int x = Integer.parseInt(step[1]);
         int y = Integer.parseInt(step[2]);
