@@ -5,18 +5,22 @@ import java.util.ArrayList;
 /**
  * Parses a turtle Program
  *
+ * A Program need to have only one command per Line
+ * A Command can be right or left or up or down with one number which is the steps to move (e.g. up 4)
+ * Or it can be jump with two numbers which are the x and y Position to jump.
+ *
  * Commands must be in the correct semantics, else they will be ignored or in
  * case a number couldn't be parsed an Exception is thrown
  * (e.g. right 5right throws an Exception)
  *
  * There is no invariant because the arguments will be dynamically changed
- * means they are Variant. And the SIZE is final so there is also no need to
+ * means they are variant. The only invariant would be that they exist and that makes no sense to implement.
+ * Also the SIZE is final so there is also no need to
  * check that
  *
  * @throws ParserException if command argument as number (not the command itself but the number/numbers after) couldn't be parsed
  */
 public class CommandParser {
-
     private String[] commands;
     ArrayList<Command> Program = new ArrayList<>();
     private final int SIZE;
@@ -28,6 +32,7 @@ public class CommandParser {
     /**
      * @return an ArrayList with the parsed Commands ready to execute
      * @throws ParserException if an argument couldn't be parsed
+     * @param turtleProgram is the String which will be parsed
      */
     public ArrayList<Command> parse(String turtleProgram) throws ParserException {
         try{
@@ -42,6 +47,8 @@ public class CommandParser {
     /**
      * Parses the command
      * @throws ParserException if an argument couldn't be parsed
+     * @param command The first Parameter must be one of the following Strings:
+     * "right","left","up","down","jump".
      */
     private void parseCommand(String[] command) throws Exception{
         switch(command[0]){
@@ -57,6 +64,7 @@ public class CommandParser {
     /**
      * Parses the command "right" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
+     * @param command must be of size 2
      */
     private void parseRight(String[] command) throws Exception{
         if(command.length != 2) return;
@@ -68,6 +76,7 @@ public class CommandParser {
     /**
      * Parses the command "left" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
+     * @param command must be of size 2
      */
     private void parseLeft(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -79,6 +88,7 @@ public class CommandParser {
     /**
      * Parses the command "up" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
+     * @param command must be of size 2
      */
     private void parseUp(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -90,6 +100,7 @@ public class CommandParser {
     /**
      * Parses the command "down" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
+     * @param command must be of size 2
      */
     private void parseDown(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -101,6 +112,7 @@ public class CommandParser {
     /**
      * Parses the command "jump" and adds it to the Program
      * @throws ParserException if x or y couldn't be parsed
+     * @param command must be of size 3
      */
     private void parseJump(String[] command)throws Exception{
         if(command.length != 3) return;

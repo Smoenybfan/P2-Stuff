@@ -8,7 +8,6 @@ package turtle;
  * invariant isn't needed, because steps is final
  */
 public class CommandDown implements Command{
-
     private final int steps;
 
     public CommandDown(int steps){
@@ -17,6 +16,7 @@ public class CommandDown implements Command{
 
     /**
      * Executes the "down" command
+     * Leaves a red trail on the board where the turtle moves on
      * @param turtle the Turtle which is moved by the execution of the Program
      */
     public void execute(Turtle turtle){

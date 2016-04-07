@@ -19,7 +19,9 @@ public class Turtle {
 
     /**
      * Moves the turtle according to a command
-     * @param command holds the execution
+     * and leaves a red trail
+     * @param command holds the execution,
+     *                must be of type CommandLeft CommandRight, CommandUp, CommandDown or CommandJump
      */
     public void move(Command command){
         assert invariant();
@@ -28,7 +30,7 @@ public class Turtle {
     }
 
     /**
-     * @return is the turtle still on the board
+     * @return if the turtle is still on the board
      */
     private boolean invariant(){return x > 0 && x < board.length && y > 0 && y < board.length;}
 
