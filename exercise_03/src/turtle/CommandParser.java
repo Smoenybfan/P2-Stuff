@@ -47,8 +47,8 @@ public class CommandParser {
     /**
      * Parses the command
      * @throws ParserException if an argument couldn't be parsed
-     * @param command The first Parameter must be one of the following Strings:
-     * "right","left","up","down","jump".
+     * @param command The first Parameter should be one of the following Strings:
+     * "right","left","up","down","jump". else the command will be ignored
      */
     private void parseCommand(String[] command) throws Exception{
         switch(command[0]){
@@ -64,7 +64,7 @@ public class CommandParser {
     /**
      * Parses the command "right" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
-     * @param command must be of size 2
+     * @param command must be of size 2 else the command will be ignored
      */
     private void parseRight(String[] command) throws Exception{
         if(command.length != 2) return;
@@ -76,7 +76,7 @@ public class CommandParser {
     /**
      * Parses the command "left" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
-     * @param command must be of size 2
+     * @param command must be of size 2 else the command will be ignored
      */
     private void parseLeft(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -88,7 +88,7 @@ public class CommandParser {
     /**
      * Parses the command "up" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
-     * @param command must be of size 2
+     * @param command must be of size 2 else the command will be ignored
      */
     private void parseUp(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -100,7 +100,7 @@ public class CommandParser {
     /**
      * Parses the command "down" and adds it to the Program
      * @throws ParserException if steps couldn't be parsed
-     * @param command must be of size 2
+     * @param command must be of size 2 else the command will be ignored
      */
     private void parseDown(String[] command)throws Exception{
         if(command.length != 2) return;
@@ -112,7 +112,7 @@ public class CommandParser {
     /**
      * Parses the command "jump" and adds it to the Program
      * @throws ParserException if x or y couldn't be parsed
-     * @param command must be of size 3
+     * @param command must be of size 3 else the command will be ignored
      */
     private void parseJump(String[] command)throws Exception{
         if(command.length != 3) return;
