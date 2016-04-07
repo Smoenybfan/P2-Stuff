@@ -6,6 +6,10 @@ import java.util.ArrayList;
 /**
  * Modifies a SIZExSIZE board.
  *
+ * invariant isn't needed because the board is an argument of
+ * the turtle and the invariant of the turtle checks if the turtle is still
+ * on the board and the SIZE is final.
+ *
  */
 
 public class BoardMaker {

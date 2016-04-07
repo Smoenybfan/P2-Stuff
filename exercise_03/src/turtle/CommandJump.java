@@ -3,8 +3,8 @@ package turtle;
 /**
  * Holds the x and y Position to jump
  *
- * If the two Positions are on the board is already checked
- * when the turtleProgram is parsed
+ * There is no need to check whether or not x and y
+ * are on the board because the Parser already does that
  *
  * invariant isn't needed, because x,y are final
  */

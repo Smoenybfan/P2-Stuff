@@ -7,9 +7,11 @@ import java.util.ArrayList;
  *
  * Commands must be in the correct semantics, else they will be ignored or in
  * case a number couldn't be parsed an Exception is thrown
- * (e.g. right 5right) throws an Exception
+ * (e.g. right 5right throws an Exception)
  *
- * There is no invariant
+ * There is no invariant because the arguments will be dynamically changed
+ * means they are Variant. And the SIZE is final so there is also no need to
+ * check that
  *
  * @throws ParserException if command argument as number (not the command itself but the number/numbers after) couldn't be parsed
  */

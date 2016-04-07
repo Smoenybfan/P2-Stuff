@@ -18,7 +18,7 @@ public class Turtle {
     }
 
     /**
-     * Moves the turtle according to the command
+     * Moves the turtle according to a command
      * @param command holds the execution
      */
     public void move(Command command){
