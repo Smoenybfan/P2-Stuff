@@ -30,4 +30,8 @@ public class CommandRight implements Command{
         }
         turtle.setX(x);
     }
+
+    public String toString(){
+        return "right " + steps;
+    }
 }

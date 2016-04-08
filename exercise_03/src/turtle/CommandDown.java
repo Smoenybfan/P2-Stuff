@@ -30,4 +30,8 @@ public class CommandDown implements Command{
         }
         turtle.setY(y);
     }
+
+    public String toString(){
+        return "down " + steps;
+    }
 }

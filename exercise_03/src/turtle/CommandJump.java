@@ -28,4 +28,8 @@ public class CommandJump implements Command {
         turtle.setY(y);
 
     }
+
+    public String toString(){
+        return "jump " + x + " " + y;
+    }
 }

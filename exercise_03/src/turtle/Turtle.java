@@ -32,7 +32,7 @@ public class Turtle {
     /**
      * @return if the turtle is still on the board
      */
-    private boolean invariant(){return x > 0 && x < board.length && y > 0 && y < board.length;}
+    private boolean invariant(){return x >= 0 && x < board.length && y >= 0 && y < board.length;}
 
     public int getX(){
         return x;
