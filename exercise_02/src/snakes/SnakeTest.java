@@ -25,9 +25,9 @@ public class SnakeTest {
 
         Game game = new Game(12, players);
 
-        game.setSquareToSnake(4,2);
-        game.setSquareToSnake(9,3);
-        game.setSquareToSnake(6,3);
+        game.setSquareToSnake(4,-2);
+        game.setSquareToSnake(9,-3);
+        game.setSquareToSnake(6,-3);
 
         assertTrue(game.notOver());
         assertEquals(1, firstPlayer.position());
@@ -42,7 +42,7 @@ public class SnakeTest {
     @Given("setGame")
     public Game moveFirstPlayerToFirstSnake(Game game){
         game.movePlayer(3);
-        assertEquals(firstPlayer.position(),2);
+        assertEquals(2, firstPlayer.position());
         assertFalse(game.getSquare(4).isOccupied());
         assertTrue(game.notOver());
         assertSame(game.currentPlayer(),secondPlayer);
@@ -62,12 +62,21 @@ public class SnakeTest {
 
     @Given("moveSecondPlayer")
     public Game moveThirdPlayerToSecondSnake(Game game){
-        game.movePlayer(8);
+        game.currentPlayer().jumpTo(game.getSquare(8));
+        game.movePlayer(1);
         assertEquals(secondPlayer.position(),3);
         assertEquals("thirdPlayer gets moved back over two snakes to an occupied field", thirdPlayer.position(),1);
         assertTrue(game.notOver());
         assertSame(game.currentPlayer(),firstPlayer);
 
+        return game;
+    }
+
+    @Given("setGame")
+    public Game initialString(Game game){
+        assertEquals("[2<-4]",game.getSquare(4).toString());
+        assertEquals("[6<-9]",game.getSquare(9).toString());
+        assertEquals("[3<-6]",game.getSquare(6).toString());
         return game;
     }
 }
