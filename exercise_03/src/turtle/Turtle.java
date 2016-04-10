@@ -1,10 +1,21 @@
 package turtle;
 
 /**
- * Moves a turtle around on a board
- * The board must be of size SIZExSIZE
+ * This class holds track of a Turtle moving around on a board
  *
- * the invariant checks if the turtle is still on the board
+ * It holds a board where the turtle will be moved on
+ * and also the x and y Position where the turtle is currently located.
+ *
+ * You can move the Turtle around, but you need a Command to do so.
+ * This class just executes the command. The actual movement and the red trail
+ * that will be left on the board will be done by the Command itself.
+ *
+ * There are 5 Commands: CommandRight, CommandLeft, CommandUp, CommandDown and CommandJump
+ *
+ * This class checks with the invariant
+ * before and after every execution, if the turtle is still on the board.
+ *
+ * It is used by the Class BoardMaker to make a board to an entered turtleProgram
  */
 public class Turtle {
     private int x,y;

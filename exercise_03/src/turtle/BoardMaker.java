@@ -6,6 +6,14 @@ import java.util.ArrayList;
 /**
  * Modifies a SIZExSIZE board.
  *
+ * It holds a turtle which will be moved around on the board, the board
+ * where it will be moved around and the SIZE which is the SIZE of the board.
+ *
+ * This Class Parses a turtleProgram, then executed it and leaves a red trail on the
+ * board where the turtle was moved.
+ *
+ * This Class is used by the TurtleRenderer to parse and execute a turtleProgram
+ *
  * invariant isn't needed because the board is an argument of
  * the turtle and the invariant of the turtle checks if the turtle is still
  * on the board and the SIZE is final.
