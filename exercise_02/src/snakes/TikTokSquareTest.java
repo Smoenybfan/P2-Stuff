@@ -4,7 +4,6 @@ import ch.unibe.jexample.Given;
 import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;

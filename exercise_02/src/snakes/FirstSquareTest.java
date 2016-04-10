@@ -15,7 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(JExample.class)
 public class FirstSquareTest {
     Player firstPlayer = new Player("firstPlayer");
-    Player[] players = {firstPlayer};
+    Player secondPlayer = new Player(("secondPlayer"));
+    Player thirdPlayer = new Player("thirdPlayer");
+    Player[] players = {firstPlayer, secondPlayer,thirdPlayer};
 
 
     @Test
@@ -23,50 +25,15 @@ public class FirstSquareTest {
         Game game = new Game(12, players);
         assertTrue(game.getSquare(1).isFirstSquare());
         assertTrue(game.firstSquare().isOccupied());
+        assertEquals(firstPlayer.position(),1);
+        assertEquals(thirdPlayer.position(),1);
+        assertEquals(secondPlayer.position(),1);
         return game;
     }
 
-    @Test
-    public Game setUpEmptyGame(){
-        Game game = new Game(0, players);
-        return game;
-    }
-
-    /*@Test
-    public ISquare setUpFirstSquare() {
-
-
-    }*/
-
-
-
-    @Test
-    public void landHereOrGoHome() throws Exception {
-
-    }
-
-    @Test
-    public void isOccupied() throws Exception {
-
-    }
-
-    @Test
-    public void enter() throws Exception {
-
-    }
-
-    @Test
-    public void leave() throws Exception {
-
-    }
-
-    @Test
-    public void isFirstSquare() throws Exception {
-
-    }
-
-    @Test
-    public void player() throws Exception {
+    @Given("setUpGame")
+    public void initialString(Game game){
+        assertEquals("[1<firstPlayer><secondPlayer><thirdPlayer>]",game.getSquare(1).toString());
 
     }
 
