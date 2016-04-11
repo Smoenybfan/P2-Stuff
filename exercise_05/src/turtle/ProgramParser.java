@@ -93,12 +93,16 @@ public class ProgramParser {
 						throw new ProgramSyntaxException("Close bracket found, that was never opened at '"+ i +"' position");	
 					if (brackets.lastElement().charValue() != BLOCK_BRACKET_OPEN)
 						throw new ProgramSyntaxException("Close bracket found, but wasn't opened, at '"+ i +"' position");
+					brackets.pop();
 					break;
 				}
 				case COMMAND_DELIMITER: {
 					if (brackets.isEmpty()){
 						blocks.add(program.substring(blockStartIndex, ++i));
 						blockStartIndex = i;
+						while (blockStartIndex<length-1&& program.charAt(blockStartIndex)==' ' ){
+							blockStartIndex++;
+						}
 					}
 					break;
 				}
