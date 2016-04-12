@@ -146,7 +146,7 @@ public class ProgramParser {
 			throw new ProgramSyntaxException("Tokenizing error: was unable to extract command token");
 		
 		Token token = new Token(tokenArray[0]);
-		String params = command.substring(token.getName().length(), command.length()).trim();
+		String params = command.substring(token.getName().length(), command.length()-1).trim();
 		token.setArguments(params);
 		
 		return token;

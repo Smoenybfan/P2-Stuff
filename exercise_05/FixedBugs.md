@@ -28,3 +28,19 @@ the thrown exception came from a space before the command.
 
 I fixed the bug by pushing the *blockStartIndex* to the first char that is not a space.
 ![breakpoint](Screenshots/Case1_shot4.jpg)
+
+## Third Bug
+This Bug occured in the *checkCorrectTokenization()* test method.
+Same as with the first two bugs I first set a breakpoint (in fact, I set two breakpoints once
+I realized where the problem occurred).
+![breakpoint](Screenshots/Case3_shot1.jpg)
+
+While stepping down I realized that the problem was that the *param* of the Tokens was different.
+By comparing the values during debugging I discovered that in *TokenizeCommand()* is a semicolon
+too many.
+![breakpoint](Screenshots/Case3_shot2.jpg)
+
+So I shortened the string by one, the char that is cut off is a semicolon because otherwise the user
+failed the contract of the method. It's also necessary because we cut off the first command. Of course
+then the last semicolon must be cut off as well.
+![breakpoint](Screenshots/Case3_shot3.jpg)
