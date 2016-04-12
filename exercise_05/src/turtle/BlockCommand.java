@@ -50,7 +50,7 @@ public abstract class BlockCommand extends AbstractCommand {
 		if (!argv.matches(VALIDITY_REGEX))
 			throw new ProgramSyntaxException("command argument is invalid, received "+argv);
 		
-		int blockStartIndex = argv.indexOf(CLOSE_BRACKET);
+		int blockStartIndex = argv.indexOf(OPEN_BRACKET);
 		
 		String[] arguments = new String[VARIABLES_COUNT];
 		arguments[0] = argv.substring(0,blockStartIndex-1).trim();

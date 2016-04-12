@@ -95,7 +95,7 @@ public class Board {
 		}
 		
 		int increment = distance <= 1 ? -1 : 1;
-		for ( int stepIndex = 1; stepIndex < Math.abs(distance); stepIndex++ ) {
+		for ( int stepIndex = 0; stepIndex <= Math.abs(distance); stepIndex++ ) {
 			markPoint(start.incrementX(increment * stepIndex), color);
 		}
 	}
@@ -126,7 +126,7 @@ public class Board {
 		}
 		
 		int increment = distance <= 1 ? -1 : 1;
-		for ( int stepIndex = 1; stepIndex < Math.abs(distance); stepIndex++ ) {
+		for ( int stepIndex = 0; stepIndex <= Math.abs(distance); stepIndex++ ) {
 			markPoint(start.incrementY(increment * stepIndex), color);
 		}
 	}
