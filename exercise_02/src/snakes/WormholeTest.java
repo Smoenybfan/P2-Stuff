@@ -9,6 +9,8 @@ import ch.unibe.jexample.Given;
     import static org.junit.Assert.assertTrue;
     import static org.junit.Assert.fail;
 
+    import static org.mockito.Mockito.*;
+
     @RunWith(JExample.class)
     public class WormholeTest {
         private Player jack;
@@ -21,13 +23,20 @@ import ch.unibe.jexample.Given;
             jill = new Player("Jill");
             roby = new Player("Roby");
             Player[] args = {jack, jill, roby};
-            Game game = new Game(20, args);
+            Game game = new Game(20,args);
+            WormholeEntrance we = mock(WormholeEntrance.class);
+            when(we.toString()).thenReturn("[4 (WEn)]");
 
-            game.setSquareToWormholeEntrance(4);
-            game.setSquareToWormholeExit(5);
-            game.setSquareToWormholeExit(8);
-            game.setSquareToWormholeExit(10);
+            WormholeExit e1 = new WormholeExit(game, 5);
+            WormholeExit e2 = new WormholeExit(game, 8);
+            WormholeExit e3 = new WormholeExit(game, 10);
 
+            when(we.landHereOrGoHome()).thenReturn(e1);
+
+            game.setSquare(4,we);
+            game.setSquare(5,e1);
+            game.setSquare(8,e2);
+            game.setSquare(10,e3);
 
             assertTrue(game.notOver());
             assertTrue(game.firstSquare().isOccupied());
@@ -54,7 +63,7 @@ import ch.unibe.jexample.Given;
         @Given("newGame")
         public Game moveJackOnToWormholeEntrance(Game game) {
             game.movePlayer(3);
-            assertTrue(jack.position() > 4);
+            assertEquals(5, jack.position());
             assertEquals(1, jill.position());
             assertEquals(1, roby.position());
             assertTrue("The game should not be over when Jack moves to WormholeEntrance", game.notOver());
@@ -63,10 +72,13 @@ import ch.unibe.jexample.Given;
 
         @Given("newGame")
         public Game moveJillOnToWormholeEntrance(Game game) {
+            WormholeEntrance we = (WormholeEntrance) game.getSquare(4);
+            when(we.landHereOrGoHome()).thenReturn(game.getSquare(8));
+
             game.movePlayer(2);
             game.movePlayer(3);
             assertEquals(3, jack.position());
-            assertTrue(jill.position() > 4);
+            assertEquals(8,jill.position());
             assertEquals(1, roby.position());
             assertTrue("The game should not be over when Jill moves to WormholeEntrance", game.notOver());
             return game;

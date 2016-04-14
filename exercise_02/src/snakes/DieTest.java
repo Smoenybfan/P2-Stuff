@@ -1,11 +1,19 @@
 package snakes;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
 public class DieTest {
 	private static final int MAX = 20;
+
+	@Test
+	public void testDie(){
+		Die die = mock(Die.class);
+		when(die.roll()).thenReturn(4);
+		assertEquals(4,die.roll());
+	}
 	
 	@Test
 	public void testInRange() {
