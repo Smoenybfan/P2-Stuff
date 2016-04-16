@@ -1,7 +1,6 @@
             01      02      03      04      05      06      07      08      09      10      11      admitted
 
-Group 03    ok      ok      nef
-                            04/14/2016 13:00
+Group 03    ok      ok      ok
 
  wow:       especially rad solution.
   ok:       accepted.

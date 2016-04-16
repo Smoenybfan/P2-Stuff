@@ -107,6 +107,27 @@ I will give you a last chance to improve your solution for exercise_03:
 - You need to meet the contracts (no assertion errors when using <code>TurtleRenderer</code>)
 
 Please revise your work and submit before **04/14/2016 13:00**
-Don't hesitate to contact me or p2 staff if you have any questions. Remeber there is a pool hour next Tuesday. 
+Don't hesitate to contact me or p2 staff if you have any questions. Remeber there is a pool hour next Tuesday.
 
-**Status: REVISION REQUIRED (nef)**
+**UPDATE 04/16/2016:**
+You stated explicitly pre- and postconditions and you added checks for them. Well done.
+You even updated class comments and the UML sequence diagram regardless i had this accepted (barely). Also well done.
+
+Hint:
+In some spots you forgot to state the preconditions explicitly where you checked it, for example:
+```code
+/**
+ * Executes the "down" command
+ * Leaves a red trail on the board where the turtle moves on
+ * @param turtle the Turtle which is moved by the execution of the Program
+ */
+ public void execute(Turtle turtle){
+	assert turtle != null;
+	[...]
+ }
+```
+To state the precondition explicitly you could just add "should not be null" here:
+<code>@param turtle the Turtle which [...], should not be null</code>
+
+~~**Status: REVISION REQUIRED (nef)**~~
+**Status: ACCEPTED (ok)**
