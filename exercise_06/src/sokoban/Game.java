@@ -34,7 +34,7 @@ public class Game{
     }
 
     public static void main(String[] args){
-        Game game = new Game("levels/basic1.sok");
+        Game game = new Game("levels/basic2.sok");
         try{
             game.run();
         }catch(Exception e){

@@ -92,7 +92,7 @@ public class Parser {
         for(int height = 0; height < board.length; height++){
             String line = reader.readLine();
             for(int pos = 0; pos < board[0].length; pos++){
-                board[height][pos] = parseTile(line.charAt(pos),height,pos);
+                board[height][pos] = newTile(line.charAt(pos),height,pos);
             }
         }
     }
@@ -105,7 +105,7 @@ public class Parser {
      * @return A new Tile corresponding to the character on the Position x,y
      * @throws Exception if there is already one Player one the board
      */
-    private Tile parseTile(char c, int height, int pos) throws Exception{
+    private Tile newTile(char c, int height, int pos) throws Exception{
         switch(c){
              default: assert false;
             case '#': return new Wall(height,pos);
