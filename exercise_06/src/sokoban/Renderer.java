@@ -19,7 +19,7 @@ public class Renderer {
      * @throws Exception if an element in the board is null ot not one of the five tiles
      *          described in the class comment
      */
-    public void render(Tile[][] board) throws Exception{
+    public String render(Tile[][] board) throws Exception{
         assert board != null;
         StringBuffer representation = new StringBuffer();
         /*representation.append(board[0].length);
@@ -33,7 +33,7 @@ public class Renderer {
             }
             representation.append("\n");
         }
-        System.out.println(representation.toString());
+        return representation.toString();
     }
 
     /**

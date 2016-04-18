@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ParserTest {
-    Parser parser;
+    private Parser parser;
 
     @Before
     public void setUp(){
@@ -63,7 +63,6 @@ public class ParserTest {
         Tile[][] board = parser.parse("levels/basic2.sok");
         Tile[][] excpectedBoard = new Tile[7][8];
         //first row
-        excpectedBoard[1][0] = new Wall(1,0);
         for(int i = 0; i < 8; i++){
             excpectedBoard[0][i] = new Wall(0,i);
         }

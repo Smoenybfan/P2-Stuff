@@ -45,7 +45,7 @@ public class Game{
     private void run() throws Exception{
         Renderer rend = new Renderer();
         do {
-            rend.render(board);
+            System.out.print(rend.render(board));
             int move = getMove();
             player.move(board);
         }while(notOver());
