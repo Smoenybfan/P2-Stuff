@@ -1,5 +1,7 @@
 package sokoban;
 
+import java.io.IOException;
+
 /**
  * The Game class handles the game flow
  * It holds a Borad of Tiles, and a Player
@@ -10,7 +12,7 @@ public class Game{
     Player player;
 
     /**
-     * @param path to the file which contains the board
+     * @param path path to the file which contains the board
      */
     private Game(String path){
         try{
@@ -18,6 +20,27 @@ public class Game{
             player = getPlayer();}
         catch(Exception e){
             System.out.println("Could not load level!");
+            if(e.getClass().equals(java.io.FileNotFoundException.class)){
+                System.out.println("File not found!");
+            }
+            if(e.getClass().equals(IOException.class)){
+                System.out.println("Could not read from the file " + path);
+            }
+            if(e.getClass().equals(NumberFormatException.class)){
+                System.out.println("Either height or width could not be parsed!");
+            }
+            if(e.getClass().equals(InvalidSizeException.class)){
+                System.out.println("Either height or width was 0!");
+            }
+            if(e.getClass().equals(MultiplePlayerException.class)){
+                System.out.println("There is more than one Player!");
+            }
+            if(e.getClass().equals(BoxGoalException.class)){
+                System.out.println("There aren't as much Boxes as Goals!");
+            }
+            if(e.getClass().equals(IndexOutOfBoundsException.class)){
+                System.out.println("The height or the width isn't correct");
+            }
         }
     }
 
@@ -37,12 +60,12 @@ public class Game{
         Game game = new Game("levels/basic2.sok");
         try{
             game.run();
-        }catch(Exception e){
+        }catch(RenderException e){
             System.out.println("Could not render board!");
         }
     }
 
-    private void run() throws Exception{
+    private void run() throws RenderException{
         Renderer rend = new Renderer();
         do {
             System.out.print(rend.render(board));

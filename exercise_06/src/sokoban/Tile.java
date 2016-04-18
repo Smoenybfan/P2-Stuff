@@ -2,6 +2,10 @@ package sokoban;
 
 /**
  * A Tile holds the position on the board
+ *
+ * It is used to create a Tile[][] board by the parser
+ * and later on in the Game to have a data-structure capable
+ * of holding the information about the game
  */
 
 public class Tile{

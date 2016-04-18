@@ -19,7 +19,7 @@ public class Renderer {
      * @throws Exception if an element in the board is null ot not one of the five tiles
      *          described in the class comment
      */
-    public String render(Tile[][] board) throws Exception{
+    public String render(Tile[][] board) throws RenderException{
         assert board != null;
         StringBuffer representation = new StringBuffer();
         /*representation.append(board[0].length);
@@ -40,9 +40,9 @@ public class Renderer {
      * @param tile to be checked if it is one of the five tiles described in the class comment
      * @throws Exception if it is not
      */
-    private void checkTile(Tile tile) throws Exception{
+    private void checkTile(Tile tile) throws RenderException{
         switch(tile.toString()){
-            default: throw new Exception();
+            default: throw new RenderException();
             case " ": return;
             case "P": return;
             case "G": return;

@@ -46,13 +46,16 @@ public class Parser {
     public Parser(){}
 
     /**
-     *
      * @param path should be the path to a file which should have a ".sok" extension and should not be null.
      *             Should fulfill the terms described in the class comment.
      * @return a board (actually a Tile[][] array) filled with the appropriate Tiles
-     * @throws Exception if the file doesn't exists, the Parser couldn't read from the file
-     *          the height or width couldn't be parsed, one of them equals to 0, if there is already one
-     *          player on the board or there aren't as many boxes as goals on the board.
+     * @throws java.io.FileNotFoundException if the file couldn't be found
+     * @throws java.io.IOException if the reader couldn't read something from the file
+     * @throws NumberFormatException if the height or the width couldn't be parsed
+     * @throws InvalidSizeException if the width or the height equals to 0
+     * @throws MultiplePlayerException if there is more than one Player one the board
+     * @throws BoxGoalException if there aren't as many boxes as goals
+     * @throws IndexOutOfBoundsException if the height or the width aren't correct
      */
     public Tile[][] parse(String path) throws Exception{
         assert path != null;
@@ -60,11 +63,11 @@ public class Parser {
         File file = new File(path);
         BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
         int[] size = parseSize(reader);
-        if(size[0] == 0 || size[1] == 0) throw new Exception();
+        if(size[0] == 0 || size[1] == 0) throw new InvalidSizeException();
         Tile[][] board = new Tile[size[0]][size[1]];
         hasPlayer = false;
         parseBoard(board, reader);
-        if(differenceBoxGoal != 0) throw new Exception();
+        if(differenceBoxGoal != 0) throw new BoxGoalException();
         return board;
     }
 
@@ -72,7 +75,8 @@ public class Parser {
      *
      * @param reader BufferedReader with a the File which contains the Board, it should not be null
      * @return integer array : the first element is the height and the second is the width of the board
-     * @throws Exception if the height or the width couldn't be parsed or the reader couldn't read the first line
+     * @throws java.io.IOException if the reader couldn't read the first line
+     * @throws NumberFormatException if the height or the width couldn't be parsed
      */
     private int[] parseSize(BufferedReader reader) throws Exception{
         assert reader != null;
@@ -85,7 +89,8 @@ public class Parser {
      *
      * @param board should be an empty Tile[][] array (all elements are null) and not null
      * @param reader BufferedReader with a the File which contains the Board, it should not be null
-     * @throws Exception if the reader couldn't read a line or there is already one Player one the board
+     * @throws MultiplePlayerException if there is more than one Player one the board
+     * @throws java.io.IOException if the reader couldn't read a line
      */
     private void parseBoard(Tile[][] board, BufferedReader reader) throws Exception{
         assert board != null;
@@ -103,16 +108,16 @@ public class Parser {
      * @param height the y coordinate on the board
      * @param  pos the x coordinate ont the board
      * @return A new Tile corresponding to the character on the Position x,y
-     * @throws Exception if there is already one Player one the board
+     * @throws MultiplePlayerException if there is already one Player one the board
      */
-    private Tile newTile(char c, int height, int pos) throws Exception{
+    private Tile newTile(char c, int height, int pos) throws MultiplePlayerException {
         switch(c){
              default: assert false;
             case '#': return new Wall(height,pos);
             case ' ': return new Floor(height,pos);
             case 'G': differenceBoxGoal--;
                 return new Goal(height,pos);
-            case 'P': if(hasPlayer) throw new Exception();
+            case 'P': if(hasPlayer) throw new MultiplePlayerException();
                         hasPlayer = true;
                         return new Player(height,pos);
             case 'B': differenceBoxGoal++;
