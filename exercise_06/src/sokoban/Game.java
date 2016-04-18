@@ -17,7 +17,7 @@ public class Game{
             board = new Parser().parse(path);
             player = getPlayer();}
         catch(Exception e){
-            System.out.println("Could not load level");
+            System.out.println("Could not load level!");
         }
     }
 
@@ -35,17 +35,28 @@ public class Game{
 
     public static void main(String[] args){
         Game game = new Game("levels/basic1.sok");
-        game.run();
+        try{
+            game.run();
+        }catch(Exception e){
+            System.out.println("Could not render board!");
+        }
     }
 
-    private void run(){
+    private void run() throws Exception{
+        Renderer rend = new Renderer();
         do {
-
+            rend.render(board);
+            int move = getMove();
+            player.move(board);
         }while(notOver());
     }
 
     private boolean notOver(){
         return false;
+    }
+
+    private int getMove(){
+        return 0;
     }
 
 

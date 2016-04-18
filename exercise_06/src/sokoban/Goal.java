@@ -1,8 +1,10 @@
 package sokoban;
 
 /**
- * Created by daveb on 17.04.2016.
+ * A Goal is a special type of Tile
+ * It holds the position which inherits from the Tile class
  */
+
 public class Goal extends Tile {
     public Goal(int x, int y){
         super(x,y);

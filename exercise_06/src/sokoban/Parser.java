@@ -5,8 +5,18 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
- * The Parser takes an input File with the ending ".sok",
+ * The Parser takes an input String, reads the File from that String
  * parses it an returns a board filled with the appropriate tiles
+ *
+ * This class is used by the Game to initialize the board.
+ *
+ * If you want to use this class you need a new instance of it and then simply call the
+ * parse method with a String which is the path to the file you want to parse.
+ * The ending of the File should be ".sok"
+ * If the file doesn't exist, the parser couldn't read from the file,
+ * the height or the width couldn't be parsed, the height or the width equals to 0
+ * ,there is more than one Player on the board
+ * or there aren't as many boxes as goals an Exception is thrown
  *
  * The file have to be in the following order:
  * In the first line are two integers which are the width and the height of the field
@@ -18,15 +28,20 @@ import java.io.FileReader;
  * A "#" character represents a Wall tile
  * A "G" character represents a Goal tile (where the player have to put the boxes)
  *
+ * There have to be as many Boxes as there are Goals
+ *
  * If there are more characters as described with the first two parameters (height and width)
  * they just wont be parsed
  *
- * Since the Parses holds no information there is no need for an invariant
+ * Since the Parses holds only the hasPlayer attribute and the differenceBoxGoal which
+ * will be caught by an exception if they don't have the right value,
+ * there is no need for an invariant
  */
 
 public class Parser {
 
     private boolean hasPlayer;
+    private int differenceBoxGoal = 0;
 
     public Parser(){}
 
@@ -36,8 +51,8 @@ public class Parser {
      *             Should fulfill the terms described in the class comment.
      * @return a board (actually a Tile[][] array) filled with the appropriate Tiles
      * @throws Exception if the file doesn't exists, the Parser couldn't read from the file
-     *          the height or width couldn't be parsed, one of them equals to 0 or if there is already one
-     *          player on the board
+     *          the height or width couldn't be parsed, one of them equals to 0, if there is already one
+     *          player on the board or there aren't as many boxes as goals on the board.
      */
     public Tile[][] parse(String path) throws Exception{
         assert path != null;
@@ -49,6 +64,7 @@ public class Parser {
         Tile[][] board = new Tile[size[0]][size[1]];
         hasPlayer = false;
         parseBoard(board, reader);
+        if(differenceBoxGoal != 0) throw new Exception();
         return board;
     }
 
@@ -82,7 +98,6 @@ public class Parser {
     }
 
     /**
-     *
      * @param c should be one of the following characters:
      *          '#',' ','G','P' or 'B'.
      * @param height the y coordinate on the board
@@ -95,11 +110,13 @@ public class Parser {
              default: assert false;
             case '#': return new Wall(height,pos);
             case ' ': return new Floor(height,pos);
-            case 'G': return new Goal(height,pos);
+            case 'G': differenceBoxGoal--;
+                return new Goal(height,pos);
             case 'P': if(hasPlayer) throw new Exception();
                         hasPlayer = true;
                         return new Player(height,pos);
-            case 'B': return new Box(height,pos);
+            case 'B': differenceBoxGoal++;
+                return new Box(height,pos);
         }
     }
 }
