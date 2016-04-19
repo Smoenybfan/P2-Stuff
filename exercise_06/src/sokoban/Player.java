@@ -14,20 +14,28 @@ package sokoban;
  * space to do so. If there's a Wall he can't move.
  */
 
-public class Player extends Tile{
-    Tile floor;
+public class Player extends Box{
+    private Tile floor;
 
     public Player(int x, int y){
         super(x,y);
         floor= new Floor(x,y);
     }
 
-    public void move(Tile[][] board){
-
+    public void move(Move move, Tile[][] board){
+        move.execute(this,board);
     }
 
     public String toString(){
         return "P";
+    }
+
+    public Tile getFloor(){
+        return this.floor;
+    }
+
+    public void setFloor(Tile tile){
+        this.floor = tile;
     }
 
 }
