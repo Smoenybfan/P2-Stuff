@@ -1,6 +1,8 @@
             01      02      03      04      05      06      07      08      09      10      11      admitted
 
-Group 03    ok      ok      ok
+Group 03    ok      ok      ok      *       ok
+
+*corrections for ex04 follows asap 
 
  wow:       especially rad solution.
   ok:       accepted.
