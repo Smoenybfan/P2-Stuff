@@ -13,8 +13,8 @@ package sokoban;
 
 public class Floor extends Tile {
 
-    public Floor(int x, int y){
-        super(x,y);
+    public Floor(int y, int x){
+        super(y,x);
     }
 
     public String toString(){

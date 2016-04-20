@@ -21,9 +21,9 @@ package sokoban;
 public class Box extends Tile {
     private Tile floor;
 
-    public Box(int x, int y){
-        super(x,y);
-        floor = new Floor(x,y);
+    public Box(int y, int x){
+        super(y,x);
+        floor = new Floor(y,x);
     }
 
     public String toString(){

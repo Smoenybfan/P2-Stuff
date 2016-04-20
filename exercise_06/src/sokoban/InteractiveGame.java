@@ -10,7 +10,8 @@ public class InteractiveGame extends Game{
     public InteractiveGame(String path){
         super(path);
     }
-    public static InteractiveGame initialize(){
+
+    private static InteractiveGame initialize(){
         InteractiveGame game = null;
         boolean initialized = false;
         while(!initialized){
@@ -48,7 +49,7 @@ public class InteractiveGame extends Game{
      * @throws IOException if it couldn't read from the console
      * @throws RenderException if the board couldn't been rendered
      */
-    public void run() throws Exception{
+    private void run() throws Exception{
         Renderer rend = new Renderer();
         do {
             System.out.print(rend.render(this.getBoard()));
@@ -58,5 +59,27 @@ public class InteractiveGame extends Game{
         System.out.print(rend.render(this.getBoard()));
         System.out.println("You Win!");
         return;
+    }
+
+    /**
+     * This method takes an input from the command line and
+     * parses it. You have to try until you get one of the following commands
+     * "up", "down", "right", "left" right.
+     * @return the corresponding move to the given input
+     * @throws IOException if it couldn't read from the console
+     */
+    private Move getMove() throws IOException{
+        System.out.println("Which direction do you want to go next?");
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        while(true){
+            String command = bf.readLine();
+            switch(command){
+                default: System.out.println("Try again!"); break;
+                case "up": return new Up();
+                case "down": return new Down();
+                case "right": return new Right();
+                case "left": return new Left();
+            }
+        }
     }
 }

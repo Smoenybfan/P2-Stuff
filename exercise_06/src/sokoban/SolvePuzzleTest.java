@@ -11,7 +11,7 @@ public class SolvePuzzleTest {
     Game game;
 
     @Test
-    public void solveBasic1() throws Exception{
+    public void solveBasic1(){
         game = new Game("levels/basic1.sok");
         StringBuffer program = new StringBuffer();
         program.append("right,right,right,");
@@ -27,8 +27,11 @@ public class SolvePuzzleTest {
         program.append("up,");
         program.append("right,");
         program.append("down,down");
-
-        game.run(program.toString());
+        try {
+            game.run(program.toString());
+        }catch(RenderException e){
+            assertTrue(false);
+        }
         assertTrue(!game.notOver());
 
     }

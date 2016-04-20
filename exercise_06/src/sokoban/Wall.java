@@ -12,8 +12,8 @@ package sokoban;
  */
 
 public class Wall extends Tile {
-    public Wall(int x, int y){
-        super(x,y);
+    public Wall(int y, int x){
+        super(y,x);
     }
 
     public String toString(){

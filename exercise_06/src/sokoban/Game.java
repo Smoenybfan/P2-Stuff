@@ -11,10 +11,7 @@ import java.util.Iterator;
  * The Game class handles the game flow
  * It holds a Borad of Tiles, a Player and a List of every Box
  *
- * With a came you can either play a level interactively or you can
- * play by giving an input Program as String where the commands are separated by a "."
- *
- * This class is used in the GameDriver to initialize and run the Game;
+ * This class is used in the InteractiveGame where the a game initialize and run
  *
  * To use this class you have to first make an instance of it
  * and the call the run method. You can also inherit from it and implement you own run method
@@ -25,13 +22,12 @@ import java.util.Iterator;
  * There are four moves: "up","down","right" and "left"
  *
  * A very specified ExceptionHandling is implemented in the Constructor while you read and
- * parse the level from the file, so you get a detailed feedback what went wrong
- * Still there are two uncaught Exceptions in the run method which are a RenderException
- * it the Rendering fails or a IOException if something with the input on the console went wrong
+ * parse the level from a file, so you get a detailed feedback what went wrong
+ * There still is one uncaught Exceptions in the run method which is a RenderException
+ * which is thrown if the Rendering fails
  *
  * Note that there is a method IsInitializes() to check whether or not the Game is initialized,
- * because even if the Game gets an Exception during the parsing of the filed it will
- * be instanced.
+ * because the game is instanced even if you get an Exception from the Parser
  */
 
 public class Game{
@@ -102,17 +98,17 @@ public class Game{
      * This method contains the game-flow for a scripted game
      * @throws RenderException if the board couldn't been rendered
      */
-    public void run(String program) throws Exception{
+    public void run(String program) throws RenderException{
         Renderer rend = new Renderer();
         ArrayList<Move> moves = parseProgram(program);
         Iterator<Move> it = moves.iterator();
         while(it.hasNext()){
-            System.out.print(rend.render(board));
+            System.out.print(rend.render(board)+"\n");
             Move move = it.next();
             player.move(move,board);
             if(!notOver()){
                 System.out.print(rend.render(board));
-                System.out.println("Finished, " + "" +"moves left.");
+                System.out.println("Puzzle Solved!");
                 return;
             }
         }
@@ -148,28 +144,6 @@ public class Game{
             if(!box.match()) return true;
         }
         return false;
-    }
-
-    /**
-     * This method takes an input from the command line and
-     * parses it. You have to try until you get one of the following commands
-     * "up", "down", "right", "left" right.
-     * @return the corresponding move to the given input
-     * @throws IOException if it couldn't read from the console
-     */
-    protected Move getMove() throws IOException{
-        System.out.println("Where to go next: ");
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        while(true){
-            String command = bf.readLine();
-            switch(command){
-                default: System.out.println("Try again :"); break;
-                case "up": return new Up();
-                case "down": return new Down();
-                case "right": return new Right();
-                case "left": return new Left();
-            }
-        }
     }
 
     public boolean isInitialized(){

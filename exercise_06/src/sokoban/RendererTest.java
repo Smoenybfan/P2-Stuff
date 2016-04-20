@@ -17,9 +17,14 @@ public class RendererTest {
     }
 
     @Test
-    public void renderBasic1Sok()throws Exception{
-        Tile[][] board = parser.parse("levels/basic1.sok");
-        String string = rend.render(board);
+    public void renderBasic1Sok(){
+        String string = "";
+        try {
+            Tile[][] board = parser.parse("levels/basic1.sok");
+            string += rend.render(board);
+        }catch(Exception e){
+            assertTrue(false);
+        }
         StringBuffer excpectedString = new StringBuffer();
         excpectedString.append("#######\n");
         excpectedString.append("#     #\n");
@@ -32,8 +37,13 @@ public class RendererTest {
 
     @Test
     public void renderBasic2Sok() throws Exception{
-        Tile[][] board = parser.parse("levels/basic2.sok");
-        String string = rend.render(board);
+        String string = "";
+        try {
+            Tile[][] board = parser.parse("levels/basic2.sok");
+            string += rend.render(board);
+        }catch(Exception e){
+            assertTrue(false);
+        }
         StringBuffer excpectedString = new StringBuffer();
         excpectedString.append("########\n");
         excpectedString.append("#      #\n");

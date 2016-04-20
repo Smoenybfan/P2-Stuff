@@ -12,8 +12,8 @@ package sokoban;
  */
 
 public class Goal extends Tile {
-    public Goal(int x, int y){
-        super(x,y);
+    public Goal(int y, int x){
+        super(y,x);
     }
 
     public String toString(){

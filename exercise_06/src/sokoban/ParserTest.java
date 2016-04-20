@@ -14,17 +14,25 @@ public class ParserTest {
     }
 
     @Test
-    public void equalsBasic1Sok()throws Exception{
-        Tile[][] board = parser.parse("levels/basic1.sok");
-        Tile[][] expectedBoard = buildExpectedBasic1Sok();
-        assertArrayEquals(expectedBoard, board);
+    public void equalsBasic1Sok(){
+        try{
+            Tile[][] board = parser.parse("levels/basic1.sok");
+            Tile[][] expectedBoard = buildExpectedBasic1Sok();
+            assertArrayEquals(expectedBoard, board);
+        }catch(Exception e){
+            assertTrue(false);
+        }
     }
 
     @Test
-    public void equalsBasic2Sok() throws Exception{
-        Tile[][] board = parser.parse("levels/basic2.sok");
-        Tile[][] expectedBoard = buildExpectedBasic2Sok();
-        assertArrayEquals(expectedBoard, board);
+    public void equalsBasic2Sok(){
+        try {
+            Tile[][] board = parser.parse("levels/basic2.sok");
+            Tile[][] expectedBoard = buildExpectedBasic2Sok();
+            assertArrayEquals(expectedBoard, board);
+        }catch(Exception e){
+            assertTrue(false);
+        }
     }
 
     @Test(expected = java.io.FileNotFoundException.class)
