@@ -12,7 +12,7 @@ package sokoban;
  * It should only be used by the Parser and Game Class.
  */
 
-public class Tile{
+public class  Tile{
     protected int[] position;
 
     public Tile(int y, int x){

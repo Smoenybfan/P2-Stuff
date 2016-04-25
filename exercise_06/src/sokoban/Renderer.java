@@ -44,6 +44,8 @@ public class Renderer {
             case "G": return;
             case "B": return;
             case "#": return;
+            case "X": return;
+            case "O": return;
         }
     }
 

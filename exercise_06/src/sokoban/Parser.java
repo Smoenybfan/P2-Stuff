@@ -23,10 +23,12 @@ import java.io.FileReader;
  * between them has to be one space and one space only
  * After that line comes the board:
  * A " " character represents floor tile
- * A "P" character represents the player (also a tile), there has to be only one player
+ * A "P" character represents the player (also a tile), there must be only one player
  * A "B" character represents a Box tile
  * A "#" character represents a Wall tile
  * A "G" character represents a Goal tile (where the player have to put the boxes)
+ * A "O" character represents a Bomb tile
+ * A "X" character represents a BreakableWall tile
  *
  * There have to be as many Boxes as there are Goals
  *
@@ -104,7 +106,7 @@ public class Parser {
 
     /**
      * @param c should be one of the following characters:
-     *          '#',' ','G','P' or 'B'.
+     *          '#',' ','G','P','X','O' or 'B'.
      * @param height the y coordinate on the board
      * @param  pos the x coordinate ont the board
      * @return A new Tile corresponding to the character on the Position x,y
@@ -122,6 +124,8 @@ public class Parser {
                         return new Player(height,pos);
             case 'B': differenceBoxGoal++;
                 return new Box(height,pos);
+            case 'X': return new BreakableWall(height, pos);
+            case 'O': return new Bomb(height, pos);
         }
     }
 }

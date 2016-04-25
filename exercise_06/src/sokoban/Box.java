@@ -13,7 +13,7 @@ package sokoban;
  *
  * This class should only be used by the Parser and the Game. It can move around but
  * to be able to only move it when a player push it, you need to implement a new Game, Parse a Board
- * and the run the Game
+ * and then run the Game
  *
  * A Box has a match method which will return if the Box is on a Goal.
  */
