@@ -1,4 +1,4 @@
-package sokoban;
+package sokoban.GameObjects;
 
 /**
  * A Goal is a special type of Tile
@@ -16,6 +16,7 @@ public class Goal extends Tile {
         super(y,x);
     }
 
+    @Override
     public String toString(){
         return "G";
     }

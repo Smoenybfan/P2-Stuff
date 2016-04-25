@@ -1,7 +1,12 @@
-package sokoban;
+package sokoban.Tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import sokoban.Exceptions.BoxGoalException;
+import sokoban.Exceptions.InvalidSizeException;
+import sokoban.Exceptions.MultiplePlayerException;
+import sokoban.Game.Parser;
+import sokoban.GameObjects.*;
 
 import static org.junit.Assert.*;
 

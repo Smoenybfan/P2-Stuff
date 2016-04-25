@@ -1,4 +1,4 @@
-package sokoban;
+package sokoban.GameObjects;
 
 /**
  * A Tile holds the position on the board
@@ -13,7 +13,7 @@ package sokoban;
  */
 
 public class  Tile{
-    protected int[] position;
+    public int[] position;
 
     public Tile(int y, int x){
         position = new int[2];
@@ -78,11 +78,17 @@ public class  Tile{
         return board[position[0]][position[1] - index];
     }
 
+
+
     public int getX(){
         return position[1];
     }
 
     public int getY(){
         return  position[0];
+    }
+
+    public String toString(){
+        return "No type";
     }
 }

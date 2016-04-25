@@ -1,4 +1,9 @@
-package sokoban;
+package sokoban.Game;
+
+import sokoban.Exceptions.BoxGoalException;
+import sokoban.Exceptions.InvalidSizeException;
+import sokoban.Exceptions.MultiplePlayerException;
+import sokoban.GameObjects.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -127,5 +132,9 @@ public class Parser {
             case 'X': return new BreakableWall(height, pos);
             case 'O': return new Bomb(height, pos);
         }
+    }
+
+    public String toString(){
+        return "Has player: "+hasPlayer+" Box-Goal Difference: "+differenceBoxGoal;
     }
 }

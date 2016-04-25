@@ -1,15 +1,23 @@
-package sokoban;
+package sokoban.Game;
 
-import java.io.BufferedReader;
+import sokoban.Exceptions.BoxGoalException;
+import sokoban.Exceptions.InvalidSizeException;
+import sokoban.GameObjects.Box;
+import sokoban.GameObjects.Player;
+import sokoban.GameObjects.Tile;
+import sokoban.Moves.*;
+import sokoban.Exceptions.MultiplePlayerException;
+import sokoban.Exceptions.RenderException;
+
 import java.io.IOException;
 
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
  * The Game class handles the game flow
- * It holds a Borad of Tiles, a Player and a List of every Box
+ * It holds a Board of Tiles, a Player and a List of every Box
  *
  * This class is used in the InteractiveGame where the a game initialize and run
  *
@@ -137,7 +145,7 @@ public class Game{
         return moves;
     }
 
-    protected boolean notOver(){
+    public boolean notOver(){
         Iterator<Box> it = boxes.iterator();
         while(it.hasNext()){
             Box box = it.next();
@@ -155,5 +163,9 @@ public class Game{
 
     public Tile[][] getBoard(){
         return this.board;
+    }
+
+    public String toString(){
+        return Arrays.toString(board);
     }
 }

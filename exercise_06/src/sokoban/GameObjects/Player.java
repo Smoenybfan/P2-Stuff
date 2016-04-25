@@ -1,4 +1,6 @@
-package sokoban;
+package sokoban.GameObjects;
+
+import sokoban.Moves.Move;
 
 /**
  * The player is a special type of a Box
@@ -32,6 +34,7 @@ public class Player extends Box{
         move.execute(this,board);
     }
 
+    @Override
     public String toString(){
         return "P";
     }

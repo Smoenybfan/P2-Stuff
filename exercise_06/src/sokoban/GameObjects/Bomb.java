@@ -1,4 +1,4 @@
-package sokoban;
+package sokoban.GameObjects;
 
 /**
  * A Bomb is a special type of Box

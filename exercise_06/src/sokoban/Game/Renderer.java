@@ -1,4 +1,7 @@
-package sokoban;
+package sokoban.Game;
+
+import sokoban.Exceptions.RenderException;
+import sokoban.GameObjects.Tile;
 
 /**
  * The Renderer takes a Tile[][] array, makes a String out of it
@@ -47,6 +50,10 @@ public class Renderer {
             case "X": return;
             case "O": return;
         }
+    }
+
+    public String toString(){
+        return "Game Renderer";
     }
 
 }

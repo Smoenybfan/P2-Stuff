@@ -1,4 +1,4 @@
-package sokoban;
+package sokoban.GameObjects;
 
 /**
  * A Box is a special type of Tile
@@ -26,6 +26,7 @@ public class Box extends Tile {
         floor = new Floor(y,x);
     }
 
+    @Override
     public String toString(){
         return "B";
     }

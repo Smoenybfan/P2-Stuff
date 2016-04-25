@@ -1,4 +1,4 @@
-package sokoban;
+package sokoban.GameObjects;
 
 /**
  * A BreakableWall is a special type of Tile

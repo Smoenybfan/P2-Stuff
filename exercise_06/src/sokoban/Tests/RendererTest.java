@@ -1,8 +1,11 @@
-package sokoban;
+package sokoban.Tests;
 
 
 import org.junit.Before;
 import org.junit.Test;
+import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
+import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 

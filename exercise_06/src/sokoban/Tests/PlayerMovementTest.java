@@ -1,10 +1,14 @@
-package sokoban;
+package sokoban.Tests;
 
 
 import ch.unibe.jexample.Given;
 import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sokoban.Game.Game;
+import sokoban.Game.Parser;
+import sokoban.GameObjects.Player;
+import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 

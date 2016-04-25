@@ -1,4 +1,7 @@
-package sokoban;
+package sokoban.Game;
+
+import sokoban.Moves.*;
+import sokoban.Exceptions.RenderException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

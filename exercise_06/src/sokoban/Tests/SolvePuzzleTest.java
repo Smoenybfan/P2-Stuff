@@ -1,8 +1,10 @@
-package sokoban;
+package sokoban.Tests;
 
 import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sokoban.Game.Game;
+import sokoban.Exceptions.RenderException;
 
 import static org.junit.Assert.*;
 
