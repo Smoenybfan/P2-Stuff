@@ -47,7 +47,7 @@ public class Game {
 		game.play(new Die());
 	}
 
-	public void play(Die die) {
+	public void play(IDie die) {
 		System.out.println("Initial state: " + this);
 		while (this.notOver()) {
 			int roll = die.roll();
