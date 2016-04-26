@@ -1,6 +1,6 @@
 package snakes;
 
-public class Die {
+public class Die implements IDie {
 	static final int FACES = 6;
 	
 	public int roll() {
