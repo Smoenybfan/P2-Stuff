@@ -14,6 +14,7 @@ public class SimpleGameTest {
 
 	private Player jack;
 	private Player jill;
+	private MockedDie die = new MockedDie(new int[] {6,1,4,1,2,5,3,1});
 
 	@Test
 	public Game newGame() {
@@ -139,5 +140,23 @@ public class SimpleGameTest {
 		assertEquals(jack, game.currentPlayer());
 		assertEquals(jill, game.winner());
 		return game;
+	}
+
+	@Given("newGame")
+	public void moveJackWhenRolled(Game game){
+		game.movePlayer(die.roll());
+		assertEquals(jack.position(),6);
+		assertEquals(1, jill.position());
+		assertEquals(jill, game.currentPlayer());
+		assertTrue(game.notOver());
+	}
+
+	@Given("moveJackWhenRolled")
+	public void moveJillwhenRolled(Game game){
+		game.movePlayer(die.roll());
+		assertEquals(jack.position(),6);
+		assertEquals(2, jill.position());
+		assertEquals(jack, game.currentPlayer());
+		assertTrue(game.notOver());
 	}
 }

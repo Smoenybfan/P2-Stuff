@@ -8,4 +8,6 @@ public class Die implements IDie {
 		assert result >= 1 && result <= FACES;
 		return result;
 	}
+
+
 }

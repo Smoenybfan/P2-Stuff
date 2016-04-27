@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(JExample.class)
 public class FirstSquareTest {
@@ -22,18 +23,16 @@ public class FirstSquareTest {
 
     @Test
     public Game setUpGame(){
-        Game game = new Game(12, players);
-        assertTrue(game.getSquare(1).isFirstSquare());
-        assertTrue(game.firstSquare().isOccupied());
-        assertEquals(firstPlayer.position(),1);
-        assertEquals(thirdPlayer.position(),1);
-        assertEquals(secondPlayer.position(),1);
-        return game;
-    }
+        Game spygame = spy(new Game(12, players));
+        /*doReturn().when(spygame.getSquare(1))
+        when(spygame.getSquare(1)).thenReturn(new FirstSquare(spygame, 1));
+        assertTrue(spygame.getSquare(1).isFirstSquare());
+        return spygame;*/
+    return spygame;}
 
     @Given("setUpGame")
-    public void initialString(Game game){
-        assertEquals("[1<firstPlayer><secondPlayer><thirdPlayer>]",game.getSquare(1).toString());
+    public void initialString(Game spygame){
+        assertEquals("[1<firstPlayer><secondPlayer><thirdPlayer>]",spygame.getSquare(1).toString());
 
     }
 
