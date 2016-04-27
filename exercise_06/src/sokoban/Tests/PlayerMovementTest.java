@@ -31,7 +31,7 @@ public class PlayerMovementTest {
         Player player = (Player) expectedBoard[2][1];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[1][1]);
-        player.position[0] = 1;
+        player.setY(1);
         expectedBoard[1][1] = player;
         expectedBoard[2][1] = floor;
         assertArrayEquals(expectedBoard, game.getBoard());
@@ -43,7 +43,7 @@ public class PlayerMovementTest {
         Player player = (Player) expectedBoard[1][1];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[1][2]);
-        player.position[1] = 2;
+        player.setX(2);
         expectedBoard[1][2] = player;
         expectedBoard[1][1] = floor;
         assertArrayEquals(expectedBoard, game.getBoard());
@@ -55,7 +55,7 @@ public class PlayerMovementTest {
         Player player = (Player) expectedBoard[1][2];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[2][2]);
-        player.position[0] = 2;
+        player.setY(2);
         expectedBoard[2][2] = player;
         expectedBoard[1][2] = floor;
         assertArrayEquals(expectedBoard, game.getBoard());
@@ -67,7 +67,7 @@ public class PlayerMovementTest {
         Player player = (Player) expectedBoard[2][2];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[2][1]);
-        player.position[1] = 1;
+        player.setX(1);
         expectedBoard[2][1] = player;
         expectedBoard[2][2] = floor;
         assertArrayEquals(expectedBoard, game.getBoard());

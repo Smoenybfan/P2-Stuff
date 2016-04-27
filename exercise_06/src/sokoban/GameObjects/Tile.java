@@ -13,7 +13,11 @@ package sokoban.GameObjects;
  */
 
 public class  Tile{
-    public int[] position;
+    public void setPosition(int[] position) {
+        this.position = position;
+    }
+
+    protected int[] position;
 
     public Tile(int y, int x){
         position = new int[2];
@@ -86,6 +90,15 @@ public class  Tile{
 
     public int getY(){
         return  position[0];
+    }
+
+    public void setX(int value){
+        position[1]=value;
+    }
+
+    public void setY(int value){
+        position[0]=value;
+
     }
 
     public String toString(){

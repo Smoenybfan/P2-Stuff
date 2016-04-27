@@ -34,9 +34,9 @@ public class BoxMovementTest {
         Tile BoxFloor = box.getFloor();
         player.setFloor(BoxFloor);
         box.setFloor(expectedBoard[2][2]);
-        box.position[1] = 2;
+        box.setX(2);
         expectedBoard[2][2] = box;
-        player.position[1] = 3;
+        player.setX(3);
         expectedBoard[2][3] = player;
         expectedBoard[2][6] = PlayerFloor;
         assertArrayEquals(expectedBoard, game.getBoard());
@@ -51,9 +51,9 @@ public class BoxMovementTest {
         Tile BoxFloor = box.getFloor();
         player.setFloor(BoxFloor);
         box.setFloor(expectedBoard[2][1]);
-        box.position[1] = 1;
+        box.setX(1);
         expectedBoard[2][1] = box;
-        player.position[1] = 2;
+        player.setX(2);
         expectedBoard[2][2] = player;
         expectedBoard[2][3] = PlayerFloor;
         assertArrayEquals(expectedBoard, game.getBoard());
