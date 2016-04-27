@@ -4,63 +4,84 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by kafader on 10.04.2016.
  */
 public class SquareTest {
-    Game game;
-    Player firstPlayer = new Player("firstPlayer");
-    Player secondPlayer = new Player(("secondPlayer"));
-    Player thirdPlayer = new Player("thirdPlayer");
+    Game spyGame;
+    Player firstPlayer = mock(Player.class);
+    Player secondPlayer = mock(Player.class);
+    Player thirdPlayer = mock(Player.class);
     Player[] players = {firstPlayer, secondPlayer,thirdPlayer};
 
     @Before
     public void setUp(){
-        game = new Game(12,players);
+        Game game = new Game(12,players);
+        spyGame = spy(game);
+        Square secondSquare = new Square(spyGame, 2);
+        Square thirdSquare = new Square(spyGame, 3);
+        Square sixthSquare = new Square(spyGame, 6);
+        when(spyGame.getSquare(2)).thenReturn(secondSquare);
+        when(spyGame.getSquare(3)).thenReturn(thirdSquare);
+        when(spyGame.getSquare(6)).thenReturn(sixthSquare);
+        when(firstPlayer.toString()).thenReturn("first");
+        when(secondPlayer.toString()).thenReturn("second");
+
     }
 
     @Test
     public void nextAndPreviousSquare() throws Exception{
-        assertEquals(game.getSquare(2).position()+1,game.getSquare(3).position());
-        assertEquals(game.getSquare(3).position()-1, game.getSquare(2).position());
+
+        assertEquals(spyGame.getSquare(2).position()+1,spyGame.getSquare(3).position());
+        assertEquals(spyGame.getSquare(3).position()-1, spyGame.getSquare(2).position());
     }
 
     @Test
     public void position() throws Exception {
-        assertEquals(6, game.getSquare(6).position());
+        assertEquals(6, spyGame.getSquare(6).position());
     }
 
     @Test
     public void moveAndLand() throws Exception {
-        game.movePlayer(4);
-        assertEquals(5,firstPlayer.position());
+        Square secondSquare = new Square(spyGame,2);
+        ISquare square = secondSquare.moveAndLand(4);
+        assertEquals(6, square.position());
     }
 
     @Test
     public void landHereOrGoHome() throws Exception {
-        game.movePlayer(4);//moves firstPlayer
-        game.movePlayer(4);//moves secondPlayer
-        assertEquals(5,firstPlayer.position());
-        assertEquals(1,secondPlayer.position());
+        Square square = new Square(spyGame, 2);
+        square.enter(firstPlayer);
+        ISquare secondSquare = square.landHereOrGoHome();
+        assertEquals(1, secondSquare.position());
     }
 
     @Test
     public void isOccupied() throws Exception {
-        assertTrue(game.getSquare(1).isOccupied());
-        game.movePlayer(3);
-        assertTrue(game.getSquare(4).isOccupied());
+        Square square = new Square(spyGame, 2);
+        square.enter(firstPlayer);
+        assertTrue(square.isOccupied());
     }
 
     @Test
     public void leave() throws Exception {
-        game.movePlayer(3);
-        assertNotEquals(1, firstPlayer.position());
+       Square square = new Square(spyGame,2);
+        square.enter(firstPlayer);
+        square.leave(firstPlayer);
+        assertFalse(square.isOccupied());
     }
 
     @Test
-    public void isFirstSquare() throws Exception {
-        assertEquals(1,game.firstSquare().position());
+    public void player(){
+        Square square = new Square(spyGame,2);
+        assertEquals("",square.player());
+        square.enter(firstPlayer);
+
+        assertEquals("<first>",square.player());
     }
 
 }

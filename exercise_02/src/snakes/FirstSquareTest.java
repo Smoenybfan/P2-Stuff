@@ -15,24 +15,41 @@ import static org.mockito.Mockito.*;
 
 @RunWith(JExample.class)
 public class FirstSquareTest {
-    Player firstPlayer = new Player("firstPlayer");
-    Player secondPlayer = new Player(("secondPlayer"));
-    Player thirdPlayer = new Player("thirdPlayer");
-    Player[] players = {firstPlayer, secondPlayer,thirdPlayer};
+
+    Player firstPlayer = mock(Player.class);
+    Player secondPlayer = mock(Player.class);
+    Player fourthPlayer;
+    Player[] players = {firstPlayer, secondPlayer};
 
 
     @Test
-    public Game setUpGame(){
-        Game spygame = spy(new Game(12, players));
-        /*doReturn().when(spygame.getSquare(1))
-        when(spygame.getSquare(1)).thenReturn(new FirstSquare(spygame, 1));
-        assertTrue(spygame.getSquare(1).isFirstSquare());
-        return spygame;*/
-    return spygame;}
+    public FirstSquare setUpGame(){
+        Game game = new Game(12,players);
+        Game spyGame = spy(game);
+        FirstSquare firstSquare = new FirstSquare(spyGame,1);
+        assertEquals("",firstSquare.player());
+        return firstSquare;
+    }
 
     @Given("setUpGame")
-    public void initialString(Game spygame){
-        assertEquals("[1<firstPlayer><secondPlayer><thirdPlayer>]",spygame.getSquare(1).toString());
+    public FirstSquare firstEnters(FirstSquare firstSquare){
+        fourthPlayer = mock(Player.class);
+        firstSquare.enter(fourthPlayer);
+        when(fourthPlayer.toString()).thenReturn("first");
+        assertEquals("<first>",firstSquare.player());
+        return firstSquare;
+    }
+
+    @Given("firstEnters")
+    public FirstSquare firstLeaves(FirstSquare firstSquare){
+        firstSquare.leave(fourthPlayer);
+        assertEquals("",firstSquare.player());
+        return firstSquare;
+    }
+
+    @Given("firstEnters")
+    public void initialString(FirstSquare firstSquare){
+        assertEquals("[1<first>]",firstSquare.toString());
 
     }
 

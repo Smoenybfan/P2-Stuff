@@ -13,74 +13,46 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(JExample.class)
 public class LadderTest {
-    private Player firstPlayer;
-    private Player secondPlayer;
-    private Player thirdPlayer;
-
+    private Player firstPlayer = mock(Player.class);
+    private Player secondPlayer = mock(Player.class);
+    private Player thirdPlayer = mock(Player.class);
+    private Game spyGame;
 
     @Test
-    public Game setGame() {
-        firstPlayer=new Player("firstPlayer");
-        secondPlayer=new Player("secondPlayer");
-        thirdPlayer=new Player("thirdPlayer");
+    public Ladder setGame() {
         Player[] players = {firstPlayer, secondPlayer, thirdPlayer};
 
-        Game game = spy(new Game(12, players));
-
-        game.setSquareToLadder(4,2);
-        game.setSquareToLadder(5,7);
-
-        /*assertTrue(game.notOver());
-        assertEquals(1, firstPlayer.position());
-        assertEquals(1, secondPlayer.position());
-        assertEquals(1, thirdPlayer.position());
-        assertSame(firstPlayer, game.currentPlayer());
-        assertTrue(game.firstSquare().isOccupied()); */
-
-        return game;
+        Game game = new Game(10, players);
+        spyGame = spy(game);
+        Ladder ladder = new Ladder(2,spyGame,4);
+        return ladder;
     }
 
     @Given("setGame")
-    public Game firstPlayerEntersLadder(Game game) {
-        game.movePlayer(3);
-        assertEquals(6,firstPlayer.position());
-        assertEquals(1, secondPlayer.position());
-        assertEquals(1, thirdPlayer.position());
-        assertTrue(game.notOver());
-        assertSame(game.currentPlayer(),secondPlayer);
-        return game;
+    public Ladder firstPlayerEntersLadder(Ladder ladder) {
+        Square square = mock(Square.class);
+        when(square.landHereOrGoHome()).thenReturn(square);
+        when(spyGame.getSquare(6)).thenReturn(square);
+        assertEquals(square,ladder.landHereOrGoHome());
+        return ladder;
     }
 
     @Given("firstPlayerEntersLadder")
-    public Game secondPlayerEntersLadder(Game game){
-        game.movePlayer(3);
-        assertEquals(6, firstPlayer.position());
-        assertEquals("gets moved back because 6 is occupied", 1, secondPlayer.position());
-        assertEquals(1, thirdPlayer.position());
-        assertTrue(game.notOver());
-        assertSame(game.currentPlayer(), thirdPlayer);
-        return game;
+    public Ladder secondPlayerEntersLadder(Ladder ladder){
+        FirstSquare firstSquare = mock(FirstSquare.class);
+        Square square = mock(Square.class);
+        when(square.landHereOrGoHome()).thenReturn(firstSquare);
+        when(spyGame.getSquare(6)).thenReturn(square);
+        assertEquals(firstSquare,ladder.landHereOrGoHome());
+        return ladder;
     }
 
     @Given("setGame")
-    public Game firstPlayerEntersFinalLadder(Game game){
-        game.movePlayer(4);
-        assertEquals(12,firstPlayer.position());
-        assertEquals(1, secondPlayer.position());
-        assertEquals(1, thirdPlayer.position());
-        assertTrue(game.isOver());
-        assertSame(firstPlayer,game.winner());
-        return game;
-    }
+    public void initialStrings(Ladder ladder){
+        ladder.enter(firstPlayer);
+        when(firstPlayer.toString()).thenReturn("first");
+        assertEquals("[4->6<first>]",ladder.toString());
 
-    @Given("setGame")
-    public Game initialStrings(Game game){
-        assertEquals("firstPlayer", firstPlayer.toString());
-        assertEquals("secondPlayer", secondPlayer.toString());
-        assertEquals("thirdPlayer", thirdPlayer.toString());
-        assertEquals("[4->6]",game.getSquare(4).toString());
-        assertEquals("[5->12]",game.getSquare(5).toString());
-        return game;
     }
 
 

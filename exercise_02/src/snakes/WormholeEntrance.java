@@ -26,7 +26,7 @@ public class WormholeEntrance extends Square {
 
 	@Override
 	public ISquare landHereOrGoHome(){
-		return destination();
+		return this.destination();
 	}
 
 	@Override

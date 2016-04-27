@@ -7,55 +7,48 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 @RunWith(JExample.class)
 public class TikTokSquareTest {
 	private Player jack;
 	private Player jill;
+	private TikTokSquare tikTokSquare;
+	Game spyGame;
 
 	@Test
-	public Game newGame() {
-		jack = new Player("Jack");
-		jill = new Player("Jill");
+	public TikTokSquare newGame() {
+		jack = mock(Player.class);
+		jill = mock(Player.class);
 		Player[] args = { jack, jill };
-		Game game = new Game(12, args);
-
-		game.setSquare(4, new TikTokSquare(game, 4, 5, 6));
-		
-		assertTrue(game.notOver());
-		assertTrue(game.firstSquare().isOccupied());
-		assertEquals(1, jack.position());
-		assertEquals(1, jill.position());
-		assertEquals(jack, game.currentPlayer());
-		return game;
+		Game game = new Game(12,args);
+		spyGame = spy(game);
+		tikTokSquare = new TikTokSquare(spyGame, 3, 5, 7);
+		return tikTokSquare;
 	}
 
 	@Given("newGame")
-	public Game initialStrings(Game game) {
-		assertEquals("Jack", jack.toString());
-		assertEquals("Jill", jill.toString());
-		assertEquals("[1<Jack><Jill>]", game.firstSquare().toString());
-		assertEquals("[4 (TikTok)]", game.getSquare(4).toString());
-		assertEquals("[10]", game.getSquare(10).toString());
-		return game;
-	}
-	
-	@Given("newGame")
-	public Game moveJackOnToTikTokSquare(Game game) {
-		game.movePlayer(3);
-		assertEquals(5, jack.position());
-		assertEquals(1, jill.position());
-		assertTrue("The game should not be over when Jack moves to TikTokSquare", game.notOver());
-		return game;
+	public TikTokSquare initialStrings(TikTokSquare tikTokSquare) {
+		Square square = mock(Square.class);
+		when(square.squareLabel()).thenReturn("3");
+		assertEquals("[3 (TikTok)]",tikTokSquare.toString());
+		return tikTokSquare;
 	}
 
-	@Given("moveJackOnToTikTokSquare")
-	public Game moveJillOnToTikTokSquare(Game game) {
-		game.movePlayer(3);
-		assertEquals(5, jack.position());
-		assertEquals(6, jill.position());
-		assertTrue("The game should not be over when Jill moves to TikTokSquare", game.notOver());
-		return game;
+	@Given("newGame")
+	public TikTokSquare landHereOrGoHome(TikTokSquare tikTokSquare){
+		Square squareFive = mock(Square.class);
+		Square squareSeven = mock(Square.class);
+		when(spyGame.getSquare(5)).thenReturn(squareFive);
+		when(spyGame.getSquare(7)).thenReturn(squareSeven);
+		when(squareFive.landHereOrGoHome()).thenReturn(squareFive);
+		when(squareSeven.landHereOrGoHome()).thenReturn(squareSeven);
+
+		assertEquals(squareFive,tikTokSquare.landHereOrGoHome());
+		assertEquals(squareSeven, tikTokSquare.landHereOrGoHome());
+		return tikTokSquare;
 	}
 
 }

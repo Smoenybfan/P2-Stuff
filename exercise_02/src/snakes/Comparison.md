@@ -5,4 +5,4 @@ class <b>MockedDie</b>.
 
 In my opinion, the both approaches feel almost the same. With both you can say which methods
 should work (or exists) and what they should return. I prefer the approach with Mocktio,
-because over all you simply have more possibilities without writing too much code by your own. 
+because over all you simply have more possibilities without writing too much code by your own.
