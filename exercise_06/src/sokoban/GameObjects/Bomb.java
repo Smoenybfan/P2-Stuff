@@ -22,9 +22,11 @@ package sokoban.GameObjects;
  * Look out! The symbol for Bomb is a capital o, not the number zero!
  */
 public class Bomb extends Box{
+    private Tile floor;
 
     public Bomb(int y, int x){
         super(y,x);
+        floor = new Floor(x,y);
     }
 
     @Override
@@ -110,7 +112,9 @@ public class Bomb extends Box{
     private void explode(Bomb bomb, Tile neighbourTile, Tile[][] board) {
         assert neighbourTile.toString()=="X";
 
+        board[bomb.getY()][bomb.getX()]=null;
         board[bomb.getY()][bomb.getY()]=new Floor(bomb.getY(),bomb.getX());
+        board[neighbourTile.getY()][neighbourTile.getX()]=null;
         board[neighbourTile.getY()][neighbourTile.getX()]=new Floor(neighbourTile.getY(),neighbourTile.getY());
     }
 }

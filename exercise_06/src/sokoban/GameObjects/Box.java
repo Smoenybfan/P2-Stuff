@@ -56,6 +56,14 @@ public class Box extends Tile {
             }
             return false;
         }
+        if(upperTile.toString().equals("O")){
+            Bomb bomb = (Bomb) upperTile;
+            if(bomb.moveUp(board)){
+                swap(getUpperTile(board,1),board);
+                return true;
+            }
+            return false;
+        }
         swap(upperTile,board); //move the Box
         return true;
     }
@@ -73,6 +81,14 @@ public class Box extends Tile {
         if(lowerTile.toString().equals("B")){
             Box box = (Box) lowerTile;
             if(box.moveDown(board)){
+                swap(getLowerTile(board,1),board);
+                return true;
+            }
+            return false;
+        }
+        if(lowerTile.toString().equals("O")){
+            Bomb bomb = (Bomb) lowerTile;
+            if(bomb.moveDown(board)){
                 swap(getLowerTile(board,1),board);
                 return true;
             }
@@ -100,6 +116,14 @@ public class Box extends Tile {
             }
             return false;
         }
+        if(righterTile.toString().equals("O")){
+            Bomb bomb = (Bomb) righterTile;
+            if(bomb.moveRight(board)){
+                swap(getRighterTile(board,1),board);
+                return true;
+            }
+            return false;
+        }
         swap(righterTile,board);
         return true;
     }
@@ -122,6 +146,14 @@ public class Box extends Tile {
             }
             return false;
         }
+        if(lefterTile.toString().equals("O")){
+            Bomb bomb = (Bomb) lefterTile;
+            if(bomb.moveLeft(board)){
+                swap(getLefterTile(board,1),board);
+                return true;
+            }
+            return false;
+        }
         swap(lefterTile,board);
         return true;
     }
@@ -136,7 +168,7 @@ public class Box extends Tile {
         assert destination != null;
         assert destination == board[destination.getY()][destination.getX()];
         assert destination.toString().equals(" ")
-                || destination.toString().equals("G");
+                || destination.toString().equals("G") ||destination.toString().equals("X");
         Tile temp = this.floor;
         this.floor = destination;
         position[0] = destination.getY();
