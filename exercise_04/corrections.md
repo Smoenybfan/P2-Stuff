@@ -41,4 +41,27 @@ You did not solve the first part (snake & ladder) as we ask you for.
 You need to revise your solution until **04/28/2016 13:00**.
 If you don't know how to use Mockito or if you have any other questions, don't hesitate to ask me or somebody else of the P2 staff. You can also ask us after the lab on Friday or in the pool hours at Tuesday.
 
-**Status: REVISION REQUIRED (nef)**
+
+##UPDATE 05/03/2016:
+###Implement two different types of tests that cover <code>Game#play(IDie)</code>
+You extracted the `IDie` interface and you created a well designed `MockedDie`.
+The task was to test the method `Game#play(IDie)` - i cant find such test case where you test exactly this method with Mockito and the mocked die. You created a `DieTestWithMockito` where you add some tests testing the mocked `Die` class. Be aware that testing mocked object does not make sense. You do test a dummy this way.
+
+###Write a short paragraph and tell us which approach is better in your opinion and why
+Found your comparison.md
+
+###Test for all squares in your game (cover various scenarios)
+You improved your tests.
+
+If you mock all other objects for a class, then just test the functionalities of the class, don't test the mock, like you did for example in `SquareTest`:
+```java
+        assertEquals(spyGame.getSquare(2).position()+1,spyGame.getSquare(3).position());
+        assertEquals(spyGame.getSquare(3).position()-1, spyGame.getSquare(2).position());
+```
+With this you test the functionality of Game (or better the mock of Game) not the functionality of Square.
+
+###Conclusion
+It seems that you misunderstood some tasks. You really should improve your knowledge about unit and integration testing and mocking. Try to understand what, how and why you should test.
+If you are unsure about these and other topic, don't hesitate to ask us.
+
+**Status: Barely Accepted (OK)**
