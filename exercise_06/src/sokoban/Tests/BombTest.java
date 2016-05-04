@@ -1,7 +1,10 @@
-package sokoban.GameObjects;
+package sokoban.Tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import sokoban.GameObjects.Bomb;
+import sokoban.GameObjects.BreakableWall;
+import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

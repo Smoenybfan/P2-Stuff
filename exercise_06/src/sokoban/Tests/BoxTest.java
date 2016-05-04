@@ -1,9 +1,12 @@
-package sokoban.GameObjects;
+package sokoban.Tests;
 
 import ch.unibe.jexample.Given;
 import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sokoban.GameObjects.Box;
+import sokoban.GameObjects.Tile;
+import sokoban.GameObjects.Wall;
 
 import static org.junit.Assert.*;
 
@@ -47,7 +50,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(1);
         assertTrue(box.moveUp(board));
         int[] pos = {1,3};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveUp(board));
     }
 
@@ -58,7 +61,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(3);
         assertTrue(box.moveDown(board));
         int[] pos = {3,3};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveDown(board));
     }
 
@@ -69,7 +72,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(2);
         assertTrue(box.moveRight(board));
         int[] pos = {2,4};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveRight(board));
     }
 
@@ -80,7 +83,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(2);
         assertTrue(box.moveLeft(board));
         int[] pos = {2,2};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveLeft(board));
     }
 
@@ -124,7 +127,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(4);
         assertTrue(box.moveDown(board));
         int[] pos = {3,3};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveDown(board));
     }
 
@@ -135,7 +138,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(2);
         assertTrue(box.moveLeft(board));
         int[] pos = {2,2};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveLeft(board));
     }
 
@@ -146,7 +149,7 @@ public class BoxTest {
         when(tile.getY()).thenReturn(2);
         assertTrue(box.moveRight(board));
         int[] pos = {2,4};
-        assertArrayEquals(pos , box.position);
+        assertArrayEquals(pos , box.getPosition());
         assertFalse(box.moveRight(board));
     }
 

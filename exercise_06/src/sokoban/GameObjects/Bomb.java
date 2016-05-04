@@ -20,6 +20,8 @@ package sokoban.GameObjects;
  * A Bomb has an explode method that turns the BreakableWall and the box1 to Floor Tiles.
  *
  * Look out! The symbol for Bomb is a capital o, not the number zero!
+ *
+ * @see Box
  */
 public class Bomb extends Box{
     private Tile floor;

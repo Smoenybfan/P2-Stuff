@@ -9,6 +9,8 @@ package sokoban.GameObjects;
  * then modifies it.
  *
  * This class should only be used by the Parser Class and the Game Class.
+ *
+ * Since the only public method only returns a String it doesn't need to be tested.
  */
 
 public class Wall extends Tile {

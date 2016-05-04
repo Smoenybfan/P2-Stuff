@@ -19,6 +19,8 @@ public class  Tile{
 
     protected int[] position;
 
+    public int[] getPosition(){return this.position.clone();}
+
     public Tile(int y, int x){
         position = new int[2];
         position[0] = y;
