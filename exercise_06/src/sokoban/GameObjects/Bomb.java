@@ -10,14 +10,14 @@ package sokoban.GameObjects;
  * then modifies it.
  *
  * A Bomb can be moved around on a board, as long as there is no unbreakable wall. If there is
- * such a breakable wall, then the bomb can be moved on that wall by exploding. Then both the
- * Tile of the bomb and the breakable wall become floor Tiles.
+ * such a breakable wall, then the box1 can be moved on that wall by exploding. Then both the
+ * Tile of the box1 and the breakable wall become floor Tiles.
  *
  * This class should only be used by the Parser and the Game. It can move around but
  * to be able to only move it when a player push it, you need to implement a new Game, Parse a Board
  * and then run the Game
  *
- * A Bomb has an explode method that turns the BreakableWall and the bomb to Floor Tiles.
+ * A Bomb has an explode method that turns the BreakableWall and the box1 to Floor Tiles.
  *
  * Look out! The symbol for Bomb is a capital o, not the number zero!
  */
@@ -103,9 +103,9 @@ public class Bomb extends Box{
     }
 
     /**
-     * Makes the explosion of the bomb by setting the <code>Tile</code> of the
+     * Makes the explosion of the box1 by setting the <code>Tile</code> of the
      * <code>BreakableWall</code> and the <code>Bomb</code>, which both exploded to <code>Floor</code>.
-     * @param bomb the bomb that explodes
+     * @param bomb the box1 that explodes
      * @param neighbourTile the wall that explodes. Must be a <code>BreakableWall</code>
      * @param board the board on which is played
      */

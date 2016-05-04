@@ -12,6 +12,9 @@ import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 
+/**
+ * All tests in this class are integration tests.
+ */
 @RunWith(JExample.class)
 public class PlayerMovementTest {
     private Game game;
