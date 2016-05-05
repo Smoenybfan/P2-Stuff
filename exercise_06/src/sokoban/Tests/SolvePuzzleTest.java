@@ -8,12 +8,15 @@ import sokoban.Exceptions.RenderException;
 
 import static org.junit.Assert.*;
 
+/**
+ * This is an integration Test
+ */
 @RunWith(JExample.class)
 public class SolvePuzzleTest {
     Game game;
 
     @Test
-    public void solveBasic1(){
+    public void solveBasic1() throws RenderException{
         game = new Game("levels/basic1.sok");
         StringBuffer program = new StringBuffer();
         program.append("right,right,right,");
@@ -29,12 +32,8 @@ public class SolvePuzzleTest {
         program.append("up,");
         program.append("right,");
         program.append("down,down");
-        try {
-            game.run(program.toString());
-        }catch(RenderException e){
-            assertTrue(false);
-        }
-        assertTrue(!game.notOver());
 
+        game.run(program.toString());
+        assertTrue(!game.notOver());
     }
 }

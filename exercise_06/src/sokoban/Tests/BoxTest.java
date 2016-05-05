@@ -14,9 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by smoen on 04.05.2016.
- */
+
 @RunWith(JExample.class)
 public class BoxTest {
     Box box1,box2,box3,box4;

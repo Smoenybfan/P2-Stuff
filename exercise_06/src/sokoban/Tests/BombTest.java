@@ -9,9 +9,7 @@ import sokoban.GameObjects.Tile;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Created by smoen on 04.05.2016.
- */
+
 public class BombTest {
     Tile tile;
     Bomb mockedBomb;
