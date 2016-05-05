@@ -14,6 +14,14 @@ The menu contains 4 buttons:
 
 ![Menu](sketches/Menu.jpg)
 
+## Select Level
+
+There are buttons for each level.
+There is also a *Back* button to go back to the menu
+There is a scrollbar on the left side if the buttons doesn't fit on the screen
+
+![Select Level](sketches/Select_level.jpg)
+
 ## Play
 
 This sketch shows the Windows during the game is played.
