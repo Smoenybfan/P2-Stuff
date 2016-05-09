@@ -1,9 +1,9 @@
 # Exercise 9
 
-This week, you will work with your Sokoban code one last time by trying to 
-avoid object dependencies. This is achieved using two design patterns that try 
-to solve the same problem in different manners. You will get a chance to see 
-them in action and compare them with respect to your code.
+This week, you will work with your Sokoban code again by trying to avoid 
+object dependencies. This is achieved using two design patterns that try to 
+solve the same problem in different manners. You will get a chance to see them 
+in action and compare them with respect to your code.
 
 ## Dependencies
 
@@ -104,7 +104,7 @@ needed. In our example, we could implement a `DefaultServiceLocator` and a
 ```java
 public class DefaultServiceLocator extends ServiceLocator {
 	@Override
-	public FileSystem getScanner() {
+	public Scanner getScanner() {
 		return new ConsoleScanner();
 	}
 	//...
@@ -112,7 +112,7 @@ public class DefaultServiceLocator extends ServiceLocator {
 
 public class TestServiceLocator extends ServiceLocator {
 	@Override
-	public FileSystem getScanner() {
+	public Scanner getScanner() {
 		return new ScriptedScanner();
 	}
 
