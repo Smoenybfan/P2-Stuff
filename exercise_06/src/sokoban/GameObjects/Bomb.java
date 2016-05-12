@@ -24,11 +24,9 @@ package sokoban.GameObjects;
  * @see Box
  */
 public class Bomb extends Box{
-    private Tile floor;
 
     public Bomb(int y, int x){
         super(y,x);
-        floor = new Floor(x,y);
     }
 
     @Override
@@ -112,11 +110,8 @@ public class Bomb extends Box{
      * @param board the board on which is played
      */
     private void explode(Bomb bomb, Tile neighbourTile, Tile[][] board) {
-        assert neighbourTile.toString()=="X";
-
-        board[bomb.getY()][bomb.getX()]=null;
-        board[bomb.getY()][bomb.getY()]=new Floor(bomb.getY(),bomb.getX());
-        board[neighbourTile.getY()][neighbourTile.getX()]=null;
-        board[neighbourTile.getY()][neighbourTile.getX()]=new Floor(neighbourTile.getY(),neighbourTile.getY());
+        assert neighbourTile.toString() == "X";
+        board[bomb.getY()][bomb.getX()]=new Floor(bomb.getY(),bomb.getX());
+        board[neighbourTile.getY()][neighbourTile.getX()]=new Floor(neighbourTile.getY(),neighbourTile.getX());
     }
 }

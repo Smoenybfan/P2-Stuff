@@ -9,8 +9,8 @@ import sokoban.GameObjects.Tile;
  *
  * This class is used by the Game to show the current state of the game
  *
- * There are only 5 types of Tiles that are allowed which are:
- * Box, Wall, Goal, Floor and Player
+ * There are only 7 types of Tiles that are allowed which are:
+ * Box, Wall, Goal, Floor, Player, Bomb and BreakableWall
  *
  * When a tile is null or it isn't one of the above an Exception is thrown
  */
@@ -18,6 +18,7 @@ import sokoban.GameObjects.Tile;
 public class Renderer {
 
     /**
+     * This method renders the board and returns it as a String
      * @param board which will be printed. Shouldn't be null
      * @throws RenderException if an element in the board is null ot not one of the five tiles
      *          described in the class comment
@@ -36,10 +37,12 @@ public class Renderer {
     }
 
     /**
-     * @param tile to be checked if it is one of the five tiles described in the class comment
+     * This method checks if a Tile is one of the seven above
+     * @param tile to be checked if it is one of the seven tiles described in the class comment, should not be null
      * @throws RenderException if it is not
      */
     private void checkTile(Tile tile) throws RenderException{
+        assert tile != null;
         switch(tile.toString()){
             default: throw new RenderException();
             case " ": return;

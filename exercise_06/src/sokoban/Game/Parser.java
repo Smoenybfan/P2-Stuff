@@ -1,13 +1,12 @@
 package sokoban.Game;
 
 import sokoban.Exceptions.BoxGoalException;
+import sokoban.Exceptions.CouldNotIdentifyCharacterException;
 import sokoban.Exceptions.InvalidSizeException;
 import sokoban.Exceptions.MultiplePlayerException;
 import sokoban.GameObjects.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 /**
  * The Parser takes an input String, reads the File from that String
@@ -53,6 +52,7 @@ public class Parser {
     public Parser(){}
 
     /**
+     * This method parses a level from a file which is located at the passed over path
      * @param path should be the path to a file which should have a ".sok" extension and should not be null.
      *             Should fulfill the terms described in the class comment.
      * @return a board (actually a Tile[][] array) filled with the appropriate Tiles
@@ -63,8 +63,10 @@ public class Parser {
      * @throws MultiplePlayerException if there is more than one Player one the board
      * @throws BoxGoalException if there aren't as many boxes as goals
      * @throws IndexOutOfBoundsException if the height or the width aren't correct
+     * @throws CouldNotIdentifyCharacterException if there was a not identifiable character in the file
      */
-    public Tile[][] parse(String path) throws Exception{
+    public Tile[][] parse(String path) throws FileNotFoundException, IOException, NumberFormatException,
+            InvalidSizeException, MultiplePlayerException, BoxGoalException, CouldNotIdentifyCharacterException{
         assert path != null;
         assert path.split("\\.")[1].equals("sok");
         File file = new File(path);
@@ -79,13 +81,13 @@ public class Parser {
     }
 
     /**
-     *
+     * This method parses the Size of the board meaning the height an the width
      * @param reader BufferedReader with a the File which contains the Board, it should not be null
      * @return integer array : the first element is the height and the second is the width of the board
      * @throws java.io.IOException if the reader couldn't read the first line
      * @throws NumberFormatException if the height or the width couldn't be parsed
      */
-    private int[] parseSize(BufferedReader reader) throws Exception{
+    private int[] parseSize(BufferedReader reader) throws IOException, NumberFormatException{
         assert reader != null;
         String size = reader.readLine();
         String[] splitedSize = size.split("\\s");
@@ -93,14 +95,16 @@ public class Parser {
     }
 
     /**
-     *
+     * This method parses the board meaning it parses every tile and puts it into the board (2-dimensional array)
      * @param board should be an empty Tile[][] array (all elements are null) and not null
      * @param reader BufferedReader with a the File which contains the Board, it should not be null
      * @throws MultiplePlayerException if there is more than one Player one the board
      * @throws java.io.IOException if the reader couldn't read a line
      */
-    private void parseBoard(Tile[][] board, BufferedReader reader) throws Exception{
+    private void parseBoard(Tile[][] board, BufferedReader reader) throws MultiplePlayerException,
+            IOException, CouldNotIdentifyCharacterException{
         assert board != null;
+        assert reader != null;
         for(int height = 0; height < board.length; height++){
             String line = reader.readLine();
             for(int pos = 0; pos < board[0].length; pos++){
@@ -110,16 +114,20 @@ public class Parser {
     }
 
     /**
+     * This method parses a Tile from a given character c
      * @param c should be one of the following characters:
-     *          '#',' ','G','P','X','O' or 'B'.
-     * @param height the y coordinate on the board
-     * @param  pos the x coordinate ont the board
-     * @return A new Tile corresponding to the character on the Position x,y
+     *          '#',' ','G','P','X','O' or 'B', else an exception is thrown
+     * @param height the y coordinate on the board, should be positive
+     * @param  pos the x coordinate ont the board, should be positive
+     * @return A new Tile corresponding to the character on the Position y,x
      * @throws MultiplePlayerException if there is already one Player one the board
+     * @throws CouldNotIdentifyCharacterException if a c is not one of the above characters
      */
-    private Tile newTile(char c, int height, int pos) throws MultiplePlayerException {
+    private Tile newTile(char c, int height, int pos) throws MultiplePlayerException, CouldNotIdentifyCharacterException{
+        assert height >= 0; // Need to be >= Because else the ExceptionHandling doesn't work properly
+        assert pos >= 0;
         switch(c){
-             default: assert false;
+            default: throw new CouldNotIdentifyCharacterException();
             case '#': return new Wall(height,pos);
             case ' ': return new Floor(height,pos);
             case 'G': differenceBoxGoal--;
@@ -128,13 +136,13 @@ public class Parser {
                         hasPlayer = true;
                         return new Player(height,pos);
             case 'B': differenceBoxGoal++;
-                return new Box(height,pos);
+                        return new Box(height,pos);
             case 'X': return new BreakableWall(height, pos);
             case 'O': return new Bomb(height, pos);
         }
     }
 
     public String toString(){
-        return "Has player: "+hasPlayer+" Box-Goal Difference: "+differenceBoxGoal;
+        return "Has player: " + hasPlayer + " Box-Goal Difference: " + differenceBoxGoal;
     }
 }

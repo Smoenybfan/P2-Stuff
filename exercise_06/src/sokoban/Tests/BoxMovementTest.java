@@ -4,6 +4,7 @@ import ch.unibe.jexample.Given;
 import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
 import sokoban.Game.Parser;
 import sokoban.GameObjects.Box;
@@ -18,6 +19,10 @@ public class BoxMovementTest {
     private Parser parser;
     private Tile[][] expectedBoard;
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Test
     public void setUp() throws Exception{
         game = new Game("levels/basic2.sok");
@@ -25,8 +30,12 @@ public class BoxMovementTest {
         expectedBoard = parser.parse("levels/basic2.sok");
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("setUp")
-    public void movePlayerIntoBox()throws Exception{
+    public void movePlayerIntoBox()throws RenderException{
         game.run("left,left,left");
         Player player = (Player) expectedBoard[2][6];
         Box box = (Box) expectedBoard[2][3];
@@ -42,8 +51,12 @@ public class BoxMovementTest {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("movePlayerIntoBox")
-    public void moveBoxIntoWall()throws Exception{
+    public void moveBoxIntoWall()throws RenderException{
         game.run("left,left,left,left");
         Player player = (Player) expectedBoard[2][3];
         Box box = (Box) expectedBoard[2][2];

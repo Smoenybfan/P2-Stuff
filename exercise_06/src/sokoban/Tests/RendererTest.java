@@ -3,11 +3,14 @@ package sokoban.Tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import sokoban.Exceptions.RenderException;
 import sokoban.Game.Parser;
 import sokoban.Game.Renderer;
 import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RendererTest {
     private Parser parser;
@@ -38,6 +41,7 @@ public class RendererTest {
         assertEquals(excpectedString.toString(),string);
     }
 
+
     @Test
     public void renderBasic2Sok() throws Exception{
         String string = "";
@@ -56,5 +60,13 @@ public class RendererTest {
         excpectedString.append("#    GG#\n");
         excpectedString.append("########\n");
         assertEquals(excpectedString.toString(),string);
+    }
+
+    @Test(expected = RenderException.class)
+    public void throwRenderExpection() throws RenderException{
+        Tile[][] board = new Tile[1][1];
+        board[0][0] = mock(Tile.class);
+        when(board[0][0].toString()).thenReturn("R");
+        rend.render(board);
     }
 }

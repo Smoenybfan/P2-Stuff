@@ -16,7 +16,7 @@ package sokoban.GameObjects;
 public class BreakableWall extends Wall {
 
     public BreakableWall(int y, int x){
-        super(x,y);
+        super(y,x);
     }
 
     @Override
