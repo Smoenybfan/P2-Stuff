@@ -95,8 +95,34 @@ Unfortunately your level test for stage 3 fails and you did not complete the mut
 
 Please revise your solution for excercise 07 **until 05/12/2016 13:00**
 
+##Update 05/12/2016
+You added more preconditions and stated them in the method comments.
+You also solved other problems or followed hints i gave you.
+
+But just by looking through all your classes and study the parameters of your methods (what you should have done) i found the following methods that have parameters with objects (which could also be asserted != null):
+- `Player#move`
+- `Player#setFloor`
+- every `execute` method of the different moves.
+
+Additionaly i found the `Tile` constructor and `setX`, `setY` where i think it would make sense to check that x/y is not negative.
+
+Right now i can find just one instance variable left that could be final: `position` in `Tile`.
+
+But the real problem ist that I can't find your level test for stage 3 (*"Write a test that solves the `levels/extended1.sok` level"*).
+The only test that uses `levels/extended1.sok` is `WallBreakerTest`. I am not shure what you are testing in `movePlayerIntoBomb` but you don't solve the level there.
+
+###Conclusion
+Note that you need to do your revisions more accuratly.
+Because you added more preconditions and stated them in the method comments the DbC part is ok for me.
+
+But I can't accept your revision whitout a test that solves `levels/extended1.sok`.
+Please add such a test **until Monday, 05/16/2016 13:00**.
+
+Let me know if you have any questions.
+Note that normally we don't give the chance for second revisions.
+
 Exercise 06 (Stage 1 & 2 / JavaDoc class / method comments):
 **Status: ACCEPTED (ok)**
 
 Exercise 07 (Stage 3 / Mutability / DbC):
-**Status: REVISION REQUIRED (nef)**
+**Status: SECOND REVISION REQUIRED (nef)**
