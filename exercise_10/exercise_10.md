@@ -66,11 +66,11 @@ actions. The following requirements must be implemented:
   executing the action in the first place.
 - You need to be able to undo an arbitrary number of steps (until you end up 
   at the initial board again).
-- Once an action has been undone, it should be possible to redo it (that is, 
-  there should be a separate command that allows redoing the action that was 
-  undone last; however, if there were intermediate steps, it should not be 
-  possible anymore to redo anything anymore). This should work with multiple 
-  undo actions as well (e.g., first executing the undo action 3 times and then 
+- Once an action has been undone, it should be possible to redo it (without 
+  having to know what the action was, so basically just like undo/redo 
+  functionality in a text editor, which simply provides two "functions" that 
+  can redo and undo a series of steps). This should work with multiple undo 
+  actions as well (e.g., first executing the undo action 3 times and then 
   executing the redo action 3 times should result in the same game state 
   again).
 - Write unit tests for the above functionality.
