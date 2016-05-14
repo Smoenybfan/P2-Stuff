@@ -68,7 +68,7 @@ public class  Tile{
      */
     protected Tile getRighterTile(Tile[][] board, int index){
         assert board[position[0]][position[1]] == this;
-        assert position[0] + index < board[0].length;
+        assert position[1] + index < board[0].length;
         return board[position[0]][position[1] + index];
     }
 
@@ -81,7 +81,7 @@ public class  Tile{
      */
     protected Tile getLefterTile(Tile[][] board, int index){
         assert board[position[0]][position[1]] == this;
-        assert position[0] - index >= 0;
+        assert position[1] - index >= 0;
         return board[position[0]][position[1] - index];
     }
 

@@ -111,7 +111,7 @@ public class Bomb extends Box{
      */
     private void explode(Bomb bomb, Tile neighbourTile, Tile[][] board) {
         assert neighbourTile.toString() == "X";
-        board[bomb.getY()][bomb.getX()]=new Floor(bomb.getY(),bomb.getX());
-        board[neighbourTile.getY()][neighbourTile.getX()]=new Floor(neighbourTile.getY(),neighbourTile.getX());
+        board[bomb.getY()][bomb.getX()] = new Floor(bomb.getY(),bomb.getX());
+        board[neighbourTile.getY()][neighbourTile.getX()] = new Floor(neighbourTile.getY(),neighbourTile.getX());
     }
 }

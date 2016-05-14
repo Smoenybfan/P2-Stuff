@@ -38,4 +38,58 @@ public class SolvePuzzleTest {
         game.run(program.toString());
         assertTrue(!game.notOver());
     }
+
+    /**
+     * This is an integration Test
+     * @throws RenderException
+     */
+    @Test
+    public void solveExtended1() throws RenderException{
+        game = new Game("levels/extended1.sok");
+        StringBuffer program = new StringBuffer();
+        program.append("down,down,");
+        program.append("right,right,right,right,right,right,");
+        program.append("up,up,");
+        program.append("left,left,left,left,");
+        program.append("right,right,right,right,");
+        program.append("down,down,");
+        program.append("left,left,left,left,left,left,");
+        program.append("up,up,up,");
+        program.append("right,");
+        program.append("down,down,down,");
+        program.append("left,");
+        program.append("down,");
+        program.append("right,");
+        program.append("up,");
+        program.append("right,");
+        program.append("down,");
+        program.append("up,up,");
+        program.append("left,");
+        program.append("up,up,");
+        program.append("right,right,right,right,");
+        program.append("down,down,");
+        program.append("right,");
+        program.append("down,");
+        program.append("left,left,left,");
+        program.append("up,");
+        program.append("left,");
+        program.append("down,down,down,");
+        program.append("right,");
+        program.append("down,");
+        program.append("left,");
+        program.append("down,");
+        program.append("left,");
+        program.append("up,");
+
+        program.append("right,");
+        program.append("up,up,up,");
+        program.append("left,");
+        program.append("down,down,down,");
+        program.append("left,");
+        program.append("down,");
+        program.append("right,right,right,right");
+
+        game.run(program.toString());
+        assertTrue(!game.notOver());
+    }
 }
