@@ -9,12 +9,14 @@ package sokoban.GameObjects;
  * then modifies it.
  *
  * This class should only be used by the Parser Class, the Bomb Class and the Game Class.
+ *
+ * Since the only public method only returns a String it doesn't need to be tested.
  */
 
 public class BreakableWall extends Wall {
 
     public BreakableWall(int y, int x){
-        super(x,y);
+        super(y,x);
     }
 
     @Override

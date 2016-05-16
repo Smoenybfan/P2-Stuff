@@ -13,11 +13,10 @@ package sokoban.GameObjects;
  */
 
 public class  Tile{
-    public void setPosition(int[] position) {
-        this.position = position;
-    }
 
     protected int[] position;
+
+    public int[] getPosition(){return this.position.clone();}
 
     public Tile(int y, int x){
         position = new int[2];
@@ -35,6 +34,7 @@ public class  Tile{
     }
 
     /**
+     * This method returns the upper Tile which is "index" steps above this one
      * @param board board which should contains this tile
      * @param index how much steps you want to go,
      *              "y position of this tile" - index should be greater or equal to 0
@@ -47,6 +47,7 @@ public class  Tile{
     }
 
     /**
+     * This method returns the lower Tile which is "index" steps below this one
      * @param board board which should contains this tile
      * @param index how much steps you want to go,
      *              "y position of this tile" + index should be smaller than the height of the board
@@ -59,26 +60,28 @@ public class  Tile{
     }
 
     /**
+     * This method returns the righter Tile which is "index" steps right to this one
      * @param board board which should contains this tile
      * @param index how much steps you want to go,
-     *              "x position of this tile" + index should be smaller than the width of the board
-     * @return tile which lies index positions right this one
+     *              ("x position of this tile" + index) should be smaller than the width of the board
+     * @return tile which lies index positions right to this one
      */
     protected Tile getRighterTile(Tile[][] board, int index){
         assert board[position[0]][position[1]] == this;
-        assert position[0] + index < board[0].length;
+        assert position[1] + index < board[0].length;
         return board[position[0]][position[1] + index];
     }
 
     /**
+     * This method returns the lefter Tile which is "index" steps left to this one
      * @param board board which should contains this tile
      * @param index how much steps you want to go,
      *              "x position of this tile" - index should be greater or equal to 0
-     * @return tile which lies index positions left this one
+     * @return tile which lies index positions left to this one
      */
     protected Tile getLefterTile(Tile[][] board, int index){
         assert board[position[0]][position[1]] == this;
-        assert position[0] - index >= 0;
+        assert position[1] - index >= 0;
         return board[position[0]][position[1] - index];
     }
 

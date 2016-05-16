@@ -1,14 +1,12 @@
 package sokoban.Game;
 
-import sokoban.Exceptions.BoxGoalException;
-import sokoban.Exceptions.InvalidSizeException;
+import sokoban.Exceptions.*;
 import sokoban.GameObjects.Box;
 import sokoban.GameObjects.Player;
 import sokoban.GameObjects.Tile;
 import sokoban.Moves.*;
-import sokoban.Exceptions.MultiplePlayerException;
-import sokoban.Exceptions.RenderException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -44,42 +42,50 @@ public class Game{
     private ArrayList<Box> boxes;
 
     /**
-     * @param path path to the file which contains the board
+     * @param path path to the file which contains the board, should not be null
      */
     public Game(String path){
+        assert path != null;
         try{
             board = new Parser().parse(path);
             player = getPlayer();
             getBoxes();
         }
-        catch(Exception e){
+        catch(FileNotFoundException e){
             System.out.println("Could not load level!");
-            if(e.getClass().equals(java.io.FileNotFoundException.class)){
-                System.out.println("File not found!");
-            }
-            if(e.getClass().equals(IOException.class)){
-                System.out.println("Could not read from the file " + path);
-            }
-            if(e.getClass().equals(NumberFormatException.class)){
-                System.out.println("Either height or width could not be parsed!");
-            }
-            if(e.getClass().equals(InvalidSizeException.class)){
-                System.out.println("Either height or width was 0!");
-            }
-            if(e.getClass().equals(MultiplePlayerException.class)){
-                System.out.println("There is more than one Player!");
-            }
-            if(e.getClass().equals(BoxGoalException.class)){
-                System.out.println("There aren't as much Boxes as Goals!");
-            }
-            if(e.getClass().equals(IndexOutOfBoundsException.class)){
-                System.out.println("The height or the width isn't correct");
-            }
+            System.out.println("File not found!");
+        }
+        catch(IOException e){
+            System.out.println("Could not load level!");
+            System.out.println("Could not read from the file " + path);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Could not load level!");
+            System.out.println("Either height or width could not be parsed!");
+        }
+        catch(InvalidSizeException e){
+            System.out.println("Could not load level!");
+            System.out.println("Either height or width was 0!");
+        }
+        catch(MultiplePlayerException e){
+            System.out.println("Could not load level!");
+            System.out.println("There is more than one Player!");
+        }
+        catch(BoxGoalException e){
+            System.out.println("Could not load level!");
+            System.out.println("There aren't as much Boxes as Goals!");
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("Could not load level!");
+            System.out.println("The height or the width isn't correct");
+        }
+        catch (CouldNotIdentifyCharacterException e){
+            System.out.println("Could not load level!");
+            System.out.println("There was a foreign character in the file");
         }
     }
 
     private Player getPlayer(){
-        assert board != null;
         boxes = new ArrayList<>();
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
@@ -91,8 +97,11 @@ public class Game{
         return null;
     }
 
+    /**
+     * Gets all the Boxes from the Board and saves them in an ArrayList
+     * The board should already be parsed
+     */
     private void getBoxes(){
-        assert board != null;
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
                 if(board[i][j].toString().equals("B")){
@@ -103,10 +112,18 @@ public class Game{
     }
 
     /**
-     * This method contains the game-flow for a scripted game
+     * This method moves the player around meaning i actually plays the game
+     * After the moves are made you will be noticed in the console,
+     * if you have successfully solved the puzzle or not
+     * @param program a Program that instructs the player where to move. There are 4 commands:
+     *                "up","down","left" and "right". In order to to pass several commands at one time
+     *                you need to separate them by a comma (invalid commands will be ignored)
+     *                the program should not be null
+     *                e.g "up,down,right" moves the player up then down then right
      * @throws RenderException if the board couldn't been rendered
      */
     public void run(String program) throws RenderException{
+        assert program != null;
         Renderer rend = new Renderer();
         ArrayList<Move> moves = parseProgram(program);
         Iterator<Move> it = moves.iterator();
@@ -125,11 +142,14 @@ public class Game{
     }
 
     /**
+     * Parses a Program which afterwards moves a Player in the run method.
+     * A Program has the 4 commands explain later which are separated by a comma.
      * All commands that doesn't fit to: "up","down","right","left" ,will just be left out
-     * @param program a program where the commands are sperated by a .
-     * @return a ArrayList which contains the corresponding Moves
+     * @param program a program where the commands are separated by a comma, should not be null
+     * @return an ArrayList which contains the corresponding Moves
      */
     private ArrayList<Move> parseProgram(String program){
+        assert program != null;
         ArrayList<Move> moves = new ArrayList<>();
         if(program == null) return moves;
         String[] commands = program.split(",");
@@ -154,6 +174,9 @@ public class Game{
         return false;
     }
 
+    /**
+     * @return if the game could been initialised
+     */
     public boolean isInitialized(){
         if(board == null) return false;
         if(player == null) return false;

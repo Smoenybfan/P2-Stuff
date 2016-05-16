@@ -37,13 +37,12 @@ public class InteractiveGame extends Game{
         InteractiveGame game = initialize();
         try{
             game.run();
-        }catch(Exception e){
-            if(e.getClass().equals(RenderException.class)){
-                System.out.println("Could not render board!");
-            }
-            if(e.getClass().equals(IOException.class)){
-                System.out.println("Could not read from the console");
-            }
+        }
+        catch(RenderException e){
+            System.out.println("Could not render board!");
+        }
+        catch(IOException e){
+            System.out.println("Could not read from the console");
         }
     }
 
@@ -52,7 +51,7 @@ public class InteractiveGame extends Game{
      * @throws IOException if it couldn't read from the console
      * @throws RenderException if the board couldn't been rendered
      */
-    private void run() throws Exception{
+    private void run() throws IOException, RenderException{
         Renderer rend = new Renderer();
         do {
             System.out.print(rend.render(this.getBoard()));
@@ -61,7 +60,6 @@ public class InteractiveGame extends Game{
         }while(notOver());
         System.out.print(rend.render(this.getBoard()));
         System.out.println("You Win!");
-        return;
     }
 
     /**

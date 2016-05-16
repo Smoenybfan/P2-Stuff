@@ -19,7 +19,7 @@ package sokoban.GameObjects;
  */
 
 public class Box extends Tile {
-    private Tile floor;
+    protected Tile floor;
 
     public Box(int y, int x){
         super(y,x);

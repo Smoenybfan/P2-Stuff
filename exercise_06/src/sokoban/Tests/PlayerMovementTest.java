@@ -12,12 +12,17 @@ import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 
+
 @RunWith(JExample.class)
 public class PlayerMovementTest {
     private Game game;
     private Parser parser;
     private Tile[][] expectedBoard;
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Test
     public void setUp() throws Exception{
         game = new Game("levels/basic1.sok");
@@ -25,6 +30,10 @@ public class PlayerMovementTest {
         expectedBoard = parser.parse("levels/basic1.sok");
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("setUp")
     public void movePlayerUp()throws Exception {
         game.run("up");
@@ -37,6 +46,10 @@ public class PlayerMovementTest {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("movePlayerUp")
     public void movePlayerRight() throws Exception{
         game.run("right");
@@ -49,6 +62,10 @@ public class PlayerMovementTest {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("movePlayerRight")
     public void movePlayerDown() throws Exception{
         game.run("down");
@@ -61,6 +78,10 @@ public class PlayerMovementTest {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("movePlayerDown")
     public void movePlayerLeft() throws Exception{
         game.run("left");
@@ -73,6 +94,10 @@ public class PlayerMovementTest {
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 
+    /**
+     * This is an integration Test
+     * @throws Exception
+     */
     @Given("movePlayerLeft")
     public void movePlayerIntoWall() throws Exception{
         game.run("left");
