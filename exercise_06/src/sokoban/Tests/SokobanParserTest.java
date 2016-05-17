@@ -5,23 +5,23 @@ import org.junit.Test;
 import sokoban.Exceptions.BoxGoalException;
 import sokoban.Exceptions.InvalidSizeException;
 import sokoban.Exceptions.MultiplePlayerException;
-import sokoban.Game.Parser;
+import sokoban.Game.SokobanParser;
 import sokoban.GameObjects.*;
 
 import static org.junit.Assert.*;
 
-public class ParserTest {
-    private Parser parser;
+public class SokobanParserTest {
+    private SokobanParser sokobanParser;
 
     @Before
     public void setUp(){
-        parser = new Parser();
+        sokobanParser = new SokobanParser();
     }
 
     @Test
     public void equalsBasic1Sok(){
         try{
-            Tile[][] board = parser.parse("levels/basic1.sok");
+            Tile[][] board = sokobanParser.parse("levels/basic1.sok");
             Tile[][] expectedBoard = buildExpectedBasic1Sok();
             assertArrayEquals(expectedBoard, board);
         }catch(Exception e){
@@ -32,7 +32,7 @@ public class ParserTest {
     @Test
     public void equalsBasic2Sok(){
         try {
-            Tile[][] board = parser.parse("levels/basic2.sok");
+            Tile[][] board = sokobanParser.parse("levels/basic2.sok");
             Tile[][] expectedBoard = buildExpectedBasic2Sok();
             assertArrayEquals(expectedBoard, board);
         }catch(Exception e){
@@ -42,32 +42,32 @@ public class ParserTest {
 
     @Test(expected = java.io.FileNotFoundException.class)
     public void fileNotFount() throws Exception{
-        parser.parse("basic1.sok");
+        sokobanParser.parse("basic1.sok");
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void OutOfBound() throws Exception{
-        parser.parse("test/OutOfBound.sok");
+        sokobanParser.parse("test/OutOfBound.sok");
     }
 
     @Test(expected = NumberFormatException.class)
     public void NumberFormat() throws Exception{
-        parser.parse("test/NumberFormat.sok");
+        sokobanParser.parse("test/NumberFormat.sok");
     }
 
     @Test(expected = InvalidSizeException.class)
     public void InvalidSize() throws Exception{
-        parser.parse("test/InvalidSize.sok");
+        sokobanParser.parse("test/InvalidSize.sok");
     }
 
     @Test(expected = MultiplePlayerException.class)
     public void multiplePlayer() throws Exception{
-        parser.parse("test/MultiplePlayer.sok");
+        sokobanParser.parse("test/MultiplePlayer.sok");
     }
 
     @Test(expected = BoxGoalException.class)
     public void moreBoxesThanGoals() throws Exception{
-        parser.parse("test/BoxGoal.sok");
+        sokobanParser.parse("test/BoxGoal.sok");
     }
 
     private  Tile[][] buildExpectedBasic1Sok(){

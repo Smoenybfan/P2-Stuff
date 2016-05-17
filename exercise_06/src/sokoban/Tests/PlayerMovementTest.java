@@ -6,7 +6,7 @@ import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.Game.Game;
-import sokoban.Game.Parser;
+import sokoban.Game.SokobanParser;
 import sokoban.GameObjects.Player;
 import sokoban.GameObjects.Tile;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 @RunWith(JExample.class)
 public class PlayerMovementTest {
     private Game game;
-    private Parser parser;
+    private SokobanParser sokobanParser;
     private Tile[][] expectedBoard;
 
     /**
@@ -26,8 +26,8 @@ public class PlayerMovementTest {
     @Test
     public void setUp() throws Exception{
         game = new Game("levels/basic1.sok");
-        parser = new Parser();
-        expectedBoard = parser.parse("levels/basic1.sok");
+        sokobanParser = new SokobanParser();
+        expectedBoard = sokobanParser.parse("levels/basic1.sok");
     }
 
     /**

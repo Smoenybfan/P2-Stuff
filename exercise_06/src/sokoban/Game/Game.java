@@ -33,7 +33,7 @@ import java.util.Iterator;
  * which is thrown if the Rendering fails
  *
  * Note that there is a method IsInitializes() to check whether or not the Game is initialized,
- * because the game is instanced even if you get an Exception from the Parser
+ * because the game is instanced even if you get an Exception from the SokobanParser
  */
 
 public class Game{
@@ -47,7 +47,8 @@ public class Game{
     public Game(String path){
         assert path != null;
         try{
-            board = new Parser().parse(path);
+            ParserLocator.setParserLocator(new SokobanParser());
+            board = ParserLocator.instance().parse(path);
             player = getPlayer();
             getBoxes();
         }
@@ -82,6 +83,10 @@ public class Game{
         catch (CouldNotIdentifyCharacterException e){
             System.out.println("Could not load level!");
             System.out.println("There was a foreign character in the file");
+        }
+        catch (Exception e){
+            System.out.println("Could not load level!");
+            System.out.println("There was an unknown error");
         }
     }
 

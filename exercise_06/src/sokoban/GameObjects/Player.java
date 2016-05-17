@@ -9,7 +9,7 @@ import sokoban.Moves.Move;
  * which also inherits from the Box Class
  *
  * As a Box the Player is Stored in a Tile[][] array which represents the board of the game
- * It is used in the class Parser to create the board and by the class Game which
+ * It is used in the class SokobanParser to create the board and by the class Game which
  * then modifies it.
  *
  * The Player is capable of moving around. He can move around as long as there is a free Floor or Goal next to him

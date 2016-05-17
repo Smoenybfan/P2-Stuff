@@ -4,7 +4,7 @@ package sokoban.Tests;
 import org.junit.Before;
 import org.junit.Test;
 import sokoban.Exceptions.RenderException;
-import sokoban.Game.Parser;
+import sokoban.Game.SokobanParser;
 import sokoban.Game.Renderer;
 import sokoban.GameObjects.Tile;
 
@@ -13,12 +13,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RendererTest {
-    private Parser parser;
+    private SokobanParser sokobanParser;
     private Renderer rend;
 
     @Before
     public void setUp(){
-        parser = new Parser();
+        sokobanParser = new SokobanParser();
         rend = new Renderer();
     }
 
@@ -26,7 +26,7 @@ public class RendererTest {
     public void renderBasic1Sok(){
         String string = "";
         try {
-            Tile[][] board = parser.parse("levels/basic1.sok");
+            Tile[][] board = sokobanParser.parse("levels/basic1.sok");
             string += rend.render(board);
         }catch(Exception e){
             assertTrue(false);
@@ -46,7 +46,7 @@ public class RendererTest {
     public void renderBasic2Sok() throws Exception{
         String string = "";
         try {
-            Tile[][] board = parser.parse("levels/basic2.sok");
+            Tile[][] board = sokobanParser.parse("levels/basic2.sok");
             string += rend.render(board);
         }catch(Exception e){
             assertTrue(false);
