@@ -64,6 +64,7 @@ public class SokobanParser extends ParserLocator{
      * @throws BoxGoalException if there aren't as many boxes as goals
      * @throws IndexOutOfBoundsException if the height or the width aren't correct
      * @throws CouldNotIdentifyCharacterException if there was a not identifiable character in the file
+     * @throws Exception if this exception is ever thrown, then there are missing exceptions
      */
     @Override
     public Tile[][] parse(String path) throws FileNotFoundException, IOException, NumberFormatException,

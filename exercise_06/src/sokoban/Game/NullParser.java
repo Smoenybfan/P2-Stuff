@@ -3,7 +3,8 @@ package sokoban.Game;
 import sokoban.GameObjects.Tile;
 
 /**
- * Created by smoen on 17.05.2016.
+ * This is the default class for the <code>ParserLocator</code>.
+ * It follows the 'Null Pattern'. 
  */
 public class NullParser extends ParserLocator {
 
