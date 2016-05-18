@@ -36,3 +36,20 @@ further explanation). Then we extracted an Interface, which isn't really
 nescessary as long as all types of Renderer inherit from the Locator but using
 an IRenderer just looks way better and is more readable. And it could come in
 handy in the future.
+
+##Using the injection
+
+###Case 1
+I just extended the Game constructor with the parameter Parser and changed the
+affected initialisations (added simply a New Parser()).
+
+###Case 2
+Same as in Case 1 with box and new Floor. This time I had to adapt also the subclasses.
+
+###Case 3
+Same as the other cases with the run method and a Renderer.
+
+#Comparison
+In my opinion, the first approach with Locator is far better. You have more control
+over your program. Specially when you got lot of code you have to write a lot more
+and lose easily the control. 
