@@ -13,12 +13,13 @@ package sokoban.GameObjects;
  * Since the only public method only returns a String it doesn't need to be tested.
  */
 
-public class Floor extends Tile {
+public class Floor extends GroundLocator{
 
     public Floor(int y, int x){
         super(y,x);
     }
 
+    @Override
     public String toString(){
         return " ";
     }

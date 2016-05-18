@@ -4,7 +4,7 @@ import sokoban.Exceptions.RenderException;
 import sokoban.GameObjects.Tile;
 
 /**
- * The Renderer takes a Tile[][] array, makes a String out of it
+ * The SokobanRenderer takes a Tile[][] array, makes a String out of it
  * and prints it to the console
  *
  * This class is used by the Game to show the current state of the game
@@ -15,7 +15,7 @@ import sokoban.GameObjects.Tile;
  * When a tile is null or it isn't one of the above an Exception is thrown
  */
 
-public class Renderer {
+public class SokobanRenderer extends RendererLocator{
 
     /**
      * This method renders the board and returns it as a String
@@ -23,6 +23,7 @@ public class Renderer {
      * @throws RenderException if an element in the board is null ot not one of the five tiles
      *          described in the class comment
      */
+    @Override
     public String render(Tile[][] board) throws RenderException{
         assert board != null;
         StringBuffer representation = new StringBuffer();
@@ -56,7 +57,7 @@ public class Renderer {
     }
 
     public String toString(){
-        return "Game Renderer";
+        return "Game SokobanRenderer";
     }
 
 }

@@ -24,6 +24,10 @@ public class  Tile{
         position[1] = x;
     }
 
+    public Tile(){
+
+    }
+
     public boolean equals(Object object){
         if(object == null) return false;
         if(!Tile.class.isAssignableFrom(object.getClass())) return false;

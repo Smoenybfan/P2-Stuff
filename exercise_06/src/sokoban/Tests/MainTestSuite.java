@@ -4,7 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * Created by smoen on 17.05.2016.
+ * A Suite that runs all tests.
+ * The InteractiveGameTest is not used because there is nothing that this class tests.
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -15,7 +16,7 @@ import org.junit.runners.Suite;
         //InteractiveGameTest.class,
         PlayerMovementTest.class,
         PlayerTest.class,
-        RendererTest.class,
+        SokobanRendererTest.class,
         SokobanParserTest.class,
         SolvePuzzleTest.class,
         TileTest.class,

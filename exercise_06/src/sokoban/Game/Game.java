@@ -129,7 +129,8 @@ public class Game{
      */
     public void run(String program) throws RenderException{
         assert program != null;
-        Renderer rend = new Renderer();
+        RendererLocator.setRendererLocator(new SokobanRenderer());
+        IRenderer rend = RendererLocator.instance();
         ArrayList<Move> moves = parseProgram(program);
         Iterator<Move> it = moves.iterator();
         while(it.hasNext()){

@@ -23,7 +23,8 @@ public class Box extends Tile {
 
     public Box(int y, int x){
         super(y,x);
-        floor = new Floor(y,x);
+        GroundLocator.setGroundLocator(new Floor(y,x));
+        floor = GroundLocator.instance();
     }
 
     @Override

@@ -5,21 +5,21 @@ import org.junit.Before;
 import org.junit.Test;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.SokobanParser;
-import sokoban.Game.Renderer;
+import sokoban.Game.SokobanRenderer;
 import sokoban.GameObjects.Tile;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class RendererTest {
+public class SokobanRendererTest {
     private SokobanParser sokobanParser;
-    private Renderer rend;
+    private SokobanRenderer rend;
 
     @Before
     public void setUp(){
         sokobanParser = new SokobanParser();
-        rend = new Renderer();
+        rend = new SokobanRenderer();
     }
 
     @Test
