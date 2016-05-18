@@ -5,6 +5,7 @@ import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.GameObjects.Box;
+import sokoban.GameObjects.Floor;
 import sokoban.GameObjects.Tile;
 import sokoban.GameObjects.Wall;
 
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class BoxTest {
     Box box1,box2,box3,box4;
     Tile tile;
-    Box box = new Box(2,3);
+    Box box = new Box(2,3, new Floor(2,3));
     Tile[][]board =new Tile[7][7];
 
     @Test
@@ -89,10 +90,10 @@ public class BoxTest {
     public void setBoxUp(){
         Tile tiler = new Tile(2,2);
         tile = spy(tiler);
-        box1 = new Box(1,3);
-        box2 = new Box(3,3);
-        box3 = new Box(2,2);
-        box4 = new Box(2,4);
+        box1 = new Box(1,3, new Floor(1,3));
+        box2 = new Box(3,3,new Floor(3,3));
+        box3 = new Box(2,2, new Floor(2,2));
+        box4 = new Box(2,4, new Floor(2,4));
         Wall wall = mock(Wall.class);
         board[2][3]= box;
 

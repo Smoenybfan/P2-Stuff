@@ -25,7 +25,7 @@ import sokoban.Moves.Move;
 public class Player extends Box{
 
     public Player(int x, int y){
-        super(x,y);
+        super(x,y, new Floor(x,y));
     }
 
     public void move(Move move, Tile[][] board){

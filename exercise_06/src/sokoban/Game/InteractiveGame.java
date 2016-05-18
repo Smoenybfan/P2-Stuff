@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class InteractiveGame extends Game{
 
     public InteractiveGame(String path){
-        super(path);
+        super(path, new Parser());
     }
 
     private static InteractiveGame initialize(){

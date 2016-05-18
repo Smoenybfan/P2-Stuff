@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.Game.Game;
 import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
 import sokoban.GameObjects.Player;
 import sokoban.GameObjects.Tile;
 
@@ -25,7 +26,7 @@ public class PlayerMovementTest {
      */
     @Test
     public void setUp() throws Exception{
-        game = new Game("levels/basic1.sok");
+        game = new Game("levels/basic1.sok", new Parser());
         parser = new Parser();
         expectedBoard = parser.parse("levels/basic1.sok");
     }
@@ -36,7 +37,7 @@ public class PlayerMovementTest {
      */
     @Given("setUp")
     public void movePlayerUp()throws Exception {
-        game.run("up");
+        game.run("up", new Renderer());
         Player player = (Player) expectedBoard[2][1];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[1][1]);
@@ -52,7 +53,7 @@ public class PlayerMovementTest {
      */
     @Given("movePlayerUp")
     public void movePlayerRight() throws Exception{
-        game.run("right");
+        game.run("right", new Renderer());
         Player player = (Player) expectedBoard[1][1];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[1][2]);
@@ -68,7 +69,7 @@ public class PlayerMovementTest {
      */
     @Given("movePlayerRight")
     public void movePlayerDown() throws Exception{
-        game.run("down");
+        game.run("down", new Renderer());
         Player player = (Player) expectedBoard[1][2];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[2][2]);
@@ -84,7 +85,7 @@ public class PlayerMovementTest {
      */
     @Given("movePlayerDown")
     public void movePlayerLeft() throws Exception{
-        game.run("left");
+        game.run("left", new Renderer());
         Player player = (Player) expectedBoard[2][2];
         Tile floor = player.getFloor();
         player.setFloor(expectedBoard[2][1]);
@@ -100,7 +101,7 @@ public class PlayerMovementTest {
      */
     @Given("movePlayerLeft")
     public void movePlayerIntoWall() throws Exception{
-        game.run("left");
+        game.run("left", new Renderer());
         assertArrayEquals(expectedBoard, game.getBoard());
     }
 }

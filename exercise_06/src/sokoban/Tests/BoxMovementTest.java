@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
 import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
 import sokoban.GameObjects.Box;
 import sokoban.GameObjects.Player;
 import sokoban.GameObjects.Tile;
@@ -25,7 +26,7 @@ public class BoxMovementTest {
      */
     @Test
     public void setUp() throws Exception{
-        game = new Game("levels/basic2.sok");
+        game = new Game("levels/basic2.sok",new Parser());
         parser = new Parser();
         expectedBoard = parser.parse("levels/basic2.sok");
     }
@@ -36,7 +37,7 @@ public class BoxMovementTest {
      */
     @Given("setUp")
     public void movePlayerIntoBox()throws RenderException{
-        game.run("left,left,left");
+        game.run("left,left,left", new Renderer());
         Player player = (Player) expectedBoard[2][6];
         Box box = (Box) expectedBoard[2][3];
         Tile PlayerFloor = player.getFloor();
@@ -57,7 +58,7 @@ public class BoxMovementTest {
      */
     @Given("movePlayerIntoBox")
     public void moveBoxIntoWall()throws RenderException{
-        game.run("left,left,left,left");
+        game.run("left,left,left,left", new Renderer());
         Player player = (Player) expectedBoard[2][3];
         Box box = (Box) expectedBoard[2][2];
         Tile PlayerFloor = player.getFloor();

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
+import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
 import sokoban.GameObjects.Tile;
 
 import static org.mockito.Mockito.mock;
@@ -17,12 +19,12 @@ public class GameTest {
 
     @Before
     public void setUp(){
-        game = new Game("levels/basic1.sok");
+        game = new Game("levels/basic1.sok", new Parser());
     }
 
     @Test
     public void notInitialized(){
-        game = new Game("levels/basic5");
+        game = new Game("levels/basic5", new Parser());
         assertFalse(game.isInitialized());
     }
 
@@ -41,7 +43,7 @@ public class GameTest {
         Tile tile = mock(Tile.class);
         game.getBoard()[2][1] = tile;
         when(tile.toString()).thenReturn("Y");
-        game.run("down");
+        game.run("down", new Renderer());
     }
 
     /**
@@ -49,7 +51,7 @@ public class GameTest {
      */
     @Test
     public void NotOverAfterMove() throws RenderException{
-        game.run("down,up,up,right");
+        game.run("down,up,up,right", new Renderer());
         assertTrue(game.notOver());
     }
 }

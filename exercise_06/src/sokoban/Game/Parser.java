@@ -136,7 +136,7 @@ public class Parser {
                         hasPlayer = true;
                         return new Player(height,pos);
             case 'B': differenceBoxGoal++;
-                        return new Box(height,pos);
+                        return new Box(height,pos, new Floor(height,pos));
             case 'X': return new BreakableWall(height, pos);
             case 'O': return new Bomb(height, pos);
         }

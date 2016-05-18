@@ -44,10 +44,10 @@ public class Game{
     /**
      * @param path path to the file which contains the board, should not be null
      */
-    public Game(String path){
+    public Game(String path, Parser parser){
         assert path != null;
         try{
-            board = new Parser().parse(path);
+            board = parser.parse(path);
             player = getPlayer();
             getBoxes();
         }
@@ -122,9 +122,8 @@ public class Game{
      *                e.g "up,down,right" moves the player up then down then right
      * @throws RenderException if the board couldn't been rendered
      */
-    public void run(String program) throws RenderException{
+    public void run(String program, Renderer rend) throws RenderException{
         assert program != null;
-        Renderer rend = new Renderer();
         ArrayList<Move> moves = parseProgram(program);
         Iterator<Move> it = moves.iterator();
         while(it.hasNext()){

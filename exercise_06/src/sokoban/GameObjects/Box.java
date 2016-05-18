@@ -21,9 +21,9 @@ package sokoban.GameObjects;
 public class Box extends Tile {
     protected Tile floor;
 
-    public Box(int y, int x){
+    public Box(int y, int x, Floor floor){
         super(y,x);
-        floor = new Floor(y,x);
+        this.floor=floor;
     }
 
     @Override

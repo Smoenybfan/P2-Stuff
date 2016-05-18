@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
 import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
 import sokoban.GameObjects.*;
 import org.junit.Assert.*;
 import static org.junit.Assert.assertArrayEquals;
@@ -23,7 +24,7 @@ public class WallBreakerTest {
      */
     @Test
     public void setUp() throws Exception{
-        game = new Game("levels/extended1.sok");
+        game = new Game("levels/extended1.sok", new Parser());
         parser = new Parser();
         expectedBoard = parser.parse("levels/extended1.sok");
     }
@@ -34,8 +35,8 @@ public class WallBreakerTest {
      */
     @Given("setUp")
     public void movePlayerIntoBomb() throws RenderException{
-        game.run("right,right,right,right,right,down,down,down,right,down,left,left,left,up,left");
-        game.run("down");
+        game.run("right,right,right,right,right,down,down,down,right,down,left,left,left,up,left", new Renderer());
+        game.run("down", new Renderer());
         expectedBoard[2][1] = new Floor(2,1);
         expectedBoard[2][6] = new Floor(2,6);
         expectedBoard[3][6] = new Floor(3,6);

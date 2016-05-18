@@ -93,7 +93,7 @@ public class ParserTest {
         for(int i = 0; i < 3; i++){
             expectedBoard[3][i] = new Wall(3,i);
         }
-        expectedBoard[3][3] = new Box(3,3);
+        expectedBoard[3][3] = new Box(3,3, new Floor(3,3));
         expectedBoard[3][4] = new Floor(3,4);
         expectedBoard[3][5] = new Floor(3,5);
         expectedBoard[3][6] = new Wall(3,6);
@@ -128,7 +128,7 @@ public class ParserTest {
         expectedBoard[2][0] = new Wall(2,0);
         expectedBoard[2][1] = new Floor(2,1);
         expectedBoard[2][2] = new Floor(2,2);
-        expectedBoard[2][3] = new Box(2,3);
+        expectedBoard[2][3] = new Box(2,3, new Floor(2,3));
         expectedBoard[2][4] = new Floor(2,4);
         expectedBoard[2][5] = new Floor(2,5);
         expectedBoard[2][6] = new Player(2,6);
@@ -137,7 +137,7 @@ public class ParserTest {
         for(int i = 0; i < 3; i++){
             expectedBoard[3][i] = new Wall(3,i);
         }
-        expectedBoard[3][3] = new Box(3,3);
+        expectedBoard[3][3] = new Box(3,3, new Floor(3,3));
         for(int i = 4; i < 7; i++){
             expectedBoard[3][i] = new Floor(3,i);
         }

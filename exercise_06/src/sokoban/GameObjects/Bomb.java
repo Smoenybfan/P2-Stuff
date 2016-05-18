@@ -26,7 +26,7 @@ package sokoban.GameObjects;
 public class Bomb extends Box{
 
     public Bomb(int y, int x){
-        super(y,x);
+        super(y,x, new Floor(y,x));
     }
 
     @Override

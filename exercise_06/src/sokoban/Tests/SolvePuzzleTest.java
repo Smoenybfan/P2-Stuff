@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.Game.Game;
 import sokoban.Exceptions.RenderException;
+import sokoban.Game.Parser;
+import sokoban.Game.Renderer;
 
 import static org.junit.Assert.*;
 
@@ -19,7 +21,7 @@ public class SolvePuzzleTest {
      */
     @Test
     public void solveBasic1() throws RenderException{
-        game = new Game("levels/basic1.sok");
+        game = new Game("levels/basic1.sok", new Parser());
         StringBuffer program = new StringBuffer();
         program.append("right,right,right,");
         program.append("down,down,");
@@ -35,7 +37,7 @@ public class SolvePuzzleTest {
         program.append("right,");
         program.append("down,down");
 
-        game.run(program.toString());
+        game.run(program.toString(), new Renderer());
         assertTrue(!game.notOver());
     }
 
@@ -45,7 +47,7 @@ public class SolvePuzzleTest {
      */
     @Test
     public void solveExtended1() throws RenderException{
-        game = new Game("levels/extended1.sok");
+        game = new Game("levels/extended1.sok", new Parser());
         StringBuffer program = new StringBuffer();
         program.append("down,down,");
         program.append("right,right,right,right,right,right,");
@@ -89,7 +91,7 @@ public class SolvePuzzleTest {
         program.append("down,");
         program.append("right,right,right,right");
 
-        game.run(program.toString());
+        game.run(program.toString(), new Renderer());
         assertTrue(!game.notOver());
     }
 }
