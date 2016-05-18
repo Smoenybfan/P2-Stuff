@@ -6,14 +6,14 @@ package sokoban.GameObjects;
  * inherit from the Box class.
  *
  * As a Box, the Bomb is stored in a Tile[][] array which represents the board of a game
- * It is used in the class Parser to create the board and by the class Game which
+ * It is used in the class SokobanParser to create the board and by the class Game which
  * then modifies it.
  *
  * A Bomb can be moved around on a board, as long as there is no unbreakable wall. If there is
  * such a breakable wall, then the box1 can be moved on that wall by exploding. Then both the
  * Tile of the box1 and the breakable wall become floor Tiles.
  *
- * This class should only be used by the Parser and the Game. It can move around but
+ * This class should only be used by the SokobanParser and the Game. It can move around but
  * to be able to only move it when a player push it, you need to implement a new Game, Parse a Board
  * and then run the Game
  *

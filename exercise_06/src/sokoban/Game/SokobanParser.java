@@ -9,7 +9,7 @@ import sokoban.GameObjects.*;
 import java.io.*;
 
 /**
- * The Parser takes an input String, reads the File from that String
+ * The SokobanParser takes an input String, reads the File from that String
  * parses it an returns a board filled with the appropriate tiles
  *
  * This class is used by the Game to initialize the board.
@@ -44,12 +44,12 @@ import java.io.*;
  * there is no need for an invariant
  */
 
-public class Parser {
+public class SokobanParser extends ParserLocator{
 
     private boolean hasPlayer;
     private int differenceBoxGoal = 0;
 
-    public Parser(){}
+    public SokobanParser(){}
 
     /**
      * This method parses a level from a file which is located at the passed over path
@@ -64,7 +64,9 @@ public class Parser {
      * @throws BoxGoalException if there aren't as many boxes as goals
      * @throws IndexOutOfBoundsException if the height or the width aren't correct
      * @throws CouldNotIdentifyCharacterException if there was a not identifiable character in the file
+     * @throws Exception if this exception is ever thrown, then there are missing exceptions
      */
+    @Override
     public Tile[][] parse(String path) throws FileNotFoundException, IOException, NumberFormatException,
             InvalidSizeException, MultiplePlayerException, BoxGoalException, CouldNotIdentifyCharacterException{
         assert path != null;

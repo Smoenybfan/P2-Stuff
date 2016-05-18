@@ -16,8 +16,8 @@ import org.junit.runners.Suite;
         //InteractiveGameTest.class,
         PlayerMovementTest.class,
         PlayerTest.class,
-        RendererTest.class,
-        ParserTest.class,
+        SokobanRendererTest.class,
+        SokobanParserTest.class,
         SolvePuzzleTest.class,
         TileTest.class,
         WallBreakerTest.class

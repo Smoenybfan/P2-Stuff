@@ -6,16 +6,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
-import sokoban.Game.Parser;
-import sokoban.Game.Renderer;
+import sokoban.Game.SokobanParser;
 import sokoban.GameObjects.*;
-import org.junit.Assert.*;
+
 import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(JExample.class)
 public class WallBreakerTest {
     private Game game;
-    private Parser parser;
+    private SokobanParser sokobanParser;
     private Tile[][] expectedBoard;
 
     /**
@@ -24,9 +23,9 @@ public class WallBreakerTest {
      */
     @Test
     public void setUp() throws Exception{
-        game = new Game("levels/extended1.sok", new Parser());
-        parser = new Parser();
-        expectedBoard = parser.parse("levels/extended1.sok");
+        game = new Game("levels/extended1.sok");
+        sokobanParser = new SokobanParser();
+        expectedBoard = sokobanParser.parse("levels/extended1.sok");
     }
 
     /**

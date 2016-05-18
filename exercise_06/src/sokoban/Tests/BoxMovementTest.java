@@ -6,8 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import sokoban.Exceptions.RenderException;
 import sokoban.Game.Game;
-import sokoban.Game.Parser;
-import sokoban.Game.Renderer;
+import sokoban.Game.SokobanParser;
 import sokoban.GameObjects.Box;
 import sokoban.GameObjects.Player;
 import sokoban.GameObjects.Tile;
@@ -17,7 +16,7 @@ import static org.junit.Assert.assertArrayEquals;
 @RunWith(JExample.class)
 public class BoxMovementTest {
     private Game game;
-    private Parser parser;
+    private SokobanParser sokobanParser;
     private Tile[][] expectedBoard;
 
     /**
@@ -26,9 +25,9 @@ public class BoxMovementTest {
      */
     @Test
     public void setUp() throws Exception{
-        game = new Game("levels/basic2.sok",new Parser());
-        parser = new Parser();
-        expectedBoard = parser.parse("levels/basic2.sok");
+        game = new Game("levels/basic2.sok");
+        sokobanParser = new SokobanParser();
+        expectedBoard = sokobanParser.parse("levels/basic2.sok");
     }
 
     /**

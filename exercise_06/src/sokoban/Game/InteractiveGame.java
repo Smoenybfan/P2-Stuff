@@ -52,7 +52,7 @@ public class InteractiveGame extends Game{
      * @throws RenderException if the board couldn't been rendered
      */
     private void run() throws IOException, RenderException{
-        Renderer rend = new Renderer();
+        SokobanRenderer rend = new SokobanRenderer();
         do {
             System.out.print(rend.render(this.getBoard()));
             Move move = getMove();

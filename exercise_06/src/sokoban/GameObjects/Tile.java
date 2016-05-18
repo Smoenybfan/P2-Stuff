@@ -9,7 +9,7 @@ package sokoban.GameObjects;
  *
  * It can get you every Tile from the same board, if you provide it with the correct board
  *
- * It should only be used by the Parser and Game Class.
+ * It should only be used by the SokobanParser and Game Class.
  */
 
 public class  Tile{
@@ -22,6 +22,10 @@ public class  Tile{
         position = new int[2];
         position[0] = y;
         position[1] = x;
+    }
+
+    public Tile(){
+
     }
 
     public boolean equals(Object object){
