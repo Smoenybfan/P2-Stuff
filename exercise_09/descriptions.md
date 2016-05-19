@@ -52,4 +52,4 @@ Same as the other cases with the run method and a Renderer.
 #Comparison
 In my opinion, the first approach with Locator is far better. You have more control
 over your program. Specially when you got lot of code you have to write a lot more
-and lose easily the control. 
+and lose easily the control.
