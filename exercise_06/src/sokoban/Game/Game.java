@@ -33,7 +33,7 @@ import java.util.Iterator;
  * which is thrown if the Rendering fails
  *
  * Note that there is a method IsInitializes() to check whether or not the Game is initialized,
- * because the game is instanced even if you get an Exception from the Parser
+ * because the game is instanced even if you get an Exception from the SokobanParser
  */
 
 public class Game{
@@ -44,10 +44,11 @@ public class Game{
     /**
      * @param path path to the file which contains the board, should not be null
      */
-    public Game(String path){
+    public Game(String path, Parser parser){
         assert path != null;
         try{
-            board = new Parser().parse(path);
+            ParserLocator.setParserLocator(new SokobanParser());
+            board = ParserLocator.instance().parse(path);
             player = getPlayer();
             getBoxes();
         }
@@ -82,6 +83,10 @@ public class Game{
         catch (CouldNotIdentifyCharacterException e){
             System.out.println("Could not load level!");
             System.out.println("There was a foreign character in the file");
+        }
+        catch (Exception e){
+            System.out.println("Could not load level!");
+            System.out.println("There was an unknown error");
         }
     }
 
@@ -122,9 +127,10 @@ public class Game{
      *                e.g "up,down,right" moves the player up then down then right
      * @throws RenderException if the board couldn't been rendered
      */
-    public void run(String program) throws RenderException{
+    public void run(String program, Renderer rend) throws RenderException{
         assert program != null;
-        Renderer rend = new Renderer();
+        RendererLocator.setRendererLocator(new SokobanRenderer());
+        IRenderer rend = RendererLocator.instance();
         ArrayList<Move> moves = parseProgram(program);
         Iterator<Move> it = moves.iterator();
         while(it.hasNext()){

@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class InteractiveGame extends Game{
 
     public InteractiveGame(String path){
-        super(path);
+        super(path, new Parser());
     }
 
     private static InteractiveGame initialize(){
@@ -52,7 +52,7 @@ public class InteractiveGame extends Game{
      * @throws RenderException if the board couldn't been rendered
      */
     private void run() throws IOException, RenderException{
-        Renderer rend = new Renderer();
+        SokobanRenderer rend = new SokobanRenderer();
         do {
             System.out.print(rend.render(this.getBoard()));
             Move move = getMove();

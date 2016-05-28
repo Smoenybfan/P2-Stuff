@@ -121,8 +121,11 @@ Please add such a test **until Monday, 05/16/2016 13:00**.
 Let me know if you have any questions.
 Note that normally we don't give the chance for second revisions.
 
+##Update 05/21/2016
+Well done.
+
 Exercise 06 (Stage 1 & 2 / JavaDoc class / method comments):
 **Status: ACCEPTED (ok)**
 
 Exercise 07 (Stage 3 / Mutability / DbC):
-**Status: SECOND REVISION REQUIRED (nef)**
+**Status: ACCEPTED (ok)**

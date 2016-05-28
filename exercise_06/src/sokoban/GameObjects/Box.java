@@ -6,12 +6,12 @@ package sokoban.GameObjects;
  * and a floor Tile, which is the Tile where the box is currently on (Could be either a Floor o a Goal)
  *
  * As a Tile a Box is Stored in a Tile[][] array which represents the board of a game
- * It is used in the class Parser to create the board and by the class Game which
+ * It is used in the class SokobanParser to create the board and by the class Game which
  * then modifies it.
  *
  * A Box can be moved around on a board as long as there is no wall.
  *
- * This class should only be used by the Parser and the Game. It can move around but
+ * This class should only be used by the SokobanParser and the Game. It can move around but
  * to be able to only move it when a player push it, you need to implement a new Game, Parse a Board
  * and then run the Game
  *
@@ -21,9 +21,10 @@ package sokoban.GameObjects;
 public class Box extends Tile {
     protected Tile floor;
 
-    public Box(int y, int x){
+    public Box(int y, int x, Floor floor){
         super(y,x);
-        floor = new Floor(y,x);
+        GroundLocator.setGroundLocator(new Floor(y,x));
+        floor = GroundLocator.instance();
     }
 
     @Override

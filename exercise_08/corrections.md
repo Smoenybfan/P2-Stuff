@@ -41,4 +41,10 @@ But you need to provide unit tests for all non-trivial public methods in `Game`,
 Please submit your revised solution **until Thursday, 05/12/2016 13:00**.
 Let me know if you have questions regarding testing or other P2 related questions.
 
-**Status: REVISION REQUIRED (nef)**
+##Update 05/23/2016
+Regarding our discussion (after lab hour) i considered your solution again. You were right that testing `InteractiveGame` does not make sense, because according the task you had to unit test all "publicly visible classes". Every method is private in `InteractiveGame` except for "main". It was also my mistake to mention `Player` for testing. Further i can see why you did not unit test `Game` either.
+
+**Conclusion**
+In my opinion it is still discussable if it makes sense to unit test the public methods of `Game` or not. But the point is that you came to me and disscused it. Also you put some effort to solve a task I gave you that does not make sense. This also gives you some extra credit here.
+
+**Status: ACCEPTED (ok)**
